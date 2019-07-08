@@ -53,6 +53,7 @@ class PurchaseController extends Controller
         $item->store_id = $data['store'];
         $item->supplier_id = $data['supplier'];
         $item->status = $data['status'];
+        $item->note = $data['note'];
 
         if($request->has("attachment")){
             $picture = request()->file('attachment');
@@ -77,13 +78,12 @@ class PurchaseController extends Controller
 
     public function edit(Request $request, $id){    
         config(['site.page' => 'product']);    
-        $product = Purchase::find($id);
-        $categories = Category::all();
-        $taxes = Tax::all();
-        $barcode_symbologies = BarcodeSymbology::all();
+        $purchase = Purchase::find($id);        
         $suppliers = Supplier::all();
+        $products = Product::all();
+        $stores = Store::all();
 
-        return view('product.edit', compact('product', 'categories', 'taxes', 'barcode_symbologies', 'suppliers'));
+        return view('purchase.edit', compact('purchase', 'suppliers', 'stores', 'products'));
     }
 
     public function detail(Request $request, $id){    
@@ -102,14 +102,16 @@ class PurchaseController extends Controller
             'status'=>'required',
         ]);
         $data = $request->all();
+        // dd($data);
         $item = Purchase::find($request->get("id"));
 
         $item->user_id = Auth::user()->id;  
         $item->timestamp = $data['date'].":00";
         $item->reference_no = $data['reference_number'];
         $item->store_id = $data['store'];
-        $item->customer_id = $data['customer'];
+        $item->supplier_id = $data['supplier'];
         $item->status = $data['status'];
+        $item->note = $data['note'];
 
         if($request->has("attachment")){
             $picture = request()->file('attachment');
@@ -117,7 +119,7 @@ class PurchaseController extends Controller
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
-        $item->save;
+        $item->save();
         return back()->with('success', 'Updated Successfully');
     }
 

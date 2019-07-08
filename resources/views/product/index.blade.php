@@ -51,8 +51,8 @@
                                     <td class="quantity">{{$item->quantity}}</td>
                                     <td class="unit">{{$item->unit}}</td>
                                     <td class="alert_quantity">{{$item->alert_quantity}}</td>
-                                    <td class="py-2 dropdown">
-                                        <a href="#" class="btn btn-info btn-with-icon btn-block nav-link" data-toggle="dropdown">
+                                    <td class="py-2 dropdown" align="center">
+                                        <a href="#" class="btn btn-info btn-with-icon nav-link" data-toggle="dropdown">
                                             <div class="ht-30">
                                                 <span class="icon wd-30"><i class="fa fa-send"></i></span>
                                                 <span class="pd-x-15">Action</span>

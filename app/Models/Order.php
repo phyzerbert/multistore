@@ -11,8 +11,7 @@ class Order extends Model
         'product_id', 'quantity', 'subtotal', 'orderable', 'orderable_type', 'orderable_id', 'orderable_type',
     ];
 
-    public function orderable()
-    {
+    public function orderable(){
         return $this->morphTo();
     }
 

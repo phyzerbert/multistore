@@ -117,17 +117,4 @@ class ProductController extends Controller
         return back()->with("success", __('page.deleted_successfully'));
     }
 
-    public function get_products() {
-        $products = Product::all();
-
-        return response()->json($products);
-    }
-
-    public function get_product(Request $request) {
-        $id = $request->get('id');
-
-        $product = Product::find($id)->load('tax');
-
-        return response()->json($product);
-    }
 }

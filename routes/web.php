@@ -60,7 +60,7 @@ Route::get('/product/delete/{id}', 'ProductController@delete')->name('product.de
 Route::get('/purchase/index', 'PurchaseController@index')->name('purchase.index');
 Route::get('/purchase/create', 'PurchaseController@create')->name('purchase.create');
 Route::post('/purchase/save', 'PurchaseController@save')->name('purchase.save');
-Route::get('/purchase/edit', 'PurchaseController@edit')->name('purchase.edit');
+Route::get('/purchase/edit/{id}', 'PurchaseController@edit')->name('purchase.edit');
 Route::post('/purchase/update', 'PurchaseController@update')->name('purchase.update');
 Route::get('/purchase/detail/{id}', 'PurchaseController@detail')->name('purchase.detail');
 Route::get('/purchase/delete/{id}', 'PurchaseController@delete')->name('purchase.delete');
@@ -70,7 +70,7 @@ Route::get('/purchase/delete/{id}', 'PurchaseController@delete')->name('purchase
 Route::get('/sale/index', 'SaleController@index')->name('sale.index');
 Route::get('/sale/create', 'SaleController@create')->name('sale.create');
 Route::post('/sale/save', 'SaleController@save')->name('sale.save');
-Route::get('/sale/edit', 'SaleController@edit')->name('sale.edit');
+Route::get('/sale/edit/{id}', 'SaleController@edit')->name('sale.edit');
 Route::post('/sale/update', 'SaleController@update')->name('sale.update');
 Route::get('/sale/detail/{id}', 'SaleController@detail')->name('sale.detail');
 Route::get('/sale/delete/{id}', 'SaleController@delete')->name('sale.delete');
@@ -81,5 +81,6 @@ Route::post('/payment/create', 'PaymentController@create')->name('payment.create
 Route::post('/payment/edit', 'PaymentController@edit')->name('payment.edit');
 Route::get('/payment/delete/{id}', 'PaymentController@delete')->name('payment.delete');
 
-Route::get('get_products', 'ProductController@get_products');
-Route::post('get_product', 'ProductController@get_product');
+Route::get('get_products', 'VueController@get_products');
+Route::post('get_orders', 'VueController@get_orders');
+Route::post('get_product', 'VueController@get_product');
