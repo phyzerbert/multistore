@@ -3,8 +3,8 @@
     <link href="{{asset('master/lib/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+    <script src="{{asset('master/lib/vuejs/vue.js')}}"></script>
+    <script src="{{asset('master/lib/vuejs/axios.js')}}"></script>
 @endsection
 @section('content')
     <div class="br-mainpanel" id="app">
@@ -116,7 +116,7 @@
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
                                                 <select class="form-control input-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
-                                                    <option value="">Select a product</option>
+                                                    <option value="" hidden>Select a product</option>
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
