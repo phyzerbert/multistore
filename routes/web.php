@@ -73,3 +73,5 @@ Route::get('/sale/edit', 'SaleController@edit')->name('sale.edit');
 Route::post('/sale/update', 'SaleController@update')->name('sale.update');
 Route::get('/sale/delete/{id}', 'SaleController@delete')->name('sale.delete');
 
+Route::get('get_products', 'ProductController@get_products');
+Route::post('get_product', 'ProductController@get_product');

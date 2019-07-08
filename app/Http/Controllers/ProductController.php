@@ -69,8 +69,8 @@ class ProductController extends Controller
         return back()->with('success', 'Created Successfully');
     }
 
-    public function edit(Request $request, $id){    
-        config(['site.page' => 'product']);    
+    public function edit(Request $request, $id){
+        config(['site.page' => 'product']);
         $product = Product::find($id);
         $categories = Category::all();
         $taxes = Tax::all();
@@ -80,8 +80,8 @@ class ProductController extends Controller
         return view('product.edit', compact('product', 'categories', 'taxes', 'barcode_symbologies', 'suppliers'));
     }
 
-    public function detail(Request $request, $id){    
-        config(['site.page' => 'product']);    
+    public function detail(Request $request, $id){
+        config(['site.page' => 'product']);
         $product = Product::find($id);
 
         return view('product.detail', compact('product'));
@@ -115,5 +115,19 @@ class ProductController extends Controller
         $item = Product::find($id);
         $item->delete();
         return back()->with("success", __('page.deleted_successfully'));
+    }
+
+    public function get_products() {
+        $products = Product::all();
+
+        return response()->json($products);
+    }
+
+    public function get_product(Request $request) {
+        $id = $request->get('id');
+
+        $product = Product::find($id)->load('tax');
+
+        return response()->json($product);
     }
 }

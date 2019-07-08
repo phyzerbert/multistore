@@ -1,11 +1,13 @@
 @extends('layouts.master')
-@section('style')    
+@section('style')
     <link href="{{asset('master/lib/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
 @endsection
 @section('content')
-    <div class="br-mainpanel">
+    <div class="br-mainpanel" id="app">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
@@ -16,7 +18,7 @@
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
             <h4 class="tx-gray-800 mg-b-5">Add Purchase</h4>
         </div>
-        
+
         @php
             $role = Auth::user()->role->slug;
         @endphp
@@ -35,7 +37,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Reference Number:</label>
@@ -54,11 +56,11 @@
                                     <option label="Product Supplier"></option>
                                     @foreach ($stores as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach                                    
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
@@ -67,36 +69,36 @@
                                     <option label="Supplier"></option>
                                     @foreach ($suppliers as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach                                    
+                                    @endforeach
                                 </select>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Attachment:</label>                                
+                                <label class="form-control-label">Attachment:</label>
                                 <label class="custom-file wd-100p">
                                     <input type="file" name="attachment" id="file2" class="custom-file-input">
                                     <span class="custom-file-control custom-file-control-primary"></span>
                                 </label>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Status:</label>
                                 <select class="form-control select2" name="status" data-placeholder="Status">
                                     <option label="Status"></option>
                                     <option value="0">Pending</option>
-                                    <option value="1">Received</option>                                
+                                    <option value="1">Received</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row mg-b-25">
-                        <div class="col-md-12">                            
+                        <div class="col-md-12">
                             <div>
                                 <h5 class="mg-t-10" style="float:left">Order Items</h5>
                                 {{-- <button type="button" class="btn btn-primary mg-b-10 add-product" style="float:right">ADD</button> --}}
-                                <a href="#" class="btn btn-primary btn-icon rounded-circle mg-b-10 add-product" style="float:right"><div><i class="fa fa-plus"></i></div></a>
+                                <a href="#" class="btn btn-primary btn-icon rounded-circle mg-b-10 add-product" style="float:right" @click="add_item()"><div><i class="fa fa-plus"></i></div></a>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-colored table-success" id="product_table">
@@ -111,34 +113,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
-                                                <select class="form-control input-sm product" name="product_id[]">
+                                                <select class="form-control input-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
                                                     <option value="">Select a product</option>
-                                                    @foreach ($products as $item)
-                                                        <option value="{{$item->id}}"  
-                                                            data-cost="{{$item->cost}}"   
-                                                            data-taxname="{{$item->tax->name}}"
-                                                            data-taxrate="{{$item->tax->rate}}"
-                                                        >{{$item->name}}</option>
-                                                    @endforeach                                    
+                                                    <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
-                                            <td class="cost"></td>
-                                            <td><input type="number" class="form-control input-sm quantity" name="quantity[]" placeholder="Quantity" /></td>
-                                            <td class="tax"></td>
-                                            <td class="subtotal"></td>
+                                            <td class="cost">@{{item.cost}}</td>
+                                            <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="Quantity" /></td>
+                                            <td class="tax">@{{item.tax_name}}</td>
+                                            <td class="subtotal">@{{item.sub_total}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-warning btn-icon rounded-circle mg-t-3 remove-product"><div style="width:25px;height:25px;"><i class="fa fa-times"></i></div></a>
+                                                <a href="#" class="btn btn-warning btn-icon rounded-circle mg-t-3 remove-product" @click="remove(i)"><div style="width:25px;height:25px;"><i class="fa fa-times"></i></div></a>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">Total</td>
-                                            <td class="total_quantity"></td>
+                                            <td class="total_quantity">@{{total.quantity}}</td>
                                             <td class="total_tax"></td>
-                                            <td colspan="2" class="total"></td>
+                                            <td colspan="2" class="total">@{{total.cost}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -160,7 +156,7 @@
                     </div>
                 </form>
             </div>
-        </div>                
+        </div>
     </div>
 @endsection
 
@@ -170,7 +166,7 @@
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
 <script>
     $(document).ready(function () {
-        
+
         $("#purchase_date").datetimepicker({
             dateFormat: 'yy-mm-dd',
         });
@@ -178,34 +174,35 @@
             dateFormat: 'yy-mm-dd',
         });
 
-        $("#product_table .product").change(function(){
-            let cost = $(this).find('option:selected').data('cost');
-            let taxname = $(this).find('option:selected').data('taxname');
-            let taxrate = $(this).find('option:selected').data('taxrate');
-            $("#product_table .cost").text(cost);
-            $("#product_table .tax").text(taxname);
-            console.log(taxrate);
-            $("#product_table .quantity").change(function(){
-                // console.log(taxrate);
-                let quantity = $(this).val();
-                let subtotal = (cost*(taxrate/100) + cost)*quantity;
-                console.log(subtotal);
-                $("#product_table .subtotal").text(subtotal);
+        // $("#product_table .product").change(function(){
+        //     let cost = $(this).find('option:selected').data('cost');
+        //     let taxname = $(this).find('option:selected').data('taxname');
+        //     let taxrate = $(this).find('option:selected').data('taxrate');
+        //     $("#product_table .cost").text(cost);
+        //     $("#product_table .tax").text(taxname);
+        //     console.log(taxrate);
+        //     $("#product_table .quantity").change(function(){
+        //         // console.log(taxrate);
+        //         let quantity = $(this).val();
+        //         let subtotal = (cost*(taxrate/100) + cost)*quantity;
+        //         console.log(subtotal);
+        //         $("#product_table .subtotal").text(subtotal);
 
-            });
-        });
+        //     });
+        // });
 
-        $(".add-product").click(function(){
-            // console.log($("#product_table tbody tr:first-child").html());
-            let tr_data = $("#product_table tbody tr:first-child").html();
-            $("#product_table tbody").append('<tr>'+tr_data+'</tr>');
-        });
+        // $(".add-product").click(function(){
+        //     // console.log($("#product_table tbody tr:first-child").html());
+        //     let tr_data = $("#product_table tbody tr:first-child").html();
+        //     $("#product_table tbody").append('<tr>'+tr_data+'</tr>');
+        // });
 
-        $(".remove-product").click(function(){
-            $(this).parents("tr").remove();
-        });
-        
+        // $(".remove-product").click(function(){
+        //     $(this).parents("tr").remove();
+        // });
+
 
     });
 </script>
+<script src="{{ asset('js/order_items.js') }}"></script>
 @endsection
