@@ -11,9 +11,18 @@ class Purchase extends Model
         'timestamp', 'reference_no', 'store_id', 'supplier_id', 'attachment', 'note', 'status',
     ];
 
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
     public function orders()
     {
         return $this->morphMany('App\Models\Order', 'orderable');
+    }
+
+    public function payments()
+    {
+        return $this->morphMany('App\Models\Payment', 'paymentable');
     }
 
     public function store(){

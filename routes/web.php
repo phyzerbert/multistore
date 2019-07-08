@@ -62,6 +62,7 @@ Route::get('/purchase/create', 'PurchaseController@create')->name('purchase.crea
 Route::post('/purchase/save', 'PurchaseController@save')->name('purchase.save');
 Route::get('/purchase/edit', 'PurchaseController@edit')->name('purchase.edit');
 Route::post('/purchase/update', 'PurchaseController@update')->name('purchase.update');
+Route::get('/purchase/detail/{id}', 'PurchaseController@detail')->name('purchase.detail');
 Route::get('/purchase/delete/{id}', 'PurchaseController@delete')->name('purchase.delete');
 
 
@@ -72,6 +73,12 @@ Route::post('/sale/save', 'SaleController@save')->name('sale.save');
 Route::get('/sale/edit', 'SaleController@edit')->name('sale.edit');
 Route::post('/sale/update', 'SaleController@update')->name('sale.update');
 Route::get('/sale/delete/{id}', 'SaleController@delete')->name('sale.delete');
+
+
+Route::get('/payment/index/{type}/{id}', 'PaymentController@index')->name('payment.index');
+Route::post('/payment/create', 'PaymentController@create')->name('payment.create');
+Route::post('/payment/edit', 'PaymentController@edit')->name('payment.edit');
+Route::get('/payment/delete/{id}', 'PaymentController@delete')->name('payment.delete');
 
 Route::get('get_products', 'ProductController@get_products');
 Route::post('get_product', 'ProductController@get_product');

@@ -32,7 +32,7 @@
     
     @yield('content')    
 
-    <script src="{{asset('master/lib/jquery/jquery.js')}}"></script>
+    <script src="{{asset('master/lib/jquery/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('master/lib/popper.js/popper.js')}}"></script>
     <script src="{{asset('master/lib/bootstrap/bootstrap.js')}}"></script>
     <script src="{{asset('master/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>

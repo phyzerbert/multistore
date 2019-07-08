@@ -52,12 +52,17 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Store:</label>
-                                <select class="form-control select2" name="store_id" data-placeholder="Select Store">
+                                <select class="form-control select2" name="store" data-placeholder="Select Store">
                                     <option label="Product Supplier"></option>
                                     @foreach ($stores as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('store')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -65,12 +70,17 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Supplier:</label>
-                                <select class="form-control select2-show-search" name="supplier_id" data-placeholder="Supplier">
+                                <select class="form-control select2-show-search" name="supplier" data-placeholder="Supplier">
                                     <option label="Supplier"></option>
                                     @foreach ($suppliers as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('supplier')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -123,7 +133,10 @@
                                             <td class="cost">@{{item.cost}}</td>
                                             <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="Quantity" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
-                                            <td class="subtotal">@{{item.sub_total}}</td>
+                                            <td class="subtotal">
+                                                @{{item.sub_total}}
+                                                <input type="hidden" name="subtotal[]" :value="item.sub_total" />
+                                            </td>
                                             <td>
                                                 <a href="#" class="btn btn-warning btn-icon rounded-circle mg-t-3 remove-product" @click="remove(i)"><div style="width:25px;height:25px;"><i class="fa fa-times"></i></div></a>
                                             </td>
@@ -173,34 +186,6 @@
         $(".expire_date").datepicker({
             dateFormat: 'yy-mm-dd',
         });
-
-        // $("#product_table .product").change(function(){
-        //     let cost = $(this).find('option:selected').data('cost');
-        //     let taxname = $(this).find('option:selected').data('taxname');
-        //     let taxrate = $(this).find('option:selected').data('taxrate');
-        //     $("#product_table .cost").text(cost);
-        //     $("#product_table .tax").text(taxname);
-        //     console.log(taxrate);
-        //     $("#product_table .quantity").change(function(){
-        //         // console.log(taxrate);
-        //         let quantity = $(this).val();
-        //         let subtotal = (cost*(taxrate/100) + cost)*quantity;
-        //         console.log(subtotal);
-        //         $("#product_table .subtotal").text(subtotal);
-
-        //     });
-        // });
-
-        // $(".add-product").click(function(){
-        //     // console.log($("#product_table tbody tr:first-child").html());
-        //     let tr_data = $("#product_table tbody tr:first-child").html();
-        //     $("#product_table tbody").append('<tr>'+tr_data+'</tr>');
-        // });
-
-        // $(".remove-product").click(function(){
-        //     $(this).parents("tr").remove();
-        // });
-
 
     });
 </script>

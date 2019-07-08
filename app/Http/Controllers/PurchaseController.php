@@ -11,6 +11,8 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Store;
 
+use Auth;   
+
 class PurchaseController extends Controller
 {
     public function __construct()
@@ -26,7 +28,7 @@ class PurchaseController extends Controller
     }
 
     public function create(Request $request){
-        config(['site.page' => 'purchase']);        
+        config(['site.page' => 'purchase_create']);        
         $suppliers = Supplier::all();
         $products = Product::all();
         $stores = Store::all();
@@ -35,36 +37,40 @@ class PurchaseController extends Controller
 
     public function save(Request $request){
         $request->validate([
-            'name'=>'required|string',
-            'code'=>'required|string',
-            'barcode_symbology_id'=>'required',
-            'category_id'=>'required',
-            'unit'=>'required|string',
-            'cost'=>'required|numeric',
-            'price'=>'required|numeric',
+            'date'=>'required|string',
+            'reference_number'=>'required|string',
+            'store'=>'required',
+            'supplier'=>'required',
+            'status'=>'required',
         ]);
-        $data = $request->all();
-        $item = new Purchase();
-        $item->name = $data['name'];
-        $item->code = $data['code'];
-        $item->barcode_symbology_id = $data['barcode_symbology_id'];
-        $item->category_id = $data['category_id'];
-        $item->unit = $data['unit'];
-        $item->cost = $data['cost'];
-        $item->price = $data['price'];
-        $item->tax_id = $data['tax_id'];
-        $item->tax_method = $data['tax_method'];
-        $item->alert_quantity = $data['alert_quantity'];
-        $item->supplier_id = $data['supplier_id'];
-        $item->detail = $data['detail'];
 
-        if($request->has("image")){
-            $picture = request()->file('image');
-            $imageName = "product_".time().'.'.$picture->getClientOriginalExtension();
+        $data = $request->all();
+        // dd($data);
+        $item = new Purchase();
+        $item->user_id = Auth::user()->id;  
+        $item->timestamp = $data['date'].":00";
+        $item->reference_no = $data['reference_number'];
+        $item->store_id = $data['store'];
+        $item->supplier_id = $data['supplier'];
+        $item->status = $data['status'];
+
+        if($request->has("attachment")){
+            $picture = request()->file('attachment');
+            $imageName = "purchase_".time().'.'.$picture->getClientOriginalExtension();
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
-            $item->image = 'images/uploaded/purchase_images/'.$imageName;
+            $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
         $item->save();
+
+        for ($i=0; $i < count($data['product_id']); $i++) { 
+            Order::create([
+                'product_id' => $data['product_id'][$i],
+                'quantity' => $data['quantity'][$i],
+                'subtotal' => $data['subtotal'][$i],
+                'orderable_id' => $item->id,
+                'orderable_type' => Purchase::class,
+            ]);
+        }
 
         return back()->with('success', 'Created Successfully');
     }
@@ -81,10 +87,10 @@ class PurchaseController extends Controller
     }
 
     public function detail(Request $request, $id){    
-        config(['site.page' => 'product']);    
-        $product = Purchase::find($id);
+        config(['site.page' => 'purchase']);    
+        $purchase = Purchase::find($id);
 
-        return view('product.detail', compact('product'));
+        return view('purchase.detail', compact('purchase'));
     }
 
     public function update(Request $request){
@@ -113,6 +119,7 @@ class PurchaseController extends Controller
 
     public function delete($id){
         $item = Purchase::find($id);
+        $item->orders->delete();
         $item->delete();
         return back()->with("success", __('page.deleted_successfully'));
     }

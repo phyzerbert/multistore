@@ -12185,7 +12185,7 @@ table.dataTable.no-footer {
   border-radius: 3px;
   display: none;
   width: auto !important;
-  z-index: 5 !important;
+  z-index: 1100 !important;
 }
 .ui-datepicker .ui-datepicker-header {
   display: flex;

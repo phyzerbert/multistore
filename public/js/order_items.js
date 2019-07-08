@@ -30,7 +30,6 @@ var app = new Vue({
 
             axios.post('/get_product', data)
                 .then(response => {
-                    console.log(response.data)
                     this.order_items[i].cost = response.data.cost
                     this.order_items[i].tax_name = response.data.tax.name
                     this.order_items[i].tax_rate = response.data.tax.rate
@@ -52,7 +51,6 @@ var app = new Vue({
             })
         },
         calc_subtotal() {
-            console.log('1231231');
             data = this.order_items
             let total_quantity = 0;
             let total_cost = 0;
@@ -72,6 +70,7 @@ var app = new Vue({
 
     mounted:function() {
         this.init();
+        // this.add_item();
     },
     updated: function() {
         this.calc_subtotal()

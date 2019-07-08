@@ -26,3 +26,24 @@
 #product_table tbody td.subtotal {
     line-height: 33px;
 }
+
+.purchase-card {
+    min-width: 350px;
+}
+
+@media(max-width: 1470px)
+{
+    .purchase-card {
+        min-width: 50%;
+    }
+}
+
+.action-dropdown {
+    padding-left:5px !important;
+    padding-right:5px !important;
+    min-width: 9rem;
+    border-top: solid 1px;
+}
+.action-dropdown::before {
+    height: 0 !important;
+}

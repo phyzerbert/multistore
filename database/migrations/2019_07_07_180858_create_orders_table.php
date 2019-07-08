@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->integer('quantity')->nullable();
+            $table->integer('subtotal')->nullable();
             $table->date('expire_date')->nullable();
             $table->string('serial_no')->nullable();
             $table->integer('orderable_id')->nullable();
