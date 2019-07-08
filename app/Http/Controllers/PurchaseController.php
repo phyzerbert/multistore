@@ -95,25 +95,29 @@ class PurchaseController extends Controller
 
     public function update(Request $request){
         $request->validate([
-            'name'=>'required|string',
-            'code'=>'required|string',
-            'barcode_symbology_id'=>'required',
-            'category_id'=>'required',
-            'unit'=>'required|string',
-            'cost'=>'required|numeric',
-            'price'=>'required|numeric',
+            'date'=>'required|string',
+            'reference_number'=>'required|string',
+            'store'=>'required',
+            'supplier'=>'required',
+            'status'=>'required',
         ]);
         $data = $request->all();
         $item = Purchase::find($request->get("id"));
-        $data['image'] = $item->image;
 
-        if($request->has("image")){
-            $picture = request()->file('image');
-            $imageName = "product_".time().'.'.$picture->getClientOriginalExtension();
-            $picture->move(public_path('images/uploaded/product_images/'), $imageName);
-            $data['image'] = 'images/uploaded/product_images/'.$imageName;
+        $item->user_id = Auth::user()->id;  
+        $item->timestamp = $data['date'].":00";
+        $item->reference_no = $data['reference_number'];
+        $item->store_id = $data['store'];
+        $item->customer_id = $data['customer'];
+        $item->status = $data['status'];
+
+        if($request->has("attachment")){
+            $picture = request()->file('attachment');
+            $imageName = "purchase_".time().'.'.$picture->getClientOriginalExtension();
+            $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
+            $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
-        $item->update($data);
+        $item->save;
         return back()->with('success', 'Updated Successfully');
     }
 

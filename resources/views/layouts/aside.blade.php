@@ -31,7 +31,7 @@
 
         {{-- Sale --}}
         @php
-            $sale_items = ['sale_list', 'sale_create'];
+            $sale_items = ['sale', 'sale_list', 'sale_create'];
         @endphp
 
         <a href="#" class="br-menu-link @if($page == in_array($page, $sale_items)) active show-sub @endif">
