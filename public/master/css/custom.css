@@ -1,0 +1,28 @@
+
+.modal-dialog {
+    width: 500px;
+}
+
+@media(max-width: 500px)
+{
+    .modal-dialog {
+        width: 90%;
+    }
+}
+
+.input-sm {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: 33px !important;
+}
+
+#product_table tbody td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#product_table tbody td.cost,
+#product_table tbody td.tax,
+#product_table tbody td.subtotal {
+    line-height: 33px;
+}
