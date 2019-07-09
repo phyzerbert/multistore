@@ -30,7 +30,7 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Purchase Date: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="date" id="purchase_date" placeholder="Purchase Date" autocomplete="off" required>
+                                <input class="form-control" type="text" name="date" id="purchase_date" value="{{date('Y-m-d H:i')}}"placeholder="Purchase Date" autocomplete="off" required>
                                 @error('date')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>

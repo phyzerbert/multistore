@@ -26,7 +26,7 @@
                     <table class="table table-bordered table-colored table-primary table-hover">
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
-                                <th style="width:50px;">#</th>
+                                <th class="wd-40">#</th>
                                 <th>Userame</th>
                                 <th>Company</th>
                                 <th>Role</th>
@@ -188,8 +188,8 @@
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check-circle-o"></i>&nbsp;Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Close</button>
                     </div>
                 </form>
             </div>

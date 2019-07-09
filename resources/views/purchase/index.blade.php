@@ -48,7 +48,7 @@
                             @endphp
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
-                                    <td class="timestamp">{{$item->timestamp}}</td>
+                                    <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
                                     <td class="reference_no">{{$item->reference_no}}</td>
                                     <td class="supplier" data-id="{{$item->supplier_id}}">{{$item->supplier->name}}</td>
                                     <td class="status">
@@ -58,9 +58,9 @@
                                             <span class="tx-info">Pending</span>
                                         @endif
                                     </td>
-                                    <td class="grand_total"> {{$grand_total}} </td>
-                                    <td class="paid"> {{ $paid }} </td>
-                                    <td> {{$grand_total - $paid}} </td>
+                                    <td class="grand_total"> {{number_format($grand_total)}} </td>
+                                    <td class="paid"> {{ number_format($paid) }} </td>
+                                    <td> {{number_format($grand_total - $paid)}} </td>
                                     {{-- <td></td> --}}
                                     <td class="py-2" align="center">
                                         <div class="dropdown">
