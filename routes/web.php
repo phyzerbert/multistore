@@ -64,7 +64,7 @@ Route::post('/product/update', 'ProductController@update')->name('product.update
 Route::get('/product/detail/{id}', 'ProductController@detail')->name('product.detail');
 Route::get('/product/delete/{id}', 'ProductController@delete')->name('product.delete');
 
-Route::get('/purchase/index', 'PurchaseController@index')->name('purchase.index');
+Route::any('/purchase/index', 'PurchaseController@index')->name('purchase.index');
 Route::get('/purchase/create', 'PurchaseController@create')->name('purchase.create');
 Route::post('/purchase/save', 'PurchaseController@save')->name('purchase.save');
 Route::get('/purchase/edit/{id}', 'PurchaseController@edit')->name('purchase.edit');
@@ -74,7 +74,7 @@ Route::get('/purchase/delete/{id}', 'PurchaseController@delete')->name('purchase
 
 
 
-Route::get('/sale/index', 'SaleController@index')->name('sale.index');
+Route::any('/sale/index', 'SaleController@index')->name('sale.index');
 Route::get('/sale/create', 'SaleController@create')->name('sale.create');
 Route::post('/sale/save', 'SaleController@save')->name('sale.save');
 Route::get('/sale/edit/{id}', 'SaleController@edit')->name('sale.edit');
@@ -91,3 +91,13 @@ Route::get('/payment/delete/{id}', 'PaymentController@delete')->name('payment.de
 Route::get('get_products', 'VueController@get_products');
 Route::post('get_orders', 'VueController@get_orders');
 Route::post('get_product', 'VueController@get_product');
+
+
+
+
+
+
+
+
+
+Route::post('/set_pagesize', 'HomeController@set_pagesize')->name('set_pagesize');

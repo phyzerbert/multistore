@@ -17,4 +17,12 @@ class Company extends Model
     public function stores(){
         return $this->hasMany('App\Models\Store');
     }
+
+    public function purchases(){
+        return $this->belongsTo('App\Models\Purchase');
+    }
+
+    public function sales(){
+        return $this->belongsTo('App\Models\Sale');
+    }
 }

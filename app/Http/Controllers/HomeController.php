@@ -122,4 +122,9 @@ class HomeController extends Controller
         return $return;
     }
 
+    public function set_pagesize(Request $request){
+        $request->session()->put('pagesize', $request->get('pagesize'));
+        return back();
+    }
+
 }

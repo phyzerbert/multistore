@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('style')
-<link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
+    <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="br-mainpanel" id="app">

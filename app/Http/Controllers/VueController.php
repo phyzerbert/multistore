@@ -37,4 +37,6 @@ class VueController extends Controller
         $orders = $item->orders;
         return response()->json($orders);
     }
+
+    
 }

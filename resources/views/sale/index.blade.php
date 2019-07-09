@@ -2,6 +2,7 @@
 @section('style')    
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
+    <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="br-mainpanel">
@@ -22,6 +23,21 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="">
+                    @php
+                        $pagesize = session('pagesize');
+                        if(!$pagesize){$pagesize = 15;}
+                    @endphp     
+                    <form class="form-inline ml-3 float-left" action="{{route('set_pagesize')}}" method="post" id="pagesize_form">
+                        @csrf
+                        <label for="pagesize" class="control-label">{{__('Show')}} :</label>
+                        <select class="form-control form-control-sm mx-2" name="pagesize" id="pagesize">
+                            <option value="" @if($pagesize == '') selected @endif>15</option>
+                            <option value="25" @if($pagesize == '25') selected @endif>25</option>
+                            <option value="50" @if($pagesize == '50') selected @endif>50</option>
+                            <option value="100" @if($pagesize == '100') selected @endif>100</option>
+                        </select>
+                    </form>
+                    @include('sale.filter')
                     <a href="{{route('sale.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>
                 </div>
                 <div class="table-responsive mg-t-2">
@@ -150,6 +166,7 @@
 @section('script')
 <script src="{{asset('master/lib/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
+<script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $("#payment_form input.date").datetimepicker({
@@ -163,14 +180,21 @@
             $("#paymentModal").modal();
         });
 
-        // $(".btn-edit").click(function(){
-        //     let id = $(this).data("id");
-        //     let name = $(this).parents('tr').find(".name").text().trim();
-        //     $("#edit_form input.form-control").val('');
-        //     $("#editModal .id").val(id);
-        //     $("#editModal .name").val(name);
-        //     $("#editModal").modal();
-        // });
+        $("#period").dateRangePicker({
+            autoClose: false,
+        });
+
+        $("#pagesize").change(function(){
+            $("#pagesize_form").submit();
+        });
+
+        $("#btn-reset").click(function(){
+            $("#search_company").val('');
+            $("#search_store").val('');
+            $("#search_supplier").val('');
+            $("#search_reference_no").val('');
+            $("#period").val('');
+        });
 
     });
 </script>

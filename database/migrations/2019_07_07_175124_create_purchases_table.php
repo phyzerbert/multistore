@@ -19,6 +19,7 @@ class CreatePurchasesTable extends Migration
             $table->dateTime('timestamp')->nullable();
             $table->string('reference_no')->nullable();
             $table->integer('store_id')->nullable();
+            $table->integer('company_id')->nullable();
             $table->integer('supplier_id')->nullable();
             $table->string('attachment')->nullable();
             $table->text('note')->nullable();
