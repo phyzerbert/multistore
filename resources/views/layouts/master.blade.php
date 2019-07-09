@@ -40,6 +40,7 @@
     <script src="{{asset('master/lib/jquery-switchbutton/jquery.switchButton.js')}}"></script>
     <script src="{{asset('master/lib/peity/jquery.peity.js')}}"></script>
     <script src="{{asset('master/lib/toastr/toastr.min.js')}}"></script>
+    <script src="{{asset('master/lib/moment/moment.js')}}"></script>
 
     <script src="{{asset('master/js/bracket.js')}}"></script>
     @yield('script')

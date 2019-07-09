@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('style')
-
+<link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="br-mainpanel" id="app">
@@ -20,7 +20,14 @@
             <div class="br-section-wrapper">
                 <div class="row"></div>
                 <div class="row">
-                    <div class="card card-body">
+                    <div class="mg-b-10" style="text-align:center">
+                        <form action="" class="form-inline" method="post">
+                            @csrf
+                            <input type="text" class="form-control input-sm" name="period" id="period" style="width:250px !important" value="{{$period}}" autocomplete="off" placeholder="Period">
+                            <button type="submit" class="btn btn-primary pd-y-7 mg-l-10"> <i class="fa fa-search"></i> Search</button>
+                        </form>
+                    </div>
+                    <div class="card card-body">                        
                         <canvas id="line_chart" style="height:400px;"></canvas>
                     </div>
                 </div>
@@ -31,6 +38,7 @@
 
 @section('script')
 <script src="{{asset('master/lib/chart.js/Chart.js')}}"></script>
+<script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script>
 
     var lineData = {
@@ -61,7 +69,7 @@
 </script>
 <script>
     $(document).ready(function () {
-
+        $("#period").dateRangePicker()
     });
 </script>
 @endsection
