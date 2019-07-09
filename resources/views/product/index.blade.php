@@ -58,7 +58,7 @@
                                                 <span class="pd-x-15">Action</span>
                                             </div>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-header pd-l-5 pd-r-5 bd-t-1" style="min-width:9rem">
+                                        <div class="dropdown-menu dropdown-menu-header action-dropdown pd-l-5 pd-r-5 bd-t-1" style="min-width:9rem">
                                             <ul class="list-unstyled user-profile-nav">
                                                 <li><a href="{{route('product.detail', $item->id)}}"><i class="icon ion-eye  "></i> Details</a></li>
                                                 {{-- <li><a href="{{route('product.duplicate', $item->id)}}"><i class="icon ion-ios-photos-outline"></i> Duplicate</a></li> --}}
