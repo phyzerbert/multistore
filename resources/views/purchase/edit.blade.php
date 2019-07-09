@@ -195,5 +195,5 @@
 
     });
 </script>
-<script src="{{ asset('js/edit_order_items.js') }}"></script>
+<script src="{{ asset('js/purchase_edit_order_items.js') }}"></script>
 @endsection

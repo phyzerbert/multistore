@@ -9,6 +9,7 @@ use App\Models\Sale;
 use App\Models\Order;
 
 use Carbon\Carbon;
+use DB;
 
 class HomeController extends Controller
 {
@@ -28,10 +29,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
+    {        
         config(['site.page' => 'home']);
-        $total_purchases = Order::where('orderable_type', Purchase::class)->sum('subtotal');
-        $total_sales = Order::where('orderable_type', Sale::class)->sum('subtotal');
 
         $period = '';
         if($request->has('period') && $request->get('period') != ""){   
@@ -63,7 +62,64 @@ class HomeController extends Controller
             array_push($sale_array, $daily_sale);
         }
 
-        return view('home', compact('total_purchases', 'total_sales', 'key_array', 'purchase_array', 'sale_array', 'period'));
+        $return['today_purchases'] = $this->getTodayData('purchases');
+        $return['today_sales'] = $this->getTodayData('sales');
+        $return['week_purchases'] = $this->getWeekData('purchases');
+        $return['week_sales'] = $this->getWeekData('sales');
+        $return['month_purchases'] = $this->getMonthData('purchases');
+        $return['month_sales'] = $this->getMonthData('sales');
+        $return['overall_purchases'] = $this->getOverallData('purchases');
+        $return['overall_sales'] = $this->getOverallData('sales');
+
+        return view('home', compact('return', 'key_array', 'purchase_array', 'sale_array', 'period'));
+    }
+
+    public function getTodayData($table, $where = ''){        
+        $sql = "select id from ".$table." where TO_DAYS(timestamp) = TO_DAYS(now()) ".$where;
+        $orderables = collect(DB::select($sql))->pluck('id')->toArray();
+        $return['count'] = count($orderables);
+        if($table == 'purchases'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Purchase::class)->sum('subtotal');
+        }elseif($table == 'sales'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Sale::class)->sum('subtotal');
+        }       
+        return $return;
+    }
+
+    public function getWeekData($table, $where = ''){
+        $sql = "select id from ".$table." where YEARWEEK(DATE_FORMAT(timestamp,'%Y-%m-%d')) = YEARWEEK(now()) ".$where;
+        $orderables = collect(DB::select($sql))->pluck('id')->toArray();
+        $return['count'] = count($orderables);
+        if($table == 'purchases'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Purchase::class)->sum('subtotal');
+        }elseif($table == 'sales'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Sale::class)->sum('subtotal');
+        }       
+        return $return;
+    }
+
+    public function getMonthData($table, $where = ''){
+        $sql = "select id from ".$table." where YEARWEEK(DATE_FORMAT(timestamp,'%Y-%m-%d')) = YEARWEEK(now()) ".$where;
+        $orderables = collect(DB::select($sql))->pluck('id')->toArray();
+        $return['count'] = count($orderables);
+        if($table == 'purchases'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Purchase::class)->sum('subtotal');
+        }elseif($table == 'sales'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Sale::class)->sum('subtotal');
+        }       
+        return $return;
+    }
+
+    public function getOverallData($table, $where = ''){
+        $sql = "select id from ". $table . $where;
+        $orderables = collect(DB::select($sql))->pluck('id')->toArray();
+        $return['count'] = count($orderables);
+        if($table == 'purchases'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Purchase::class)->sum('subtotal');
+        }elseif($table == 'sales'){
+            $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Sale::class)->sum('subtotal');
+        }       
+        return $return;
     }
 
 }

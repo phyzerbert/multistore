@@ -80,14 +80,13 @@ class SaleController extends Controller
     }
 
     public function edit(Request $request, $id){    
-        config(['site.page' => 'product']);    
-        $product = Sale::find($id);
-        $categories = Category::all();
-        $taxes = Tax::all();
-        $barcode_symbologies = BarcodeSymbology::all();
+        config(['site.page' => 'sale']);    
+        $sale = Sale::find($id);        
         $customers = Customer::all();
+        $products = Product::all();
+        $stores = Store::all();
 
-        return view('product.edit', compact('product', 'categories', 'taxes', 'barcode_symbologies', 'customers'));
+        return view('sale.edit', compact('sale', 'customers', 'stores', 'products'));
     }
 
     public function detail(Request $request, $id){    

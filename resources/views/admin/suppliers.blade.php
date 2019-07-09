@@ -80,7 +80,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Customer Name">
+                            <input class="form-control name" type="text" name="name" placeholder="Supplier Name">
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
@@ -142,7 +142,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Customer Name">
+                            <input class="form-control name" type="text" name="name" placeholder="Supplier Name">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>

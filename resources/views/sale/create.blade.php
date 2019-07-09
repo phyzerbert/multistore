@@ -131,7 +131,7 @@
                                     <thead>
                                         <tr>
                                             <th>Product Name(Code)</th>
-                                            <th>Product Cost</th>
+                                            <th>Product Price</th>
                                             <th>Quantity</th>
                                             <th>Product Tax</th>
                                             <th>Subtotal</th>
@@ -146,7 +146,7 @@
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
-                                            <td class="cost">@{{item.cost}}</td>
+                                            <td class="cost">@{{item.price}}</td>
                                             <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="Quantity" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
                                             <td class="subtotal">
@@ -163,7 +163,7 @@
                                             <td colspan="2">Total</td>
                                             <td class="total_quantity">@{{total.quantity}}</td>
                                             <td class="total_tax"></td>
-                                            <td colspan="2" class="total">@{{total.cost}}</td>
+                                            <td colspan="2" class="total">@{{total.price}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -205,5 +205,5 @@
 
     });
 </script>
-<script src="{{ asset('js/order_items.js') }}"></script>
+<script src="{{ asset('js/sale_order_items.js') }}"></script>
 @endsection

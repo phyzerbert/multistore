@@ -11,12 +11,13 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Purchase</a>
-                <a class="breadcrumb-item active" href="#">Add</a>
+                <a class="breadcrumb-item" href="#">Sale</a>
+                <a class="breadcrumb-item active" href="#">Edit</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">Add Purchase</h4>
+            <h4 class="tx-gray-800 mg-b-5">Edit Sale</h4>   
+            <input type="hidden" name="" data-id="{{$sale->id}}" data-type="sale" id="data">         
         </div>
 
         @php
@@ -24,13 +25,14 @@
         @endphp
         <div class="br-pagebody">
             <div class="br-section-wrapper">
-                <form class="form-layout form-layout-1" action="{{route('purchase.save')}}" method="POST" enctype="multipart/form-data">
+                <form class="form-layout form-layout-1" action="{{route('sale.update')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{$sale->id}}">
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Purchase Date: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="date" id="purchase_date" placeholder="Purchase Date" autocomplete="off" required>
+                                <label class="form-control-label">Sale Date: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="date" id="sale_date" value="{{date('Y-m-d H:i', strtotime($sale->timestamp))}}" placeholder="Sale Date" autocomplete="off" required>
                                 @error('date')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,7 +43,7 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Reference Number:</label>
-                                <input class="form-control" type="text" name="reference_number" placeholder="Reference Number">
+                                <input class="form-control" type="text" name="reference_number" value="{{$sale->reference_no}}" placeholder="Reference Number">
                                 @error('reference_number')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -53,9 +55,9 @@
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Store:</label>
                                 <select class="form-control select2" name="store" data-placeholder="Select Store">
-                                    <option label="Product Supplier"></option>
+                                    <option label="Select Store"></option>
                                     @foreach ($stores as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        <option value="{{$item->id}}" @if($sale->store_id == $item->id) selected @endif>{{$item->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('store')
@@ -69,14 +71,14 @@
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Supplier:</label>
-                                <select class="form-control select2-show-search" name="supplier" data-placeholder="Supplier">
-                                    <option label="Supplier"></option>
-                                    @foreach ($suppliers as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                <label class="form-control-label">Customer:</label>
+                                <select class="form-control select2-show-search" name="customer" data-placeholder="Customer">
+                                    <option label="Customer"></option>
+                                    @foreach ($customers as $item)
+                                        <option value="{{$item->id}}" @if($sale->customer_id == $item->id) selected @endif>{{$item->name}}</option>
                                     @endforeach
                                 </select>
-                                @error('supplier')
+                                @error('customer')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -97,8 +99,8 @@
                                 <label class="form-control-label">Status:</label>
                                 <select class="form-control select2" name="status" data-placeholder="Status">
                                     <option label="Status"></option>
-                                    <option value="0">Pending</option>
-                                    <option value="1">Received</option>
+                                    <option value="0" @if($sale->status == 0) selected @endif>Pending</option>
+                                    <option value="1" @if($sale->status == 1) selected @endif>Received</option>
                                 </select>
                             </div>
                         </div>
@@ -107,7 +109,6 @@
                         <div class="col-md-12">
                             <div>
                                 <h5 class="mg-t-10" style="float:left">Order Items</h5>
-                                {{-- <button type="button" class="btn btn-primary mg-b-10 add-product" style="float:right">ADD</button> --}}
                                 <a href="#" class="btn btn-primary btn-icon rounded-circle mg-b-10 add-product" style="float:right" @click="add_item()"><div><i class="fa fa-plus"></i></div></a>
                             </div>
                             <div class="table-responsive">
@@ -115,14 +116,17 @@
                                     <thead>
                                         <tr>
                                             <th>Product Name(Code)</th>
-                                            <th>Product Cost</th>
+                                            <th>Product Price</th>
                                             <th>Quantity</th>
                                             <th>Product Tax</th>
                                             <th>Subtotal</th>
-                                            <th style="width:30px"></th>
+                                            <th class="wd-30"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $orders = $sale->orders;
+                                        @endphp
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
                                                 <select class="form-control input-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
@@ -130,24 +134,26 @@
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
-                                            <td class="cost">@{{item.cost}}</td>
+                                            <td class="price">@{{item.price}}</td>
                                             <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="Quantity" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
                                             <td class="subtotal">
                                                 @{{item.sub_total}}
                                                 <input type="hidden" name="subtotal[]" :value="item.sub_total" />
+                                                <input type="hidden" name="order_id[]" :value="item.order_id" />
                                             </td>
                                             <td>
                                                 <a href="#" class="btn btn-warning btn-icon rounded-circle mg-t-3 remove-product" @click="remove(i)"><div style="width:25px;height:25px;"><i class="fa fa-times"></i></div></a>
                                             </td>
                                         </tr>
+
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td colspan="2">Total</td>
                                             <td class="total_quantity">@{{total.quantity}}</td>
                                             <td class="total_tax"></td>
-                                            <td colspan="2" class="total">@{{total.cost}}</td>
+                                            <td colspan="2" class="total">@{{total.price}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -159,7 +165,7 @@
                         <div class="col-lg-12">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Note:</label>
-                                <textarea class="form-control" name="note" rows="5" placeholder="Note"></textarea>
+                                <textarea class="form-control" name="note" rows="5" placeholder="Note">{{$sale->note}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -180,7 +186,7 @@
 <script>
     $(document).ready(function () {
 
-        $("#purchase_date").datetimepicker({
+        $("#sale_date").datetimepicker({
             dateFormat: 'yy-mm-dd',
         });
         $(".expire_date").datepicker({
@@ -189,5 +195,5 @@
 
     });
 </script>
-<script src="{{ asset('js/purchase_order_items.js') }}"></script>
+<script src="{{ asset('js/sale_edit_order_items.js') }}"></script>
 @endsection
