@@ -20,14 +20,14 @@
             <div class="br-section-wrapper">
                 <div class="">
                     @if ($role == 'admin')
-                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> Add New</button>
+                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-plus mg-r-2"></i> Add New</button>
                     @endif
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
-                                <th style="width:30px;">#</th>
+                                <th class="wd-40">#</th>
                                 <th>Name</th>
                                 <th>Company</th>
                                 <th>Action</th>

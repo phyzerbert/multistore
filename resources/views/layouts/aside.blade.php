@@ -69,7 +69,7 @@
         </ul>
         {{-- Setting --}}
         @php
-            $setting_items = ['category', 'store'];
+            $setting_items = ['category', 'store', 'company'];
         @endphp
         <a href="#" class="br-menu-link @if($page == in_array($page, $setting_items)) active show-sub @endif">
             <div class="br-menu-item">
@@ -80,6 +80,7 @@
         </a>
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif">Category</a></li>
+            <li class="nav-item"><a href="{{route('company.index')}}" class="nav-link @if($page == 'company') active @endif">Company</a></li>
             <li class="nav-item"><a href="{{route('store.index')}}" class="nav-link @if($page == 'store') active @endif">Store</a></li>
         </ul>
 

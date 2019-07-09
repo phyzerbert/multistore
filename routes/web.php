@@ -36,12 +36,19 @@ Route::post('/supplier/create', 'SupplierController@create')->name('supplier.cre
 Route::post('/supplier/edit', 'SupplierController@edit')->name('supplier.edit');
 Route::get('/supplier/delete/{id}', 'SupplierController@delete')->name('supplier.delete');
 
+// ******** Settings *************
+
+Route::get('/company/index', 'CompanyController@index')->name('company.index');
+Route::post('/company/create', 'CompanyController@create')->name('company.create');
+Route::post('/company/edit', 'CompanyController@edit')->name('company.edit');
+Route::get('/company/delete/{id}', 'CompanyController@delete')->name('company.delete');
 
 
 Route::get('/category/index', 'CategoryController@index')->name('category.index');
 Route::post('/category/create', 'CategoryController@create')->name('category.create');
 Route::post('/category/edit', 'CategoryController@edit')->name('category.edit');
 Route::get('/category/delete/{id}', 'CategoryController@delete')->name('category.delete');
+
 
 Route::get('/store/index', 'StoreController@index')->name('store.index');
 Route::post('/store/create', 'StoreController@create')->name('store.create');

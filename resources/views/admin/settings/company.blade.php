@@ -6,11 +6,11 @@
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
                 <a class="breadcrumb-item" href="#">Settings</a>
-                <a class="breadcrumb-item active" href="#">Category</a>
+                <a class="breadcrumb-item active" href="#">Company</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="ion icon-git-network"></i> Category Management</h4>
+            <h4 class="tx-gray-800 mg-b-5">Company Management</h4>
         </div>
         
         @php
@@ -29,6 +29,8 @@
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
                                 <th>Name</th>
+                                <th>Stores</th>
+                                <th>Users</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,9 +39,11 @@
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="name">{{$item->name}}</td>
+                                    <td class="stores">{{$item->stores()->count()}}</td>
+                                    <td class="users">{{$item->users()->count()}}</td>
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
-                                        <a href="{{route('category.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
+                                        <a href="{{route('company.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -63,15 +67,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Category</h4>
+                    <h4 class="modal-title">Add Company</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
-                <form action="{{route('category.create')}}" id="create_form" method="post">
+                <form action="{{route('company.create')}}" id="create_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Category Name">
+                            <input class="form-control name" type="text" name="name" placeholder="Company Name">
                         </div>
                     </div>    
                     <div class="modal-footer">
@@ -86,16 +90,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Category</h4>
+                    <h4 class="modal-title">Edit Company</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
-                <form action="{{route('category.edit')}}" id="edit_form" method="post">
+                <form action="{{route('company.edit')}}" id="edit_form" method="post">
                     @csrf
                     <input type="hidden" name="id" class="id">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Category Name">
+                            <input class="form-control name" type="text" name="name" placeholder="Company Name">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>

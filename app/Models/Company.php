@@ -13,4 +13,8 @@ class Company extends Model
     public function users(){
         return $this->hasMany('App\User');
     }
+
+    public function stores(){
+        return $this->hasMany('App\Models\Store');
+    }
 }
