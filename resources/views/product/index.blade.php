@@ -62,8 +62,10 @@
                                             <ul class="list-unstyled user-profile-nav">
                                                 <li><a href="{{route('product.detail', $item->id)}}"><i class="icon ion-eye  "></i> Details</a></li>
                                                 {{-- <li><a href="{{route('product.duplicate', $item->id)}}"><i class="icon ion-ios-photos-outline"></i> Duplicate</a></li> --}}
+                                                @if($role == 'admin')
                                                 <li><a href="{{route('product.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
                                                 <li><a href="{{route('product.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> Delete</a></li>
+                                                @endif
                                             </ul>
                                         </div>                                        
                                     </td>

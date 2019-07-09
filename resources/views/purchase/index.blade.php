@@ -89,10 +89,12 @@
                                             <div class="dropdown-menu dropdown-menu-header action-dropdown bd-t-1">
                                                 <ul class="list-unstyled user-profile-nav">
                                                     <li><a href="{{route('purchase.detail', $item->id)}}"><i class="icon ion-eye  "></i> Details</a></li>
-                                                    <li><a href="{{route('purchase.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
                                                     <li><a href="{{route('payment.index', ['purchase', $item->id])}}"><i class="icon ion-cash"></i> Payment List</a></li>
                                                     <li><a href="#" data-id="{{$item->id}}" class="btn-add-payment"><i class="icon ion-cash"></i> Add Payment</a></li>
-                                                    <li><a href="{{route('purchase.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> Delete</a></li>
+                                                    @if($role == 'admin')
+                                                        <li><a href="{{route('purchase.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
+                                                        <li><a href="{{route('purchase.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> Delete</a></li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>

@@ -19,10 +19,10 @@ class Company extends Model
     }
 
     public function purchases(){
-        return $this->belongsTo('App\Models\Purchase');
+        return $this->hasMany('App\Models\Purchase');
     }
 
     public function sales(){
-        return $this->belongsTo('App\Models\Sale');
+        return $this->hasMany('App\Models\Sale');
     }
 }

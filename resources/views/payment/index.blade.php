@@ -33,7 +33,9 @@
                                 <th>Reference No</th>
                                 <th>Amount</th> 
                                 <th>Note</th>
+                                @if($role == 'admin')
                                 <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>                                
@@ -49,10 +51,12 @@
                                             <a href="{{asset($item->attachment)}}" download><i class="fa fa-paperclip"></i></a>
                                         @endif
                                     </td>
+                                    @if($role == 'admin')
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
                                         <a href="{{route('payment.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

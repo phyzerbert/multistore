@@ -1,5 +1,6 @@
 @php
     $page = config('site.page');
+    $role = Auth::user()->role->slug;
 @endphp
 <div class="br-logo"><a href="{{route('home')}}"><span>{{config('app.name')}}</span></a></div>
 <div class="br-sideleft overflow-y-auto">
@@ -45,13 +46,14 @@
             <li class="nav-item"><a href="{{route('sale.index')}}" class="nav-link @if($page == 'sale_list') active @endif">Sales List</a></li>
             <li class="nav-item"><a href="{{route('sale.create')}}" class="nav-link @if($page == 'sale_create') active @endif">Add Sale</a></li>
         </ul>
-
+        
         <a href="{{route('product.index')}}" class="br-menu-link @if($page == 'product') active @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon fa fa-cube tx-22"></i>
                 <span class="menu-item-label">Product</span>
             </div>
         </a>
+
         @php
             $people_items = ['user', 'customer', 'supplier'];
         @endphp
@@ -63,10 +65,13 @@
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif">Users</a></li>
+            @if($role == 'admin')
+                <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif">Users</a></li>
+            @endif
             <li class="nav-item"><a href="{{route('customer.index')}}" class="nav-link @if($page == 'customer') active @endif">Customers</a></li>
             <li class="nav-item"><a href="{{route('supplier.index')}}" class="nav-link @if($page == 'supplier') active @endif">Suppliers</a></li>
         </ul>
+        @if($role == 'admin')
         {{-- Setting --}}
         @php
             $setting_items = ['category', 'store', 'company'];
@@ -83,7 +88,7 @@
             <li class="nav-item"><a href="{{route('company.index')}}" class="nav-link @if($page == 'company') active @endif">Company</a></li>
             <li class="nav-item"><a href="{{route('store.index')}}" class="nav-link @if($page == 'store') active @endif">Store</a></li>
         </ul>
-
+        @endif
     </div>
 
     <br>

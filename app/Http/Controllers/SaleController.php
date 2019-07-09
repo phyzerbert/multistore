@@ -64,10 +64,14 @@ class SaleController extends Controller
     }
 
     public function create(Request $request){
-        config(['site.page' => 'sale_create']);        
+        config(['site.page' => 'sale_create']); 
+        $user = Auth::user();
         $customers = Customer::all();
         $products = Product::all();
         $stores = Store::all();
+        if($user->role->slug == 'user'){
+            $stores = $user->company->stores;
+        }
         $users = User::where('role_id', 2)->get();
         return view('sale.create', compact('customers', 'stores', 'products', 'users'));
     }
@@ -117,11 +121,15 @@ class SaleController extends Controller
     }
 
     public function edit(Request $request, $id){    
-        config(['site.page' => 'sale']);    
+        config(['site.page' => 'sale']);
+        $user = Auth::user();    
         $sale = Sale::find($id);        
         $customers = Customer::all();
         $products = Product::all();
         $stores = Store::all();
+        if($user->role->slug == 'user'){
+            $stores = $user->company->stores;
+        }
 
         return view('sale.edit', compact('sale', 'customers', 'stores', 'products'));
     }

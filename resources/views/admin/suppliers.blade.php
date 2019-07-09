@@ -33,7 +33,9 @@
                                 <th>Phone Number</th>
                                 <th>City</th>
                                 <th>Address</th>
+                                @if($role == 'admin')
                                 <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>                                
@@ -46,10 +48,12 @@
                                     <td class="phone_number">{{$item->phone_number}}</td>
                                     <td class="city">{{$item->city}}</td>
                                     <td class="address">{{$item->address}}</td>
+                                    @if($role == 'admin')
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
                                         <a href="{{route('supplier.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
@@ -66,7 +70,7 @@
             </div>
         </div>                
     </div>
-
+    @if($role == 'admin')
     <!-- The Modal -->
     <div class="modal fade" id="addModal">
         <div class="modal-dialog">
@@ -191,6 +195,7 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 
 @section('script')

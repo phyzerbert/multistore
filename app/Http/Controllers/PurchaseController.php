@@ -33,7 +33,6 @@ class PurchaseController extends Controller
             $mod = $user->company->purchases();
             $stores = $user->company->stores;
         }
-
         $company_id = $reference_no = $supplier_id = $store_id = $period = '';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');
@@ -63,10 +62,14 @@ class PurchaseController extends Controller
     }
 
     public function create(Request $request){
-        config(['site.page' => 'purchase_create']);        
+        config(['site.page' => 'purchase_create']);   
+        $user = Auth::user();  
         $suppliers = Supplier::all();
         $products = Product::all();
         $stores = Store::all();
+        if($user->role->slug == 'user'){
+            $stores = $user->company->stores;
+        }
         return view('purchase.create', compact('suppliers', 'stores', 'products'));
     }
 
@@ -114,11 +117,15 @@ class PurchaseController extends Controller
     }
 
     public function edit(Request $request, $id){    
-        config(['site.page' => 'product']);    
+        config(['site.page' => 'product']); 
+        $user = Auth::user();   
         $purchase = Purchase::find($id);        
         $suppliers = Supplier::all();
         $products = Product::all();
         $stores = Store::all();
+        if($user->role->slug == 'user'){
+            $stores = $user->company->stores;
+        }
 
         return view('purchase.edit', compact('purchase', 'suppliers', 'stores', 'products'));
     }
