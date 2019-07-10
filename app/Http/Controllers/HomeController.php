@@ -31,13 +31,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {        
         config(['site.page' => 'home']);
-
+        
         $period = '';
         if($request->has('period') && $request->get('period') != ""){   
             $period = $request->get('period');
             $from = substr($period, 0, 10);
             $to = substr($period, 14, 10);
-            // $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
 
         if(isset($from) && isset($to)){

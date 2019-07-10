@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Company;
 use App\Models\Store;
+use App\Models\StoreProduct;
 
 use Auth;   
 
@@ -111,6 +112,17 @@ class PurchaseController extends Controller
                 'orderable_id' => $item->id,
                 'orderable_type' => Purchase::class,
             ]);
+
+            $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();
+            if(isset($store_product)){
+                $store_product->increment('quantity', $data['quantity'][$i]);
+            }else{
+                $store_product = StoreProduct::create([
+                    'store_id' => $data['store'],
+                    'product_id' => $data['product_id'][$i],
+                    'quantity' => $data['quantity'][$i],
+                ]);
+            }
         }
 
         return back()->with('success', 'Created Successfully');
@@ -172,6 +184,7 @@ class PurchaseController extends Controller
     public function delete($id){
         $item = Purchase::find($id);
         $item->orders()->delete();
+        $item->payments()->delete();
         $item->delete();
         return back()->with("success", __('page.deleted_successfully'));
     }

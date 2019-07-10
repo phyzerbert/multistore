@@ -47,6 +47,7 @@ var app = new Vue({
                 tax_name: "",
                 tax_rate: 0,
                 quantity: 0,
+                // expiry_date: "",
                 sub_total: 0,
             })
         },
@@ -70,10 +71,12 @@ var app = new Vue({
 
     mounted:function() {
         this.init();
-        // this.add_item();
     },
     updated: function() {
         this.calc_subtotal()
+        // $(".expiry_date").datepicker({
+        //     dateFormat: 'yy-mm-dd',
+        // });
         // $(".product").select2();
     }
 });

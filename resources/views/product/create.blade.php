@@ -140,7 +140,7 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Alert Quantity:</label>
-                                <input class="form-control" type="text" name="alert_quantity" placeholder="Alert Quantity">
+                                <input class="form-control" type="number" name="alert_quantity" placeholder="Alert Quantity">
                             </div>
                         </div>
                         <div class="col-lg-4">

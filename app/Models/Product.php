@@ -25,4 +25,8 @@ class Product extends Model
     public function tax(){
         return $this->belongsTo('App\Models\Tax');
     }
+
+    public function stores(){
+        return $this->belongsToMany('App\Models\Store', 'store_products');
+    }
 }

@@ -55,6 +55,51 @@
         </a>
 
         @php
+            $report_items = [
+                'overview_chart', 
+                'company_chart', 
+                'store_chart', 
+                'product_quantity_alert', 
+                'product_expiry_alert', 
+                'products_report', 
+                'categories_report', 
+                'sales_report', 
+                'purchases_report', 
+                'daily_sales', 
+                'monthly_sales', 
+                'payment_report', 
+                'customer_report', 
+                'suppliers_report', 
+                'users_report',
+            ];
+        @endphp
+
+        <a href="#" class="br-menu-link @if($page == in_array($page, $report_items)) active show-sub @endif">
+            <div class="br-menu-item">
+                <i class="menu-item-icon fa fa-file-text-o tx-24"></i>
+                <span class="menu-item-label">Reports</span>
+                <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div>
+        </a>
+        <ul class="br-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{route('report.overview_chart')}}" class="nav-link @if($page == 'overview_chart') active @endif">Overview Chart</a></li>
+            <li class="nav-item"><a href="{{route('report.company_chart')}}" class="nav-link @if($page == 'company_chart') active @endif">Company Chart</a></li>
+            {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'store_chart') active @endif">Store Chart</a></li> --}}
+            <li class="nav-item"><a href="{{route('report.product_quantity_alert')}}" class="nav-link @if($page == 'product_quantity_alert') active @endif">Product Quantity Alert</a></li>
+            {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'product_expiry_alert') active @endif">Product Expiry Alert</a></li> --}}
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'products_report') active @endif">Product Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'categories_report') active @endif">Category Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'sales_report') active @endif">Sales Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'purchases_report') active @endif">Purchase Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'daily_sales') active @endif">Daily Sales</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'monthly_sales') active @endif">Monthly Sales</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'payment_report') active @endif">Payment Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'customer_report') active @endif">Customer Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'suppliers_report') active @endif">Suppliers Report</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'users_report') active @endif">Users Report</a></li>
+        </ul>
+
+        @php
             $people_items = ['user', 'customer', 'supplier'];
         @endphp
         <a href="#" class="br-menu-link @if($page == in_array($page, $people_items)) active show-sub @endif">

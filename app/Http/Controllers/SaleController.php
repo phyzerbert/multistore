@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Models\Company;
 use App\Models\Store;
 use App\User;
+use App\Models\StoreProduct;
 
 use Auth;   
 
@@ -107,7 +108,18 @@ class SaleController extends Controller
         }
         $item->save();
 
-        for ($i=0; $i < count($data['product_id']); $i++) { 
+        for ($i=0; $i < count($data['product_id']); $i++) {             
+            
+            $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();
+            if(isset($store_product)){
+                if($store_product->quantity < $data['quantity'][$i]){
+                    continue;
+                }
+                $store_product->decrement('quantity', $data['quantity'][$i]);
+            }else{
+                continue;
+            }
+
             Order::create([
                 'product_id' => $data['product_id'][$i],
                 'quantity' => $data['quantity'][$i],
@@ -115,6 +127,7 @@ class SaleController extends Controller
                 'orderable_id' => $item->id,
                 'orderable_type' => Sale::class,
             ]);
+
         }
 
         return back()->with('success', 'Created Successfully');
@@ -152,7 +165,7 @@ class SaleController extends Controller
         ]);
         $$data = $request->all();
         // dd($data);
-        $item = Purchase::find($request->get("id"));
+        $item = Sale::find($request->get("id"));
 
         $item->user_id = Auth::user()->id;  
         $item->biller_id = $data['user'];  
@@ -178,6 +191,7 @@ class SaleController extends Controller
     public function delete($id){
         $item = Sale::find($id);
         $item->orders()->delete();
+        $item->payments()->delete();
         $item->delete();
         return back()->with("success", __('page.deleted_successfully'));
     }

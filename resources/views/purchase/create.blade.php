@@ -115,6 +115,7 @@
                                     <thead>
                                         <tr>
                                             <th>Product Name(Code)</th>
+                                            {{-- <th>Expiry Date</th> --}}
                                             <th>Product Cost</th>
                                             <th>Quantity</th>
                                             <th>Product Tax</th>
@@ -125,13 +126,14 @@
                                     <tbody>
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
-                                                <select class="form-control input-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
+                                                <select class="form-control form-control-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
                                                     <option value="" hidden>Select a product</option>
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
+                                            {{-- <td><input type="text" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="order_items[i].expiry_date" placeholder="Expiry Date" /></td> --}}
                                             <td class="cost">@{{item.cost}}</td>
-                                            <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="Quantity" /></td>
+                                            <td><input type="number" class="form-control form-control-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="Quantity" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
                                             <td class="subtotal">
                                                 @{{item.sub_total}}
@@ -183,7 +185,7 @@
         $("#purchase_date").datetimepicker({
             dateFormat: 'yy-mm-dd',
         });
-        $(".expire_date").datepicker({
+        $(".expiry_date").datepicker({
             dateFormat: 'yy-mm-dd',
         });
 
