@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('lang/{locale}', 'VerifyController@lang')->name('lang');
+Route::get('/verify', 'VerifyController@show')->name('verify');
+Route::post('/verify', 'VerifyController@verify')->name('verify');
 
 Route::any('/home', 'HomeController@index')->name('home');
 

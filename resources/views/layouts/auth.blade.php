@@ -17,6 +17,7 @@
 
     <!-- Bracket CSS -->
     <link rel="stylesheet" href="{{asset('master/css/bracket.css')}}">
+    @yield('style')
 </head>
 
 <body>
@@ -28,4 +29,5 @@
     <script src="{{asset('master/lib/bootstrap/bootstrap.js')}}"></script>
 
 </body>
+@yield('script')
 </html>
