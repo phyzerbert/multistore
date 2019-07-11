@@ -4,13 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Settings</a>
-                <a class="breadcrumb-item active" href="#">Category</a>
+                <a class="breadcrumb-item" href="#">Report</a>
+                <a class="breadcrumb-item active" href="#">Product Quantity Alert</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="ion icon-git-network"></i> Category Management</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-exclamation-triangle"></i> Product Quantity Alert</h4>
         </div>
         
         @php

@@ -14,7 +14,7 @@
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">Sales List</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i> Sales List</h4>
         </div>
         
         @php
@@ -23,20 +23,7 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="">
-                    @php
-                        $pagesize = session('pagesize');
-                        if(!$pagesize){$pagesize = 15;}
-                    @endphp     
-                    <form class="form-inline ml-3 float-left" action="{{route('set_pagesize')}}" method="post" id="pagesize_form">
-                        @csrf
-                        <label for="pagesize" class="control-label">{{__('Show')}} :</label>
-                        <select class="form-control form-control-sm mx-2" name="pagesize" id="pagesize">
-                            <option value="" @if($pagesize == '') selected @endif>15</option>
-                            <option value="25" @if($pagesize == '25') selected @endif>25</option>
-                            <option value="50" @if($pagesize == '50') selected @endif>50</option>
-                            <option value="100" @if($pagesize == '100') selected @endif>100</option>
-                        </select>
-                    </form>
+                    @include('elements.pagesize') 
                     @include('sale.filter')
                     <a href="{{route('sale.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>
                 </div>

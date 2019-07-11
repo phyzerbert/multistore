@@ -17,9 +17,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-header wd-200">
                     <ul class="list-unstyled user-profile-nav">
-                        <li><a href="index.html"><i class="icon ion-ios-person"></i> Profile</a></li>
-                        <li><a href="index.html"><i class="icon ion-ios-gear"></i> Settings</a></li>
-                        <li><a href="index.html"><i class="icon ion-ios-folder"></i> Collections</a></li>
+                        <li><a href="{{route('profile')}}"><i class="icon ion-ios-person"></i> Profile</a></li>
+                        {{-- <li><a href="index.html"><i class="icon ion-ios-gear"></i> Settings</a></li> --}}
                         <li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

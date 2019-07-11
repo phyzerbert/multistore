@@ -239,6 +239,10 @@ class ReportController extends Controller
         $data = $mod->orderBy('created_at', 'desc')->paginate(15);
         return view('reports.users_report', compact('data', 'name'));
     }
+    
+    
+
+    
 
 
 
@@ -247,79 +251,9 @@ class ReportController extends Controller
 
 
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
     
     
     

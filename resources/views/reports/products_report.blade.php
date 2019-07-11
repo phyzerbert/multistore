@@ -9,7 +9,7 @@
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="ion icon-git-network"></i> Products Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-cubes"></i> Products Report</h4>
         </div>
         
         @php

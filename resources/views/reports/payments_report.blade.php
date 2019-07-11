@@ -13,7 +13,7 @@
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">Payments Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card"></i> Payments Report</h4>
         </div>
         
         @php
@@ -54,18 +54,22 @@
                         <tbody>                                
                             @foreach ($data as $item)
                             @php
-                                $grand_total = $item->orders()->sum('subtotal');
-                                $paid = $item->payments()->sum('amount');
+                                // $grand_total = $item->orders()->sum('subtotal');
+                                // $paid = $item->payments()->sum('amount');
                             @endphp
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
                                     <td class="reference_no">{{$item->reference_no}}</td>
                                     <td class="sale" data-id="{{$item->paymentable_id}}">
-                                        {{$item->paymentable->reference_no}}
+                                        @if ($item->paymentable_type == 'App\Models\Sale')
+                                            {{$item->paymentable->reference_no}}
+                                        @endif                                        
                                     </td>
                                     <td class="purchase" data-id="{{$item->paymentable_id}}">
-                                        {{$item->paymentable->reference_no}}
+                                        @if ($item->paymentable_type == 'App\Models\Purchase')
+                                            {{$item->paymentable->reference_no}}
+                                        @endif  
                                     </td>
                                     <td class="amount"> {{number_format($item->amount)}} </td>
                                     <td class="type">
