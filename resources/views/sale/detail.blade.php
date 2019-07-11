@@ -6,13 +6,13 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Purchase</a>
-                <a class="breadcrumb-item active" href="#">Detail</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item" href="#">{{__('page.sale')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.detail')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">Purchase Detail</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-info-circle"></i> {{__('page.sale_detail')}}</h4>
         </div>
         
         @php
@@ -22,16 +22,16 @@
             <div class="br-section-wrapper">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card card-body tx-white-8 bg-success mg-y-10 bd-0 ht-150 purchase-card">
+                        <div class="card card-body tx-white-8 bg-success mg-y-10 bd-0 ht-150 sale-card">
                             <div class="row">
                                 <div class="col-3">
                                     <span class="tx-70"><i class="fa fa-plug"></i></span>
                                 </div>
                                 <div class="col-9">
-                                    <h4 class="card-title tx-white tx-medium mg-b-10">Supplier</h4>
-                                    <p class="tx-16 mg-b-3">Name: {{$purchase->supplier->name}}</p>
-                                    <p class="tx-16 mg-b-3">Email: {{$purchase->supplier->email}}</p>
-                                    <p class="tx-16 mg-b-3">Phone: {{$purchase->supplier->phone_number}}</p>
+                                    <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.customer')}}</h4>
+                                    <p class="tx-16 mg-b-3">{{__('page.name')}}: {{$sale->customer->name}}</p>
+                                    <p class="tx-16 mg-b-3">{{__('page.email')}}: {{$sale->customer->email}}</p>
+                                    <p class="tx-16 mg-b-3">{{__('page.phone')}}: {{$sale->customer->phone_number}}</p>
                                 </div>
                             </div>
                         </div>
@@ -43,28 +43,28 @@
                                     <span class="tx-70"><i class="fa fa-truck"></i></span>
                                 </div>
                                 <div class="col-9">
-                                    <h4 class="card-title tx-white tx-medium mg-b-10">Store</h4>
-                                    <p class="tx-16 mg-b-3">Name: {{$purchase->store->name}}</p>
-                                    <p class="tx-16 mg-b-3">Company: {{$purchase->store->company->name}}</p>
+                                    <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.store')}}</h4>
+                                    <p class="tx-16 mg-b-3">{{__('page.name')}}: {{$sale->store->name}}</p>
+                                    <p class="tx-16 mg-b-3">{{__('page.company')}}: {{$sale->store->company->name}}</p>
                                     <p class="tx-16 mg-b-3"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card card-body bg-info tx-white-8 mg-y-10 bd-0 ht-150 purchase-card">
+                        <div class="card card-body bg-info tx-white-8 mg-y-10 bd-0 ht-150 sale-card">
                             <div class="row">                                
                                 <div class="col-3">
                                     <span class="tx-70"><i class="fa fa-file-text-o"></i></span>
                                 </div>
                                 <div class="col-9">
-                                    <h4 class="card-title tx-white tx-medium mg-b-10">Reference</h4>
-                                    <p class="tx-16 mg-b-3">Number: {{$purchase->reference_no}}</p>
-                                    <p class="tx-16 mg-b-3">Date: {{$purchase->timestamp    }}</p>
+                                    <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.reference')}}</h4>
+                                    <p class="tx-16 mg-b-3">{{__('page.number')}}: {{$sale->reference_no}}</p>
+                                    <p class="tx-16 mg-b-3">{{__('page.date')}}: {{$sale->timestamp    }}</p>
                                     <p class="tx-16 mg-b-3">
-                                        Attachment: 
-                                        @if ($purchase->attachment != "")
-                                            <a href="{{asset($purchase->attachment)}}" download>&nbsp;&nbsp;&nbsp;<i class="fa fa-paperclip"></i></a>
+                                            {{__('page.attachment')}}: 
+                                        @if ($sale->attachment != "")
+                                            <a href="{{asset($sale->attachment)}}" download>&nbsp;&nbsp;&nbsp;<i class="fa fa-paperclip"></i></a>
                                         @endif
                                     </p>
                                 </div>
@@ -79,11 +79,11 @@
                             <thead>
                                 <tr>
                                     <th class="wd-40">#</th>
-                                    <th>Product Name(Code)</th>
-                                    <th>Product Cost</th>
-                                    <th>Quantity</th>
-                                    <th>Product Tax</th>
-                                    <th>Subtotal</th>
+                                    <th>{{__('page.product_name_code')}}</th>
+                                    <th>{{__('page.product_cost')}}</th>
+                                    <th>{{__('page.quantity')}}</th>
+                                    <th>{{__('page.product_tax')}}</th>
+                                    <th>{{__('page.subtotal')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,9 +91,9 @@
                                     $total_quantity = 0;
                                     $total_tax_rate = 0;
                                     $total_amount = 0;
-                                    $paid = $purchase->payments()->sum('amount');
+                                    $paid = $sale->payments()->sum('amount');
                                 @endphp
-                                @foreach ($purchase->orders as $item)
+                                @foreach ($sale->orders as $item)
                                 @php
                                     $tax = $item->product->tax->rate;
                                     $quantity = $item->quantity;
@@ -115,7 +115,7 @@
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="3" class="tx-bold" style="text-align:right">Total (COP)</td>
+                                    <td colspan="3" class="tx-bold" style="text-align:right">{{__('page.total')}} (COP)</td>
                                     <td>{{$total_quantity}}</td>
                                     <td>{{$total_tax_rate}}</td>
                                     <td>{{$total_amount}}</td>
@@ -123,15 +123,15 @@
                             </tbody>
                             <tfoot class="tx-bold tx-black">
                                 <tr>
-                                    <td colspan="5" style="text-align:right">Total Amount (COP)</td>
+                                    <td colspan="5" style="text-align:right">{{__('page.total_amount')}} (COP)</td>
                                     <td>{{$total_amount}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" style="text-align:right">Paid (COP)</td>
+                                    <td colspan="5" style="text-align:right">{{__('page.paid')}} (COP)</td>
                                     <td>{{$paid}}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" style="text-align:right">Balance (COP)</td>
+                                    <td colspan="5" style="text-align:right">{{__('page.balance')}} (COP)</td>
                                     <td>{{$total_amount - $paid}}</td>
                                 </tr>
                             </tfoot>
@@ -140,8 +140,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 card card-body tx-white-8 bg-success mg-l-15 bd-0 d-block" style="float:right !important;">                            
-                        <h6 class="card-title tx-white tx-medium mg-b-5">Created By {{$purchase->user->name}}</h6>
-                        <h6 class="card-title tx-white tx-medium mg-y-5">Created at {{$purchase->created_at}}</h6>
+                        <h6 class="card-title tx-white tx-medium mg-b-5">{{__('page.created_by')}} {{$sale->user->name}}</h6>
+                        <h6 class="card-title tx-white tx-medium mg-y-5">{{__('page.created_at')}} {{$sale->created_at}}</h6>
                     </div>
                 </div>
             </div>

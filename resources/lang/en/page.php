@@ -68,6 +68,7 @@ return [
     'delete' => 'Delete',
     'duplicated' => 'Duplicated',
     'details' => 'Details',
+    'payment_list' => 'Payment List',
     'save' => 'Save',
     'close' => 'Close',
     'back' => 'Back',
@@ -120,6 +121,23 @@ return [
     'quantity' => 'Quantity',
     'subtotal' => 'SubTotal',
     'barcode_symbology' => 'Barcode Symbology',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'reference' => 'Reference',
+    'number' => 'Number',
+    'total_amount' => 'Total Amount',
+    'created_by' => 'Created By',
+    'created_at' => 'Created At',
+
+
+
+
+
+
+
+
+
+
 
     // ******** Modal ********
     'add_payment' => 'Add Payment',
@@ -129,6 +147,10 @@ return [
     'product_management' => 'Product Management',
     'add_new_product' => 'Add New Product',
     'edit_product' => 'Edit Product',
+    'edit_purchase' => 'Edit Purchase',
+    'edit_sale' => 'Edit Sale',
+    'purchase_detail' => 'Purchase Detail',
+    'sale_detail' => 'Sale Detail',
 
 
 

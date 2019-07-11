@@ -129,7 +129,7 @@ class PurchaseController extends Controller
     }
 
     public function edit(Request $request, $id){    
-        config(['site.page' => 'product']); 
+        config(['site.page' => 'purchase']); 
         $user = Auth::user();   
         $purchase = Purchase::find($id);        
         $suppliers = Supplier::all();
