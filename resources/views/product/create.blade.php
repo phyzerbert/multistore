@@ -6,13 +6,13 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Product</a>
-                <a class="breadcrumb-item active" href="#">Create</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item" href="#">{{__('page.product')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.add')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">Create Product</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-plus-circle"></i> {{__('page.add_new_product')}}</h4>
         </div>
         
         @php
@@ -25,8 +25,8 @@
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="name" placeholder="Product Name" required>
+                                <label class="form-control-label">{{__('page.product_name')}}: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="name" placeholder="{{__('page.product_name')}}" required>
                                 @error('name')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,8 +36,8 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="code" placeholder="Product Code" required>
+                                <label class="form-control-label">{{__('page.product_code')}}: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="code" placeholder="{{__('page.product_code')}}" required>
                                 @error('code')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,9 +47,9 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Barcode Symbology: <span class="tx-danger">*</span></label>
-                                <select class="form-control select2" name="barcode_symbology_id" data-placeholder="Select Barcode Symbology" required>
-                                    <option label="Select Barcode Symbology"></option>
+                                <label class="form-control-label">{{__('page.barcode_symbology')}}: <span class="tx-danger">*</span></label>
+                                <select class="form-control select2" name="barcode_symbology_id" data-placeholder="{{__('page.barcode_symbology')}}" required>
+                                    <option label="{{__('page.barcode_symbology')}}"></option>
                                     @foreach ($barcode_symbologies as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
@@ -65,9 +65,9 @@
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Category: <span class="tx-danger">*</span></label>
-                                <select class="form-control select2" name="category_id" data-placeholder="Select Category" required>
-                                    <option label="Select Category"></option>
+                                <label class="form-control-label">{{__('page.select_category')}}: <span class="tx-danger">*</span></label>
+                                <select class="form-control select2" name="category_id" data-placeholder="{{__('page.select_category')}}" required>
+                                    <option label="{{__('page.select_category')}}"></option>
                                     @foreach ($categories as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
@@ -81,8 +81,8 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Unit: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="unit" placeholder="Product Unit" required>
+                                <label class="form-control-label">{{__('page.product_unit')}}: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="unit" placeholder="{{__('page.product_unit')}}" required>
                                 @error('unit')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -92,8 +92,8 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Cost: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="cost" placeholder="Product Cost" required>
+                                <label class="form-control-label">{{__('page.product_cost')}}: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="cost" placeholder="{{__('page.product_cost')}}" required>
                                 @error('cost')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -105,8 +105,8 @@
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Price: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" name="price" placeholder="Product Price" required>
+                                <label class="form-control-label">{{__('page.product_price')}}: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="price" placeholder="{{__('page.product_price')}}" required>
                                 @error('price')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -116,9 +116,9 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Tax:</label>
-                                <select class="form-control select2" name="tax_id" data-placeholder="Select Tax">
-                                    <option label="Select Tax"></option>
+                                <label class="form-control-label">{{__('page.product_tax')}}:</label>
+                                <select class="form-control select2" name="tax_id" data-placeholder="{{__('page.select_tax')}}">
+                                    <option label="{{__('page.select_tax')}}"></option>
                                     @foreach ($taxes as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
@@ -127,9 +127,9 @@
                         </div>                        
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Tax Method:</label>
-                                <select class="form-control select2" name="tax_method" data-placeholder="Select Tax Method">
-                                    <option label="Select Tax Method"></option>
+                                <label class="form-control-label">{{__('page.tax_method')}}:</label>
+                                <select class="form-control select2" name="tax_method" data-placeholder="{{__('page.select_tax_method')}}">
+                                    <option label="{{__('page.select_tax_method')}}"></option>
                                     <option value="0">Inclusive</option>
                                     <option value="1">Exclusive</option>
                                 </select>

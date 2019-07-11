@@ -221,6 +221,7 @@ class ReportController extends Controller
     public function suppliers_report(Request $request){
         config(['site.page' => 'suppliers_report']);
         $mod = new Supplier();
+        $name = '';
         if ($request->get('name') != ""){
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");

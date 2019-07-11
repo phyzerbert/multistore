@@ -4,13 +4,13 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Product</a>
-                <a class="breadcrumb-item active" href="#">List</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item" href="#">{{__('page.product')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.list')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-cubes"></i> Product Management</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-cubes"></i> {{__('page.product_management')}}</h4>
         </div>
         
         @php
@@ -28,15 +28,15 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:30px;">#</th>
-                                <th>Product Code</th>
-                                <th>Product Name</th>
-                                <th>Category</th>
-                                <th>Product Cost</th>
-                                <th>Product Price</th>
-                                <th>Quantity</th>
-                                <th>Product Unit</th>
-                                <th>Alert Quantity</th>
-                                <th>Action</th>
+                                <th>{{__('page.product_code')}}</th>
+                                <th>{{__('page.product_name')}}</th>
+                                <th>{{__('page.category')}}</th>
+                                <th>{{__('page.product_cost')}}</th>
+                                <th>{{__('page.product_price')}}</th>
+                                <th>{{__('page.quantity')}}</th>
+                                <th>{{__('page.product_unit')}}</th>
+                                <th>{{__('page.alert_quantity')}}</th>
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -63,11 +63,11 @@
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-header action-dropdown pd-l-5 pd-r-5 bd-t-1" style="min-width:9rem">
                                             <ul class="list-unstyled user-profile-nav">
-                                                <li><a href="{{route('product.detail', $item->id)}}"><i class="icon ion-eye  "></i> Details</a></li>
-                                                {{-- <li><a href="{{route('product.duplicate', $item->id)}}"><i class="icon ion-ios-photos-outline"></i> Duplicate</a></li> --}}
+                                                <li><a href="{{route('product.detail', $item->id)}}"><i class="icon ion-eye  "></i> {{__('page.details')}}</a></li>
+                                                {{-- <li><a href="{{route('product.duplicate', $item->id)}}"><i class="icon ion-ios-photos-outline"></i> {{__('page.duplicated')}}</a></li> --}}
                                                 @if($role == 'admin')
-                                                <li><a href="{{route('product.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
-                                                <li><a href="{{route('product.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> Delete</a></li>
+                                                <li><a href="{{route('product.edit', $item->id)}}"><i class="icon ion-compose"></i> {{__('page.edit')}}</a></li>
+                                                <li><a href="{{route('product.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>
                                                 @endif
                                             </ul>
                                         </div>                                        
@@ -78,7 +78,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}

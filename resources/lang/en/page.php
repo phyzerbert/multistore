@@ -66,6 +66,8 @@ return [
     'add_new' => 'Add New',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'duplicated' => 'Duplicated',
+    'details' => 'Details',
     'save' => 'Save',
     'close' => 'Close',
     'back' => 'Back',
@@ -100,16 +102,27 @@ return [
     'paid' => 'Paid',
     'grand_total' => 'Grand Total',
     'status' => 'Status',
-    'order_items' => 'Order',
+    'order_items' => 'Order Items',
+    'product_code' => 'Product Code',
+    'product_name' => 'Product Name',
+    'product_unit' => 'Product Unit',
+    'alert_quantity' => 'Alert Quantity',
     'product_name_code' => 'Product Name(Code)',
     'expiry_date' => 'Expiry Date',
     'product_cost' => 'Product Cost',
+    'product_price' => 'Product Price',
     'product_tax' => 'Product Tax',
     'quantity' => 'Quantity',
     'subtotal' => 'SubTotal',
+    'barcode_symbology' => 'Barcode Symbology',
 
     // ******** Modal ********
     'add_payment' => 'Add Payment',
+
+
+    // ******** Title ********
+    'product_management' => 'Product Management',
+    'add_new_product' => 'Add New Product',
 
 
 
