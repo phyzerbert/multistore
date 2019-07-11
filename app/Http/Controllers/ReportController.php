@@ -210,6 +210,7 @@ class ReportController extends Controller
     public function customers_report(Request $request){
         config(['site.page' => 'customers_report']);
         $mod = new Customer();
+        $name = '';
         if ($request->get('name') != ""){
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
@@ -233,6 +234,7 @@ class ReportController extends Controller
     public function users_report(Request $request){
         config(['site.page' => 'users_report']);
         $mod = new User();
+        $name = '';
         if ($request->get('name') != ""){
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
