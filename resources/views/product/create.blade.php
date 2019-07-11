@@ -139,15 +139,15 @@
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Alert Quantity:</label>
-                                <input class="form-control" type="number" name="alert_quantity" placeholder="Alert Quantity">
+                                <label class="form-control-label">{{__('page.alert_quantity')}}:</label>
+                                <input class="form-control" type="number" name="alert_quantity" placeholder="{{__('page.alert_quantity')}}">
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Supplier:</label>
-                                <select class="form-control select2-show-search" name="supplier_id" data-placeholder="Product Supplier">
-                                    <option label="Product Supplier"></option>
+                                <label class="form-control-label">{{__('page.supplier')}}:</label>
+                                <select class="form-control select2-show-search" name="supplier_id" data-placeholder="{{__('page.product_supplier')}}">
+                                    <option label="{{__('page.product_supplier')}}"></option>
                                     @foreach ($suppliers as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach                                    
@@ -156,7 +156,7 @@
                         </div>                        
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Image:</label>                                
+                                <label class="form-control-label">{{__('page.product_image')}}:</label>                                
                                 <label class="custom-file wd-100p">
                                     <input type="file" name="image" id="file2" class="custom-file-input" accept="image/*">
                                     <span class="custom-file-control custom-file-control-primary"></span>
@@ -167,14 +167,14 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group mg-b-10-force">
-                                <label class="form-control-label">Product Detail:</label>
-                                <textarea class="form-control" name="detail" rows="5" placeholder="Enter address"></textarea>
+                                <label class="form-control-label">{{__('page.product_detail')}}:</label>
+                                <textarea class="form-control" name="detail" rows="5" placeholder="{{__('page.product_detail')}}"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="form-layout-footer text-right">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-check mg-r-2"></i>Save</button>
-                        <a href="{{route('product.index')}}" class="btn btn-warning"><i class="fa fa-times mg-r-2"></i>Cancel</a>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check mg-r-2"></i>{{__('page.save')}}</button>
+                        <a href="{{route('product.index')}}" class="btn btn-warning"><i class="fa fa-times mg-r-2"></i>{{__('page.cancel')}}</a>
                     </div>
                 </form>
             </div>

@@ -111,7 +111,12 @@ return [
     'expiry_date' => 'Expiry Date',
     'product_cost' => 'Product Cost',
     'product_price' => 'Product Price',
+    'product_detail' => 'Product Detail',
     'product_tax' => 'Product Tax',
+    'product_supplier' => 'Product Supplier',
+    'product_image' => 'Product Image',
+    'tax_rate' => 'Tax Rate',
+    'tax_method' => 'Tax Method',
     'quantity' => 'Quantity',
     'subtotal' => 'SubTotal',
     'barcode_symbology' => 'Barcode Symbology',
@@ -123,6 +128,7 @@ return [
     // ******** Title ********
     'product_management' => 'Product Management',
     'add_new_product' => 'Add New Product',
+    'edit_product' => 'Edit Product',
 
 
 
@@ -134,6 +140,7 @@ return [
     'select_supplier' => 'Select a supplier',
     'select_customer' => 'Select a customer',
     'select_product' => 'Select a product',
+    'select_tax_method' => 'Select a tax method',
     'purchase_date' => 'Purchase Date',
     'payment_date' => 'Payment Date',
     'sale_date' => 'Sale Date',
