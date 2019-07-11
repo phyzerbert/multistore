@@ -62,12 +62,14 @@ return [
     'search' => 'Search',
     'reset' => 'Reset',
     'action' => 'Action',
+    'add' => 'Add',
     'add_new' => 'Add New',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'save' => 'Save',
     'close' => 'Close',
     'back' => 'Back',
+    'cancel' => 'Cancel',
     'name' => 'Name',
     'type' => 'Type',
     'total' => 'Total',
@@ -76,9 +78,12 @@ return [
     'show' => 'Show',
     'list' => 'List',
     'comment' => 'Comment',
+    'note' => 'Note',
     'are_you_sure' => 'Are you sure?',
     'accepted_formats_image' => 'Accepted formats: gif, png, jpg. Max file size 2Mb.',
     'success' => 'Success',
+    'pending' => 'Pending',
+    'received' => 'Received',
     'error' => 'Error',
     'created_successfully' => 'Created Successfully',
     'updated_successfully' => 'Updated Successfully',
@@ -89,21 +94,35 @@ return [
     // ******** Column Name ********
     'date' => 'Date',
     'reference_no' => 'Reference No',
+    'reference_number' => 'Reference Number',
     'purchase_status' => 'Purchase Status',
-    'grand_total' => 'Grand Total',
+    'sale_status' => 'Sale Status',
     'paid' => 'Paid',
-    'date' => 'Date',
-    'date' => 'Date',
-    'date' => 'Date',
-    'date' => 'Date',
-    'date' => 'Date',
+    'grand_total' => 'Grand Total',
+    'status' => 'Status',
+    'order_items' => 'Order',
+    'product_name_code' => 'Product Name(Code)',
+    'expiry_date' => 'Expiry Date',
+    'product_cost' => 'Product Cost',
+    'product_tax' => 'Product Tax',
+    'quantity' => 'Quantity',
+    'subtotal' => 'SubTotal',
+
+    // ******** Modal ********
+    'add_payment' => 'Add Payment',
+
+
+
+
 
     // ******** Filter Form ********
     'select_company' => 'Select a company',
     'select_store' => 'Select a store',
     'select_supplier' => 'Select a supplier',
     'select_customer' => 'Select a customer',
+    'select_product' => 'Select a product',
     'purchase_date' => 'Purchase Date',
+    'payment_date' => 'Payment Date',
     'sale_date' => 'Sale Date',
 
     // ******** Dashboard ********

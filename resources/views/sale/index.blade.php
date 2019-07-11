@@ -8,13 +8,13 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Sales</a>
-                <a class="breadcrumb-item active" href="#">List</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item" href="#">{{__('page.sales')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.list')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i> Sales List</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i> {{__('page.sales_list')}}</h4>
         </div>
         
         @php
@@ -25,23 +25,23 @@
                 <div class="">
                     @include('elements.pagesize') 
                     @include('sale.filter')
-                    <a href="{{route('sale.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>
+                    <a href="{{route('sale.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> {{__('page.add_new')}}</a>
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:40px;">#</th>
-                                <th>Date</th>
-                                <th>Referenct No</th>
-                                <th>User</th>
-                                <th>Customer</th>
-                                <th>Sale Status</th>
-                                <th>Grand Total</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
-                                {{-- <th>Payment Status</th> --}}
-                                <th>Action</th>
+                                <th>{{__('page.date')}}</th>
+                                <th>{{__('page.reference_no')}}</th>
+                                <th>{{__('page.user')}}</th>
+                                <th>{{__('page.customer')}}</th>
+                                <th>{{__('page.sale_status')}}</th>
+                                <th>{{__('page.grand_total')}}</th>
+                                <th>{{__('page.paid')}}</th>
+                                <th>{{__('page.balance')}}</th>
+                                {{-- <th>{{__('page.payment_status')}}</th> --}}
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -58,9 +58,9 @@
                                     <td class="customer" data-id="{{$item->customer_id}}">{{$item->customer->name}}</td>
                                     <td class="status">
                                         @if ($item->status == 1)
-                                            <span class="tx-success">Received</span>
+                                            <span class="tx-success">{{__('page.received')}}</span>
                                         @elseif($item->status == 0)
-                                            <span class="tx-info">Pending</span>
+                                            <span class="tx-info">{{__('page.pending')}}</span>
                                         @endif
                                     </td>
                                     <td class="grand_total"> {{number_format($grand_total)}} </td>
@@ -72,17 +72,17 @@
                                             <a href="#" class="btn btn-info btn-with-icon nav-link" data-toggle="dropdown">
                                                 <div class="ht-30">
                                                     <span class="icon wd-30"><i class="fa fa-send"></i></span>
-                                                    <span class="pd-x-15">Action</span>
+                                                    <span class="pd-x-15">{{__('page.action')}}</span>
                                                 </div>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-header action-dropdown bd-t-1">
                                                 <ul class="list-unstyled user-profile-nav">
-                                                    <li><a href="{{route('sale.detail', $item->id)}}"><i class="icon ion-eye  "></i> Details</a></li>
-                                                    <li><a href="{{route('payment.index', ['sale', $item->id])}}"><i class="icon ion-cash"></i> Payment List</a></li>
-                                                    <li><a href="#" data-id="{{$item->id}}" class="btn-add-payment"><i class="icon ion-cash"></i> Add Payment</a></li>
+                                                    <li><a href="{{route('sale.detail', $item->id)}}"><i class="icon ion-eye  "></i> {{__('page.details')}}</a></li>
+                                                    <li><a href="{{route('payment.index', ['sale', $item->id])}}"><i class="icon ion-cash"></i> {{__('page.payment_list')}}</a></li>
+                                                    <li><a href="#" data-id="{{$item->id}}" class="btn-add-payment"><i class="icon ion-cash"></i> {{__('page.add_payment')}}</a></li>
                                                     @if($role == 'admin')
                                                         <li><a href="{{route('sale.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
-                                                        <li><a href="{{route('sale.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> Delete</a></li>
+                                                        <li><a href="{{route('sale.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>
                                                     @endif
                                                 </ul>
                                             </div>
@@ -94,7 +94,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}
@@ -110,7 +110,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Payment</h4>
+                    <h4 class="modal-title">{{__('page.add_payment')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('payment.create')}}" id="payment_form" method="post" enctype="multipart/form-data">
@@ -119,32 +119,32 @@
                     <input type="hidden" class="paymentable_id" name="paymentable_id" />
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Date</label>
+                            <label class="control-label">{{__('page.date')}}</label>
                             <input class="form-control date" type="text" name="date" autocomplete="off" value="{{date('Y-m-d H:i')}}" placeholder="Date">
                         </div>                        
                         <div class="form-group">
-                            <label class="control-label">Reference No</label>
-                            <input class="form-control reference_no" type="text" name="reference_no" placeholder="Reference Number">
+                            <label class="control-label">{{__('page.reference_no')}}</label>
+                            <input class="form-control reference_no" type="text" name="reference_no" placeholder="{{__('page.reference_number')}}">
                         </div>                                                
                         <div class="form-group">
-                            <label class="control-label">Amount</label>
-                            <input class="form-control amount" type="text" name="amount" placeholder="Amount">
+                            <label class="control-label">{{__('page.amount')}}</label>
+                            <input class="form-control amount" type="text" name="amount" placeholder="{{__('page.amount')}}">
                         </div>                                               
                         <div class="form-group">
-                            <label class="control-label">Attachment</label>
+                            <label class="control-label">{{__('page.attachment')}}</label>
                             <label class="custom-file wd-100p">
                                 <input type="file" name="attachment" id="file2" class="custom-file-input">
                                 <span class="custom-file-control custom-file-control-primary"></span>
                             </label>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Note</label>
-                            <textarea class="form-control note" type="text" name="note" placeholder="Note"></textarea>
+                            <label class="control-label">{{__('page.note')}}</label>
+                            <textarea class="form-control note" type="text" name="note" placeholder="{{__('page.note')}}"></textarea>
                         </div> 
                     </div>    
                     <div class="modal-footer">
-                        <button type="submit" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;Close</button>
+                        <button type="submit" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>

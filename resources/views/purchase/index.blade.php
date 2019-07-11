@@ -108,7 +108,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Payment</h4>
+                    <h4 class="modal-title">{{__('page.add_payment')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('payment.create')}}" id="payment_form" method="post" enctype="multipart/form-data">
@@ -117,32 +117,32 @@
                     <input type="hidden" class="paymentable_id" name="paymentable_id" />
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Date</label>
-                            <input class="form-control date" type="text" name="date" autocomplete="off" value="{{date('Y-m-d H:i')}}" placeholder="Date">
+                            <label class="control-label">{{__('page.date')}}</label>
+                            <input class="form-control date" type="text" name="date" autocomplete="off" value="{{date('Y-m-d H:i')}}" placeholder="{{__('page.date')}}">
                         </div>                        
                         <div class="form-group">
-                            <label class="control-label">Reference No</label>
-                            <input class="form-control reference_no" type="text" name="reference_no" placeholder="Reference Number">
+                            <label class="control-label">{{__('page.reference_no')}}</label>
+                            <input class="form-control reference_no" type="text" name="reference_no" placeholder="{{__('page.reference_no')}}">
                         </div>                                                
                         <div class="form-group">
-                            <label class="control-label">Amount</label>
-                            <input class="form-control amount" type="text" name="amount" placeholder="Amount">
+                            <label class="control-label">{{__('page.amount')}}</label>
+                            <input class="form-control amount" type="text" name="amount" placeholder="{{__('page.amount')}}">
                         </div>                                               
                         <div class="form-group">
-                            <label class="control-label">Attachment</label>
+                            <label class="control-label">{{__('page.attachment')}}</label>
                             <label class="custom-file wd-100p">
                                 <input type="file" name="attachment" id="file2" class="custom-file-input">
                                 <span class="custom-file-control custom-file-control-primary"></span>
                             </label>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Note</label>
-                            <textarea class="form-control note" type="text" name="note" placeholder="Note"></textarea>
+                            <label class="control-label">{{__('page.note')}}</label>
+                            <textarea class="form-control note" type="text" name="note" placeholder="{{__('page.note')}}"></textarea>
                         </div> 
                     </div>    
                     <div class="modal-footer">
-                        <button type="submit" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;Close</button>
+                        <button type="submit" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
