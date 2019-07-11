@@ -15,6 +15,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Supplier;
+use App\User;
 
 use Carbon\Carbon;
 
@@ -214,7 +215,7 @@ class ReportController extends Controller
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
         $data = $mod->orderBy('created_at', 'desc')->paginate(15);
-        return view('report.customers_report', compact('data', 'name'));
+        return view('reports.customers_report', compact('data', 'name'));
     }
 
     public function suppliers_report(Request $request){
@@ -225,7 +226,18 @@ class ReportController extends Controller
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
         $data = $mod->orderBy('created_at', 'desc')->paginate(15);
-        return view('report.suppliers_report', compact('data', 'name'));
+        return view('reports.suppliers_report', compact('data', 'name'));
+    }
+
+    public function users_report(Request $request){
+        config(['site.page' => 'users_report']);
+        $mod = new User();
+        if ($request->get('name') != ""){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        return view('reports.users_report', compact('data', 'name'));
     }
 
 

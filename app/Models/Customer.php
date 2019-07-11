@@ -10,5 +10,9 @@ class Customer extends Model
         'name', 'company', 'email', 'phone_number', 'address', 'city',
     ];
 
+    public function sales(){
+        return $this->hasMany('App\Models\Sale');
+    }
+
     
 }

@@ -91,10 +91,10 @@
             <li class="nav-item"><a href="{{route('report.categories_report')}}" class="nav-link @if($page == 'categories_report') active @endif">Category Report</a></li>
             <li class="nav-item"><a href="{{route('report.sales_report')}}" class="nav-link @if($page == 'sales_report') active @endif">Sales Report</a></li>
             <li class="nav-item"><a href="{{route('report.purchases_report')}}" class="nav-link @if($page == 'purchases_report') active @endif">Purchase Report</a></li>
-            <li class="nav-item"><a href="#" class="nav-link @if($page == 'daily_sales') active @endif">Daily Sales</a></li>
-            <li class="nav-item"><a href="#" class="nav-link @if($page == 'monthly_sales') active @endif">Monthly Sales</a></li>
+            {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'daily_sales') active @endif">Daily Sales</a></li>
+            <li class="nav-item"><a href="#" class="nav-link @if($page == 'monthly_sales') active @endif">Monthly Sales</a></li> --}}
             <li class="nav-item"><a href="{{route('report.payments_report')}}" class="nav-link @if($page == 'payments_report') active @endif">Payments Report</a></li>
-            <li class="nav-item"><a href="{{route('report.customers_report')}}" class="nav-link @if($page == 'customers_report') active @endif">Customer Report</a></li>
+            <li class="nav-item"><a href="{{route('report.customers_report')}}" class="nav-link @if($page == 'customers_report') active @endif">Customers Report</a></li>
             <li class="nav-item"><a href="{{route('report.suppliers_report')}}" class="nav-link @if($page == 'suppliers_report') active @endif">Suppliers Report</a></li>
             <li class="nav-item"><a href="{{route('report.users_report')}}" class="nav-link @if($page == 'users_report') active @endif">Users Report</a></li>
         </ul>

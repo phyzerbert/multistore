@@ -41,6 +41,9 @@
                         </thead>
                         <tbody>                                
                             @foreach ($data as $item)
+                            @php
+                                $quantity = $item->store_products()->sum('quantity');
+                            @endphp
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="code">{{$item->code}}</td>
@@ -48,7 +51,7 @@
                                     <td class="category">{{$item->category->name}}</td>
                                     <td class="cost">{{$item->cost}}</td>
                                     <td class="price">{{$item->price}}</td>
-                                    <td class="quantity">{{$item->quantity}}</td>
+                                    <td class="quantity">{{$quantity}}</td>
                                     <td class="unit">{{$item->unit}}</td>
                                     <td class="alert_quantity">{{$item->alert_quantity}}</td>
                                     <td class="py-2 dropdown" align="center">

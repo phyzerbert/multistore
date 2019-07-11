@@ -106,8 +106,8 @@ Route::any('/report/purchases_report', 'ReportController@purchases_report')->nam
 Route::get('/report/daily_sales', 'ReportController@daily_sales')->name('report.daily_sales');
 Route::get('/report/monthly_sales', 'ReportController@monthly_sales')->name('report.monthly_sales');
 Route::get('/report/payments_report', 'ReportController@payments_report')->name('report.payments_report');
-Route::get('/report/customer_report', 'ReportController@payment_report')->name('report.customer_report');
-Route::get('/report/suppliers_report', 'ReportController@payment_report')->name('report.suppliers_report');
+Route::get('/report/customers_report', 'ReportController@customers_report')->name('report.customers_report');
+Route::get('/report/suppliers_report', 'ReportController@suppliers_report')->name('report.suppliers_report');
 Route::get('/report/users_report', 'ReportController@users_report')->name('report.users_report');
 
 

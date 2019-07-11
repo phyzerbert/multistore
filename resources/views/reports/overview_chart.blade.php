@@ -29,7 +29,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-secondary rounded overflow-hidden">
+                            <a href="{{route('report.store_chart')}}" class="d-block p-3 mt-3 bg-secondary rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-bar-chart tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -39,7 +39,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-warning rounded overflow-hidden">
+                            <a href="{{route('report.product_quantity_alert')}}" class="d-block p-3 mt-3 bg-warning rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-exclamation-triangle tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -49,7 +49,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-teal rounded overflow-hidden">
+                            <a href="{{route('report.product_expiry_alert')}}" class="d-block p-3 mt-3 bg-teal rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-exclamation-circle tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -59,17 +59,17 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-indigo rounded overflow-hidden">
+                            <a href="{{route('report.products_report')}}" class="d-block p-3 mt-3 bg-indigo rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-cubes tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Product Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Products Report</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-info rounded overflow-hidden">
+                            <a href="{{route('report.categories_report')}}" class="d-block p-3 mt-3 bg-info rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-code-fork tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -79,7 +79,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-success rounded overflow-hidden">
+                            <a href="{{route('report.sales_report')}}" class="d-block p-3 mt-3 bg-success rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-sign-out tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -89,7 +89,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-danger rounded overflow-hidden">
+                            <a href="{{route('report.purchases_report')}}" class="d-block p-3 mt-3 bg-danger rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-sign-in tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -98,7 +98,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div class="col-sm-6 col-xl-3">
+                        {{-- <div class="col-sm-6 col-xl-3">
                             <a href="#" class="d-block p-3 mt-3 bg-purple rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-clock-o tx-50 lh-0 tx-white op-7"></i>
@@ -117,29 +117,29 @@
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-pink rounded overflow-hidden">
+                            <a href="{{route('report.payments_report')}}" class="d-block p-3 mt-3 bg-pink rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-money tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Payment Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Payments Report</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-success rounded overflow-hidden">
+                            <a href="{{route('report.customers_report')}}" class="d-block p-3 mt-3 bg-success rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-user tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Customer Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Customers Report</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-orange rounded overflow-hidden">
+                            <a href="{{route('report.suppliers_report')}}" class="d-block p-3 mt-3 bg-orange rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-truck tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
@@ -149,16 +149,15 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-primary rounded overflow-hidden">
+                            <a href="{{route('report.users_report')}}" class="d-block p-3 mt-3 bg-primary rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-users tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">User Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Users Report</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
-
                 </div>
             </div>
             <div class="br-section-wrapper">

@@ -5,11 +5,11 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">Report</a>
-                <a class="breadcrumb-item active" href="#">Products Report</a>
+                <a class="breadcrumb-item active" href="#">Suppliers Report</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="ion icon-git-network"></i> Products Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-user-circle"></i> Suppliers Report</h4>
         </div>
         
         @php
@@ -22,34 +22,36 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Image</th>
-                                <th>Product Code</th>
-                                <th>Product Name</th>
-                                <th>Purchased</th>
-                                <th>Sold</th>
-                                <th>Purchased Amount</th>
-                                <th>Sold Amount</th>
-                                <th>Profit(Loss)</th>
+                                <th>Company</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email Address</th>
+                                <th>Total Purchases</th>
+                                <th>Total Amount</th>
+                                <th>Paid</th>
+                                <th>Balance</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>                                
                             @foreach ($data as $item)
                                 @php
-                                    $purchased_quantity = \App\Models\Order::where('product_id', $item->id)->where('orderable_type', "App\Models\Purchase")->sum('quantity');
-                                    $sold_quantity = \App\Models\Order::where('product_id', $item->id)->where('orderable_type', "App\Models\Sale")->sum('quantity');                                    
-                                    $purchased_amount = \App\Models\Order::where('product_id', $item->id)->where('orderable_type', "App\Models\Purchase")->sum('subtotal');
-                                    $sold_amount = \App\Models\Order::where('product_id', $item->id)->where('orderable_type', "App\Models\Sale")->sum('subtotal');
+                                    $sales_array = $item->purchases()->pluck('id');
+                                    $total_sales = $item->purchases()->count();
+                                    $total_amount = \App\Models\Order::whereIn('orderable_id', $sales_array)->where('orderable_type', "App\Models\Purchase")->sum('subtotal');
+                                    $paid = \App\Models\Payment::whereIn('paymentable_id', $sales_array)->where('paymentable_type', "App\Models\Purchase")->sum('amount'); 
                                 @endphp                              
                                 <tr>
                                     <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
-                                    <td class="image py-1 wd-60"><img src="@if($item->image){{asset($item->image)}}@else{{asset('images/no-image.png')}}@endif" class="wd-40 ht-40 rounded-circle" alt="Image"></td>
-                                    <td>{{$item->code}}</td>
+                                    <td>{{$item->company}}</td>
                                     <td>{{$item->name}}</td>
-                                    <td>{{number_format($purchased_quantity)}}</td>
-                                    <td>{{number_format($sold_quantity)}}</td>                                        
-                                    <td>{{number_format($purchased_amount)}}</td>
-                                    <td>{{number_format($sold_amount)}}</td>                                      
-                                    <td>{{number_format($sold_amount - $purchased_amount)}}</td>                                      
+                                    <td>{{$item->phone_number}}</td>
+                                    <td>{{$item->email}}</td>
+                                    <td>{{number_format($total_sales)}}</td>
+                                    <td>{{number_format($total_amount)}}</td>                                        
+                                    <td>{{number_format($paid)}}</td>
+                                    <td>{{number_format($total_amount - $paid)}}</td>                                      
+                                    {{-- <td></td>--}}
                                 </tr>
                             @endforeach
                         </tbody>
