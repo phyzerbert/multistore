@@ -101,11 +101,11 @@ Route::get('/report/product_quantity_alert', 'ReportController@product_quantity_
 Route::get('/report/product_expiry_alert', 'ReportController@product_expiry_alert')->name('report.product_expiry_alert');
 Route::get('/report/products_report', 'ReportController@products_report')->name('report.products_report');
 Route::get('/report/categories_report', 'ReportController@categories_report')->name('report.categories_report');
-Route::get('/report/sales_report', 'ReportController@sales_report')->name('report.sales_report');
-Route::get('/report/purchases_report', 'ReportController@purchases_report')->name('report.purchases_report');
+Route::any('/report/sales_report', 'ReportController@sales_report')->name('report.sales_report');
+Route::any('/report/purchases_report', 'ReportController@purchases_report')->name('report.purchases_report');
 Route::get('/report/daily_sales', 'ReportController@daily_sales')->name('report.daily_sales');
 Route::get('/report/monthly_sales', 'ReportController@monthly_sales')->name('report.monthly_sales');
-Route::get('/report/payment_report', 'ReportController@payment_report')->name('report.payment_report');
+Route::get('/report/payments_report', 'ReportController@payments_report')->name('report.payments_report');
 Route::get('/report/customer_report', 'ReportController@payment_report')->name('report.customer_report');
 Route::get('/report/suppliers_report', 'ReportController@payment_report')->name('report.suppliers_report');
 Route::get('/report/users_report', 'ReportController@users_report')->name('report.users_report');

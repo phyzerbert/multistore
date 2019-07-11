@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Store;
 use App\Models\StoreProduct;
 use App\Models\Sale;
 use App\Models\Payment;
@@ -96,6 +97,138 @@ class ReportController extends Controller
 
         return view('reports.product_quantity_alert', compact('data'));
     }
+
+    public function products_report(Request $request){
+        config(['site.page' => 'products_report']);
+
+        $data = Product::paginate(10);        
+
+        return view('reports.products_report', compact('data'));
+    }
+
+    public function categories_report(Request $request){
+        config(['site.page' => 'categories_report']);
+
+        $data = Category::paginate(10);        
+
+        return view('reports.categories_report', compact('data'));
+    }
+
+    public function sales_report(Request $request){
+        config(['site.page' => 'sales_report']);
+
+        $stores = Store::all();
+        $customers = Customer::all();
+        $companies = Company::all();
+
+        $mod = new Sale();
+
+        $company_id = $reference_no = $customer_id = $store_id = $period = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', $company_id);
+        }
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('customer_id') != ""){
+            $customer_id = $request->get('customer_id');
+            $mod = $mod->where('customer_id', $customer_id);
+        }
+        if ($request->get('store_id') != ""){
+            $store_id = $request->get('store_id');
+            $mod = $mod->where('store_id', $store_id);
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        return view('reports.sales_report', compact('data', 'companies', 'stores', 'customers', 'company_id', 'store_id', 'customer_id', 'reference_no', 'period'));
+    }
+
+    public function purchases_report(Request $request){
+        config(['site.page' => 'purchases_report']);
+        $stores = Store::all();
+        $suppliers = Supplier::all();
+        $companies = Company::all();
+
+        $mod = new Purchase();
+        $company_id = $reference_no = $supplier_id = $store_id = $period = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', $company_id);
+        }
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('supplier_id') != ""){
+            $supplier_id = $request->get('supplier_id');
+            $mod = $mod->where('supplier_id', $supplier_id);
+        }
+        if ($request->get('store_id') != ""){
+            $store_id = $request->get('store_id');
+            $mod = $mod->where('store_id', $store_id);
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        return view('reports.purchases_report', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
+    }
+
+    public function payments_report(Request $request){
+        config(['site.page' => 'payments_report']);
+        
+        $mod = new Payment();
+        $reference_no = $period = '';
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        return view('reports.payments_report', compact('data', 'reference_no', 'period'));
+    }
+
+    public function customers_report(Request $request){
+        config(['site.page' => 'customers_report']);
+        $mod = new Customer();
+        if ($request->get('name') != ""){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        return view('report.customers_report', compact('data', 'name'));
+    }
+
+    public function suppliers_report(Request $request){
+        config(['site.page' => 'suppliers_report']);
+        $mod = new Supplier();
+        if ($request->get('name') != ""){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        return view('report.suppliers_report', compact('data', 'name'));
+    }
+
+
 
 
 
