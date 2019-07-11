@@ -48,3 +48,7 @@
 .action-dropdown::before {
     height: 0 !important;
 }
+
+.dropdown-lang .dropdown-menu {
+    top: 18px !important;
+}

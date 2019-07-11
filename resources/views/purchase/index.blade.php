@@ -8,13 +8,13 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Purchase</a>
-                <a class="breadcrumb-item active" href="#">List</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item" href="#">{{__('page.purchase')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.list')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card"></i>  Purchases List</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card"></i>  {{__('page.purchases_list')}}</h4>
         </div>
         
         @php
@@ -25,22 +25,22 @@
                 <div class="">
                     @include('elements.pagesize')                    
                     @include('purchase.filter')
-                    <a href="{{route('purchase.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>
+                    <a href="{{route('purchase.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> {{__('page.add_new')}}</a>
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:40px;">#</th>
-                                <th>Date</th>
-                                <th>Referenct No</th>
-                                <th>Supplier</th>
-                                <th>Purchase Status</th>
-                                <th>Grand Total</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
+                                <th>{{__('page.date')}}</th>
+                                <th>{{__('page.reference_no')}}</th>
+                                <th>{{__('page.supplier')}}</th>
+                                <th>{{__('page.purchase_status')}}</th>
+                                <th>{{__('page.grand_total')}}</th>
+                                <th>{{__('page.paid')}}</th>
+                                <th>{{__('page.balance')}}</th>
                                 {{-- <th>Payment Status</th> --}}
-                                <th>Action</th>
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -92,7 +92,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}

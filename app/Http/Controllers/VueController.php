@@ -8,6 +8,8 @@ use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Order;
 
+use App;
+
 class VueController extends Controller
 {
     
@@ -37,6 +39,5 @@ class VueController extends Controller
         $orders = $item->orders;
         return response()->json($orders);
     }
-
     
 }

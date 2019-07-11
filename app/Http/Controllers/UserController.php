@@ -37,22 +37,21 @@ class UserController extends Controller
         
     public function profile(Request $request){
         $user = Auth::user();
-        $current_page = 'profile';
-        
-        $data = array(
-            'user' => $user,
-            'current_page' => $current_page
-        );
-        return view('profile', $data);
+        config(['site.page' => 'profile']);
+        $companies = Company::all();
+        return view('profile', compact('user', 'companies'));
     }
 
     public function updateuser(Request $request){
         $request->validate([
             'name'=>'required',
+            'phone_number'=>'required',
         ]);
         $user = Auth::user();
         $user->name = $request->get("name");
         $user->phone_number = $request->get("phone_number");
+        $user->first_name = $request->get("first_name");
+        $user->last_name = $request->get("last_name");
 
         if($request->get('password') != ''){
             $user->password = Hash::make($request->get('password'));

@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('lang/{locale}', 'VerifyController@lang')->name('lang');
+
 Route::any('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'UserController@profile')->name('profile');

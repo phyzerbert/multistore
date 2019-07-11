@@ -2,14 +2,14 @@
     $page = config('site.page');
     $role = Auth::user()->role->slug;
 @endphp
-<div class="br-logo"><a href="{{route('home')}}"><span>{{config('app.name')}}</span></a></div>
+<div class="br-logo"><a href="{{route('home')}}" class="mx-auto"><span>{{config('app.name')}}</span></a></div>
 <div class="br-sideleft overflow-y-auto">
     <label class="sidebar-label pd-x-15 mg-t-20">Navigation</label>
     <div class="br-sideleft-menu">
         <a href="{{route('home')}}" class="br-menu-link @if($page == 'home') active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-                <span class="menu-item-label">Dashboard</span>
+                <span class="menu-item-label">{{__('page.dashboard')}}</span>
             </div>
         </a>
 
@@ -21,13 +21,13 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $purchase_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-log-in tx-24"></i>
-                <span class="menu-item-label">Purchases</span>
+                <span class="menu-item-label">{{__('page.purchases')}}</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{route('purchase.index')}}" class="nav-link @if($page == 'purchase_list') active @endif">Purchases List</a></li>
-            <li class="nav-item"><a href="{{route('purchase.create')}}" class="nav-link @if($page == 'purchase_create') active @endif">Add Purchase</a></li>
+            <li class="nav-item"><a href="{{route('purchase.index')}}" class="nav-link @if($page == 'purchase_list') active @endif">{{__('page.purchases_list')}}</a></li>
+            <li class="nav-item"><a href="{{route('purchase.create')}}" class="nav-link @if($page == 'purchase_create') active @endif">{{__('page.add_purchase')}}</a></li>
         </ul>
 
         {{-- Sale --}}
@@ -38,19 +38,19 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $sale_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-log-out tx-24"></i>
-                <span class="menu-item-label">Sales</span>
+                <span class="menu-item-label">{{__('page.sales')}}</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{route('sale.index')}}" class="nav-link @if($page == 'sale_list') active @endif">Sales List</a></li>
-            <li class="nav-item"><a href="{{route('sale.create')}}" class="nav-link @if($page == 'sale_create') active @endif">Add Sale</a></li>
+            <li class="nav-item"><a href="{{route('sale.index')}}" class="nav-link @if($page == 'sale_list') active @endif">{{__('page.sales_list')}}</a></li>
+            <li class="nav-item"><a href="{{route('sale.create')}}" class="nav-link @if($page == 'sale_create') active @endif">{{__('page.add_sale')}}</a></li>
         </ul>
         
         <a href="{{route('product.index')}}" class="br-menu-link @if($page == 'product') active @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon fa fa-cube tx-22"></i>
-                <span class="menu-item-label">Product</span>
+                <span class="menu-item-label">{{__('page.product')}}</span>
             </div>
         </a>
 
@@ -77,26 +77,26 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $report_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon fa fa-file-text-o tx-24"></i>
-                <span class="menu-item-label">Reports</span>
+                <span class="menu-item-label">{{__('page.reports')}}</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{route('report.overview_chart')}}" class="nav-link @if($page == 'overview_chart') active @endif">Overview Chart</a></li>
-            <li class="nav-item"><a href="{{route('report.company_chart')}}" class="nav-link @if($page == 'company_chart') active @endif">Company Chart</a></li>
+            <li class="nav-item"><a href="{{route('report.overview_chart')}}" class="nav-link @if($page == 'overview_chart') active @endif">{{__('page.overview_chart')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.company_chart')}}" class="nav-link @if($page == 'company_chart') active @endif">{{__('page.company_chart')}}</a></li>
             {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'store_chart') active @endif">Store Chart</a></li> --}}
-            <li class="nav-item"><a href="{{route('report.product_quantity_alert')}}" class="nav-link @if($page == 'product_quantity_alert') active @endif">Product Quantity Alert</a></li>
+            <li class="nav-item"><a href="{{route('report.product_quantity_alert')}}" class="nav-link @if($page == 'product_quantity_alert') active @endif">{{__('page.product_quantity_alert')}}</a></li>
             {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'product_expiry_alert') active @endif">Product Expiry Alert</a></li> --}}
-            <li class="nav-item"><a href="{{route('report.products_report')}}" class="nav-link @if($page == 'products_report') active @endif">Product Report</a></li>
-            <li class="nav-item"><a href="{{route('report.categories_report')}}" class="nav-link @if($page == 'categories_report') active @endif">Category Report</a></li>
-            <li class="nav-item"><a href="{{route('report.sales_report')}}" class="nav-link @if($page == 'sales_report') active @endif">Sales Report</a></li>
-            <li class="nav-item"><a href="{{route('report.purchases_report')}}" class="nav-link @if($page == 'purchases_report') active @endif">Purchase Report</a></li>
+            <li class="nav-item"><a href="{{route('report.products_report')}}" class="nav-link @if($page == 'products_report') active @endif">{{__('page.product_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.categories_report')}}" class="nav-link @if($page == 'categories_report') active @endif">{{__('page.category_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.sales_report')}}" class="nav-link @if($page == 'sales_report') active @endif">{{__('page.sales_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.purchases_report')}}" class="nav-link @if($page == 'purchases_report') active @endif">{{__('page.purchases_report')}}</a></li>
             {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'daily_sales') active @endif">Daily Sales</a></li>
             <li class="nav-item"><a href="#" class="nav-link @if($page == 'monthly_sales') active @endif">Monthly Sales</a></li> --}}
-            <li class="nav-item"><a href="{{route('report.payments_report')}}" class="nav-link @if($page == 'payments_report') active @endif">Payments Report</a></li>
-            <li class="nav-item"><a href="{{route('report.customers_report')}}" class="nav-link @if($page == 'customers_report') active @endif">Customers Report</a></li>
-            <li class="nav-item"><a href="{{route('report.suppliers_report')}}" class="nav-link @if($page == 'suppliers_report') active @endif">Suppliers Report</a></li>
-            <li class="nav-item"><a href="{{route('report.users_report')}}" class="nav-link @if($page == 'users_report') active @endif">Users Report</a></li>
+            <li class="nav-item"><a href="{{route('report.payments_report')}}" class="nav-link @if($page == 'payments_report') active @endif">{{__('page.payments_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.customers_report')}}" class="nav-link @if($page == 'customers_report') active @endif">{{__('page.customers_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.suppliers_report')}}" class="nav-link @if($page == 'suppliers_report') active @endif">{{__('page.suppliers_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.users_report')}}" class="nav-link @if($page == 'users_report') active @endif">{{__('page.users_report')}}</a></li>
         </ul>
 
         @php
@@ -105,16 +105,16 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $people_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-person-stalker tx-24"></i>
-                <span class="menu-item-label">People</span>
+                <span class="menu-item-label">{{__('page.people')}}</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
             @if($role == 'admin')
-                <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif">Users</a></li>
+                <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif">{{__('page.user')}}</a></li>
             @endif
-            <li class="nav-item"><a href="{{route('customer.index')}}" class="nav-link @if($page == 'customer') active @endif">Customers</a></li>
-            <li class="nav-item"><a href="{{route('supplier.index')}}" class="nav-link @if($page == 'supplier') active @endif">Suppliers</a></li>
+            <li class="nav-item"><a href="{{route('customer.index')}}" class="nav-link @if($page == 'customer') active @endif">{{__('page.customer')}}</a></li>
+            <li class="nav-item"><a href="{{route('supplier.index')}}" class="nav-link @if($page == 'supplier') active @endif">{{__('page.supplier')}}</a></li>
         </ul>
         @if($role == 'admin')
         {{-- Setting --}}
@@ -124,14 +124,14 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $setting_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-                <span class="menu-item-label">Setting</span>
+                <span class="menu-item-label">{{__('page.setting')}}</span>
                 <i class="menu-item-arrow fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
-            <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif">Category</a></li>
-            <li class="nav-item"><a href="{{route('company.index')}}" class="nav-link @if($page == 'company') active @endif">Company</a></li>
-            <li class="nav-item"><a href="{{route('store.index')}}" class="nav-link @if($page == 'store') active @endif">Store</a></li>
+            <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif">{{__('page.category')}}</a></li>
+            <li class="nav-item"><a href="{{route('company.index')}}" class="nav-link @if($page == 'company') active @endif">{{__('page.company')}}</a></li>
+            <li class="nav-item"><a href="{{route('store.index')}}" class="nav-link @if($page == 'store') active @endif">{{__('page.store')}}</a></li>
         </ul>
         @endif
     </div>

@@ -1,0 +1,153 @@
+<?php
+
+return [
+
+    // ********  Login Page  ********
+    'sign_in' => 'Sign In',
+    'username' => 'Username',
+    'password' => 'Password',
+    'remember_me' => 'Remember Me',
+    'enter_your_credentials_below' => 'Enter your credentials below',
+
+    // ********  Verify Phone Number Page  ********
+    'verification_phone_number' => 'Verification Phone Number',
+    'please_enter_your_verification_code' => 'Please enter your verification code.',
+    'verification_code' => 'Verification Code',
+    'verify' => 'Verify',
+    
+    // ********  Header  ********
+    'online' => 'Online',
+    'my_profile' => 'My Profile',
+    'sign_out' => 'Sign Out',
+
+    // ********  Sidebar  ********
+    'dashboard' => 'Dashboard',
+    'purchases' => 'Purchases',
+    'purchases_list' => 'Purchases List',
+    'add_purchase' => 'Add Purchase',
+    'sales' => 'Sales',
+    'sales_list' => 'Sales List',
+    'add_sale' => 'Add Sale',
+    'product' => 'Product',
+    'reports' => 'Reports',
+    'overview_chart' => 'Overview Chart',
+    'company_chart' => 'Company Chart',
+    'product_quantity_alert' => 'Product Quantity Alert',
+    'product_report' => 'Product Report',
+    'category_report' => 'Category Report',
+    'sales_report' => 'Sales Report',
+    'purchases_report' => 'Purchases Report',
+    'payments_report' => 'Payments Report',
+    'customers_report' => 'Customers Report',
+    'suppliers_report' => 'Suppliers Report',
+    'users_report' => 'Users Report',
+    'people' => 'People',
+    'user' => 'User',
+    'customer' => 'Customer',
+    'supplier' => 'Supplier',
+    'setting' => 'Setting',
+    'category' => 'Category',
+    'company' => 'Company',
+    'store' => 'Store',
+
+    // ******** Common ********
+    'purchase' => 'Purchase',
+    'purchases' => 'Purchases',
+    'sale' => 'Sale',
+    'sales' => 'Sales',
+    'home' => 'Home',
+    'account_balance' => 'Account Balance',
+    'balance' => 'Balance',
+    'period' => 'Period',
+    'search' => 'Search',
+    'reset' => 'Reset',
+    'action' => 'Action',
+    'add_new' => 'Add New',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'save' => 'Save',
+    'close' => 'Close',
+    'back' => 'Back',
+    'name' => 'Name',
+    'type' => 'Type',
+    'total' => 'Total',
+    'items' => 'Items',
+    'all' => 'All',
+    'show' => 'Show',
+    'list' => 'List',
+    'comment' => 'Comment',
+    'are_you_sure' => 'Are you sure?',
+    'accepted_formats_image' => 'Accepted formats: gif, png, jpg. Max file size 2Mb.',
+    'success' => 'Success',
+    'error' => 'Error',
+    'created_successfully' => 'Created Successfully',
+    'updated_successfully' => 'Updated Successfully',
+    'deleted_successfully' => 'Deleted Successfully',
+    'insufficient' => 'Insufficient',
+    'insufficient_balance' => 'Insufficient Balance',
+
+    // ******** Column Name ********
+    'date' => 'Date',
+    'reference_no' => 'Reference No',
+    'purchase_status' => 'Purchase Status',
+    'grand_total' => 'Grand Total',
+    'paid' => 'Paid',
+    'date' => 'Date',
+    'date' => 'Date',
+    'date' => 'Date',
+    'date' => 'Date',
+    'date' => 'Date',
+
+    // ******** Filter Form ********
+    'select_company' => 'Select a company',
+    'select_store' => 'Select a store',
+    'select_supplier' => 'Select a supplier',
+    'select_customer' => 'Select a customer',
+    'purchase_date' => 'Purchase Date',
+    'sale_date' => 'Sale Date',
+
+    // ******** Dashboard ********
+    'overview' => 'Overview',
+    'today_purchases' => 'Today Purchases',
+    'week_purchases' => 'Week Purchases',
+    'month_purchases' => 'Month Purchases',
+    'overall_purchases' => 'Overall Purchases',
+    'today_sales' => 'Today Sales',
+    'week_sales' => 'Week Sales',
+    'month_sales' => 'Month Sales',
+    'overall_purchases' => 'Overall Sales',
+    
+
+    // ******** Transaction ********
+    'select_type' => 'Select a type',
+    'select_account' => 'Select an account',
+    'select_category' => 'Select a category',
+    'timestamp' => 'Timestamp',
+    'amount' => 'Amount',
+    'date' => 'Date',
+    'target_account' => 'Target Account',
+    'attachment' => 'Attachment',
+    'description' => 'Description',
+    'profit' => 'Profit',
+
+
+    // ******** User ********
+    'username' => 'Username',
+    'role' => 'Role',
+    'phone_number' => 'Phone Number', 
+    'password_confirm' => 'Password Confirm', 
+    'add_new_user' => 'Add New User',
+    'edit_user' => 'Edit User',
+    'profile' => 'Profile',
+    'profile_picture' => 'Profile Picture',
+    'new_password' => 'New Password',
+    'confirm_password' => 'Confirm Password',
+    'save_changes' => 'Save Changes',
+
+    // ******** Phone Verification ********
+    'invalid_verification_request' => 'Invalid verification request',
+    'concurrent_verifications_to_the_same_number_are_not_allowed' => 'Concurrent verifications to the same number are not allowed',
+    'invalid_credentials_were_provided' => 'Invalid credentials were provided',
+    'internal_error' => 'Internal Error',
+
+];

@@ -13322,7 +13322,7 @@ textarea.parsley-success:focus {
 }
 .navicon-left a {
   color: #868e96;
-  font-size: 20px;
+  font-size: 28px;
   transition: all 0.2s ease-in-out;
 }
 .navicon-left a:hover, .navicon-left a:focus {
@@ -13411,12 +13411,7 @@ textarea.parsley-success:focus {
 .br-logo > a:hover, .br-logo > a:focus {
   text-decoration: none;
 }
-.br-logo > a:hover span:first-child, .br-logo > a:focus span:first-child {
-  transform: translateX(-5px);
-}
-.br-logo > a:hover span:last-child, .br-logo > a:focus span:last-child {
-  transform: translateX(5px);
-}
+
 
 .br-sideleft-menu {
   transition: all 0.2s ease-in-out;
