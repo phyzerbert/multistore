@@ -94,6 +94,9 @@ return [
     'insufficient' => 'Insufficient',
     'insufficient_balance' => 'Insufficient Balance',
 
+
+
+
     // ******** Column Name ********
     'date' => 'Date',
     'reference_no' => 'Reference No',
@@ -123,11 +126,18 @@ return [
     'barcode_symbology' => 'Barcode Symbology',
     'email' => 'Email',
     'phone' => 'Phone',
+    'city' => 'City',
+    'address' => 'Address',
     'reference' => 'Reference',
     'number' => 'Number',
     'total_amount' => 'Total Amount',
     'created_by' => 'Created By',
     'created_at' => 'Created At',
+    'customer_name' => 'Customer Name',
+    'company_name' => 'Company Name',
+    'email_address' => 'Email Address',
+    'admin' => 'Admin',
+    'user' => 'User',
 
 
 
@@ -141,6 +151,10 @@ return [
 
     // ******** Modal ********
     'add_payment' => 'Add Payment',
+    'add_customer' => 'Add Customer',
+    'edit_customer' => 'Edit Customer',
+    'add_supplier' => 'Add Supplier',
+    'edit_supplier' => 'Edit Supplier',
 
 
     // ******** Title ********
@@ -151,6 +165,9 @@ return [
     'edit_sale' => 'Edit Sale',
     'purchase_detail' => 'Purchase Detail',
     'sale_detail' => 'Sale Detail',
+    'customer_management' => 'Customer Management',
+    'supplier_management' => 'Supplier Management',
+    'user_management' => 'User Management',
 
 
 

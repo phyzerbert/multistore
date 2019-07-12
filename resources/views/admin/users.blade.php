@@ -4,12 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item active" href="#">Users</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.user_management')}}</a>
             </nav>
         </div><!-- br-pageheader -->
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">User Management</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-users"></i> {{__('page.user_management')}}</h4>
         </div>
         
         @php
@@ -19,7 +19,7 @@
             <div class="br-section-wrapper">
                 <div class="">
                     @if ($role == 'admin')
-                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> Add New</button>
+                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> {{__('page.add_new')}}</button>
                     @endif
                 </div>
                 <div class="table-responsive mg-t-2">
@@ -27,11 +27,11 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Userame</th>
-                                <th>Company</th>
-                                <th>Role</th>
-                                <th>Phone Number</th>
-                                <th>Action</th>
+                                <th>{{__('page.username')}}</th>
+                                <th>{{__('page.company')}}</th>
+                                <th>{{__('page.role')}}</th>
+                                <th>{{__('page.phone_number')}}</th>
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -44,7 +44,7 @@
                                     <td class="phone">{{$item->phone_number}}</td>
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
-                                        <a href="{{route('user.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
+                                        <a href="{{route('user.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('{{__('page.are_you_sure')}}')"><div><i class="fa fa-trash-o"></i></div></a>
                                         {{-- <a href="#" class="btn bg-blue btn-icon rounded-round btn-edit"  data-popup="tooltip" title="Edit" data-placement="top"><i class="icon-pencil7"></i></a> --}}
                                         {{-- <a href="{{route('user.delete', $item->id)}}" class="btn bg-danger text-pink-800 btn-icon rounded-round ml-2" data-popup="tooltip" title="Delete" data-placement="top" onclick="return window.confirm('Are you sure?')"><i class="icon-trash"></i></a> --}}
                                     </td>
@@ -54,7 +54,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}
@@ -70,40 +70,40 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add New User</h4>
+                    <h4 class="modal-title">{{__('page.add_new_user')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="" id="create_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Username</label>
+                            <label class="control-label">{{__('page.username')}}</label>
                             <input class="form-control" type="text" name="name" id="name" placeholder="Username">
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <input class="form-control" type="text" name="phone_number" id="phone" placeholder="Phone Number">
+                            <label class="control-label">{{__('page.phone_number')}}</label>
+                            <input class="form-control" type="text" name="phone_number" id="phone" placeholder="{{__('page.phone_number')}}">
                             <span id="phone_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Role</label>
+                            <label class="control-label">{{__('page.role')}}</label>
                             <select name="role" id="role" class="form-control">
-                                <option value="1">Admin</option>
-                                <option value="2">User</option>
+                                <option value="1">{{__('page.admin')}}</option>
+                                <option value="2" selected>{{__('page.user')}}</option>
                             </select>
                             <span id="role_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>                        
                         <div class="form-group">
-                            <label class="control-label">Company</label>
+                            <label class="control-label">{{__('page.company')}}</label>
                             <select name="company_id" id="company_id" class="form-control">
-                                <option value="">Select Company</option>
+                                <option value="">{{__('page.select_company')}}</option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>                                    
                                 @endforeach
@@ -113,23 +113,23 @@
                             </span>
                         </div>
                         <div class="form-group password-field">
-                            <label class="control-label">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                            <label class="control-label">{{__('page.password')}}</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="{{__('page.password')}}">
                             <span id="password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>    
                         <div class="form-group password-field">
-                            <label class="control-label">Password Confirm</label>
-                            <input type="password" name="password_confirmation" id="confirmpassword" class="form-control" placeholder="Password Confirm">
+                            <label class="control-label">{{__('page.password_confirm')}}</label>
+                            <input type="password" name="password_confirmation" id="confirmpassword" class="form-control" placeholder="{{__('page.password_confirm')}}">
                             <span id="confirmpassword_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check-circle-o"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
@@ -139,7 +139,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit User</h4>
+                    <h4 class="modal-title">{{__('page.edit_user')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="" id="edit_form" method="post">
@@ -147,23 +147,23 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" class="id" />                    
                         <div class="form-group">
-                            <label class="control-label">Username</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Username">
+                            <label class="control-label">{{__('page.username')}}</label>
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.username')}}">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <input class="form-control phone_number" type="text" name="phone_number" placeholder="Phone Number">
+                            <label class="control-label">{{__('page.phone_number')}}</label>
+                            <input class="form-control phone_number" type="text" name="phone_number" placeholder="{{__('page.phone_number')}}">
                             <span id="edit_phone_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>                        
                         <div class="form-group">
-                            <label class="control-label">Company</label>
+                            <label class="control-label">{{__('page.company')}}</label>
                             <select name="company_id" class="form-control company">
-                                <option value="">Select Company</option>
+                                <option value="">{{__('page.select_company')}}</option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>                                    
                                 @endforeach
@@ -173,23 +173,23 @@
                             </span>
                         </div>
                         <div class="form-group password-field">
-                            <label class="control-label">New Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="New Password">
+                            <label class="control-label">{{__('page.new_password')}}</label>
+                            <input type="password" name="password" class="form-control" placeholder="{{__('page.new_password')}}">
                             <span id="edit_password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>    
                         <div class="form-group password-field">
-                            <label class="control-label">Password Confirm</label>
-                            <input type="password" name="password_confirmation" class="form-control" placeholder="Password Confirm">
+                            <label class="control-label">{{__('page.password_confirm')}}</label>
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="{{__('page.password_confirm')}}">
                             <span id="edit_confirmpassword_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check-circle-o"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check-circle-o"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>

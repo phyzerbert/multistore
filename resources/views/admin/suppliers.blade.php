@@ -4,12 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item active" href="#">Suppliers</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.suppliers')}}</a>
             </nav>
         </div><!-- br-pageheader -->
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5">Supplier Management</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-user-circle"></i> {{__('page.supplier_management')}}</h4>
         </div>
         
         @php
@@ -27,14 +27,14 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:30px;">#</th>
-                                <th>Name</th>
-                                <th>Company</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>City</th>
-                                <th>Address</th>
+                                <th>{{__('page.name')}}</th>
+                                <th>{{__('page.company')}}</th>
+                                <th>{{__('page.email')}}</th>
+                                <th>{{__('page.phone_number')}}</th>
+                                <th>{{__('page.city')}}</th>
+                                <th>{{__('page.address')}}</th>
                                 @if($role == 'admin')
-                                <th>Action</th>
+                                <th>{{__('page.action')}}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -51,7 +51,7 @@
                                     @if($role == 'admin')
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
-                                        <a href="{{route('supplier.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
+                                        <a href="{{route('supplier.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('{{__('page.are_you_sure')}}')"><div><i class="fa fa-trash-o"></i></div></a>
                                     </td>
                                     @endif
                                 </tr>
@@ -60,7 +60,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}
@@ -76,58 +76,58 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Supplier</h4>
+                    <h4 class="modal-title">{{__('page.add_supplier')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="" id="create_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Supplier Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.supplier_name')}}">
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Company</label>
-                            <input class="form-control company" type="text" name="company" placeholder="Company Name">
+                            <label class="control-label">{{__('page.company')}}</label>
+                            <input class="form-control company" type="text" name="company" placeholder="{{__('page.company_name')}}">
                             <span id="company_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Email</label>
-                            <input class="form-control email" type="email" name="email" placeholder="Email Address">
+                            <label class="control-label">{{__('page.email')}}</label>
+                            <input class="form-control email" type="email" name="email" placeholder="{{__('page.email_address')}}">
                             <span id="email_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <input class="form-control phone_number" type="text" name="phone_number" placeholder="Phone Number">
+                            <label class="control-label">{{__('page.phone_number')}}</label>
+                            <input class="form-control phone_number" type="text" name="phone_number" placeholder="{{__('page.phone_number')}}">
                             <span id="phone_number_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Address</label>
-                            <input class="form-control address" type="text" name="address" placeholder="Address">
+                            <label class="control-label">{{__('page.address')}}</label>
+                            <input class="form-control address" type="text" name="address" placeholder="{{__('page.address')}}">
                             <span id="address_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">City</label>
-                            <input class="form-control city" type="text" name="city" placeholder="City">
+                            <label class="control-label">{{__('page.city')}}</label>
+                            <input class="form-control city" type="text" name="city" placeholder="{{__('page.city')}}">
                             <span id="city_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
@@ -137,7 +137,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Supplier</h4>
+                    <h4 class="modal-title">{{__('page.edit_supplier')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="" id="edit_form" method="post">
@@ -145,51 +145,51 @@
                     <input type="hidden" name="id" class="id">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Supplier Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.supplier_name')}}">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Company</label>
-                            <input class="form-control company" type="text" name="company" placeholder="Company Name">
+                            <label class="control-label">{{__('page.company')}}</label>
+                            <input class="form-control company" type="text" name="company" placeholder="{{__('page.company_name')}}">
                             <span id="edit_company_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Email</label>
-                            <input class="form-control email" type="email" name="email" placeholder="Email Address">
+                            <label class="control-label">{{__('page.email')}}</label>
+                            <input class="form-control email" type="email" name="email" placeholder="{{__('page.email_address')}}">
                             <span id="edit_email_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <input class="form-control phone_number" type="text" name="phone_number" placeholder="Phone Number">
+                            <label class="control-label">{{__('page.phone_number')}}</label>
+                            <input class="form-control phone_number" type="text" name="phone_number" placeholder="{{__('page.phone_number')}}">
                             <span id="edit_phone_number_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Address</label>
-                            <input class="form-control address" type="text" name="address" placeholder="Address">
+                            <label class="control-label">{{__('page.address')}}</label>
+                            <input class="form-control address" type="text" name="address" placeholder="{{__('page.address')}}">
                             <span id="edit_address_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">City</label>
-                            <input class="form-control city" type="text" name="city" placeholder="City">
+                            <label class="control-label">{{__('page.city')}}</label>
+                            <input class="form-control city" type="text" name="city" placeholder="{{__('page.city')}}">
                             <span id="edit_city_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                     </div>  
                     <div class="modal-footer">
-                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
