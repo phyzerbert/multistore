@@ -138,6 +138,11 @@ return [
     'email_address' => 'Email Address',
     'admin' => 'Admin',
     'user' => 'User',
+    'users' => 'Users',
+    'stores' => 'Stores',
+    'first_name' => 'First Name',
+    'last_name' => 'Last Name',
+    'picture' => 'Picture',
 
 
 
@@ -155,6 +160,12 @@ return [
     'edit_customer' => 'Edit Customer',
     'add_supplier' => 'Add Supplier',
     'edit_supplier' => 'Edit Supplier',
+    'add_category' => 'Add Category',
+    'edit_category' => 'Edit Category',
+    'add_company' => 'Add Company',
+    'edit_company' => 'Edit Company',
+    'add_store' => 'Add Store',
+    'edit_store' => 'Edit Store',
 
 
     // ******** Title ********
@@ -168,6 +179,9 @@ return [
     'customer_management' => 'Customer Management',
     'supplier_management' => 'Supplier Management',
     'user_management' => 'User Management',
+    'category_management' => 'Category Management',
+    'company_management' => 'Company Management',
+    'store_management' => 'Store Management',
 
 
 

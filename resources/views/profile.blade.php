@@ -6,8 +6,8 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item active" href="#">Profile</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.profile')}}</a>
             </nav>
         </div>      
         
@@ -17,7 +17,7 @@
         <div class="br-pagebody">
             <div class="container">
                 <div class="pd-t-20 pd-sm-t-30">
-                    <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-user-circle"></i> My Profile</h4>
+                    <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-user-circle"></i> {{__('page.my_profile')}}</h4>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -34,8 +34,8 @@
                             <form class="form-layout form-layout-1" action="{{route('updateuser')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">UserName: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="name" value="{{$user->name}}" placeholder="Product Name" required>
+                                    <label class="form-control-label">{{__('page.username')}}: <span class="tx-danger">*</span></label>
+                                    <input class="form-control" type="text" name="name" value="{{$user->name}}" placeholder="{{__('page.username')}}" required>
                                     @error('name')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -43,17 +43,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Phone Number: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="phone_number" value="{{$user->phone_number}}" placeholder="Phone Number" required>
-                                    @error('phone_number')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">First Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="first_name" value="{{$user->first_name}}" placeholder="First Name" required>
+                                    <label class="form-control-label">{{__('page.first_name')}}: <span class="tx-danger">*</span></label>
+                                    <input class="form-control" type="text" name="first_name" value="{{$user->first_name}}" placeholder="{{__('page.first_name')}}" required>
                                     @error('first_name')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -61,8 +52,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Last Name: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="last_name" value="{{$user->last_name}}" placeholder="Last Name" required>
+                                    <label class="form-control-label">{{__('page.last_name')}}: <span class="tx-danger">*</span></label>
+                                    <input class="form-control" type="text" name="last_name" value="{{$user->last_name}}" placeholder="{{__('page.last_name')}}" required>
                                     @error('last_name')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -70,9 +61,18 @@
                                     @enderror
                                 </div>
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Company: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label">{{__('page.phone_number')}}: <span class="tx-danger">*</span></label>
+                                    <input class="form-control" type="text" name="phone_number" value="{{$user->phone_number}}" placeholder="{{__('page.phone_number')}}" required>
+                                    @error('phone_number')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group mg-b-10-force">
+                                    <label class="form-control-label">{{__('page.company')}}: <span class="tx-danger">*</span></label>
                                     <select class="form-control select2" name="company" class="wd-100" data-placeholder="Select Company">
-                                        <option label="Select Company"></option>
+                                        <option label="{{__('page.select_company')}}"></option>
                                         @foreach ($companies as $item)
                                             <option value="{{$item->id}}" @if($user->company_id == $item->id) selected @endif>{{$item->name}}</option>
                                         @endforeach
@@ -84,22 +84,22 @@
                                     @enderror
                                 </div>
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Product Image:</label>                                
+                                    <label class="form-control-label">{{__('page.picture')}}:</label>                                
                                     <label class="custom-file wd-100p">
                                         <input type="file" name="picture" id="file2" class="custom-file-input" accept="image/*">
                                         <span class="custom-file-control custom-file-control-primary"></span>
                                     </label>
                                 </div> 
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Password: <span class="tx-danger">*</span></label>
+                                    <label class="form-control-label">{{__('page.password')}}: <span class="tx-danger">*</span></label>
                                     <input class="form-control" type="password" name="password" placeholder="Password">
                                 </div>
                                 <div class="form-group mg-b-10-force">
-                                    <label class="form-control-label">Confirm Password: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="password" name="password_confirm" placeholder="Confirm Password">
+                                    <label class="form-control-label">{{__('page.confirm_password')}}: <span class="tx-danger">*</span></label>
+                                    <input class="form-control" type="password" name="password_confirm" placeholder="{{__('page.confirm_password')}}">
                                 </div>
                                 <div class="form-layout-footer text-right mt-5">
-                                    <button type="submit" class="btn btn-primary tx-20"><i class="fa fa-floppy-o mg-r-2"></i> Save</button>
+                                    <button type="submit" class="btn btn-primary tx-20"><i class="fa fa-floppy-o mg-r-2"></i> {{__('page.save')}}</button>
                                 </div>
                             </form>
                         </div>

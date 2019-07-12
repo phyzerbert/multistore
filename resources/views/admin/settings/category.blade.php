@@ -4,13 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Home</a>
-                <a class="breadcrumb-item" href="#">Settings</a>
-                <a class="breadcrumb-item active" href="#">Category</a>
+                <a class="breadcrumb-item" href="#">{{__('page.setting')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.category')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="ion icon-git-network"></i> Category Management</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-code-fork"></i> {{__('page.category_management')}}</h4>
         </div>
         
         @php
@@ -20,7 +19,7 @@
             <div class="br-section-wrapper">
                 <div class="">
                     @if ($role == 'admin')
-                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-plus mg-r-2"></i> Add New</button>
+                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-plus mg-r-2"></i>{{__('page.add_new')}}</button>
                     @endif
                 </div>
                 <div class="table-responsive mg-t-2">
@@ -28,8 +27,8 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Name</th>
-                                <th>Action</th>
+                                <th>{{__('page.name')}}</th>
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -39,7 +38,7 @@
                                     <td class="name">{{$item->name}}</td>
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
-                                        <a href="{{route('category.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('Are you sure?')"><div><i class="fa fa-trash-o"></i></div></a>
+                                        <a href="{{route('category.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('{{__('page.are_you_sure')}}')"><div><i class="fa fa-trash-o"></i></div></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -47,7 +46,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}
@@ -63,20 +62,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Category</h4>
+                    <h4 class="modal-title">{{__('page.add_category')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('category.create')}}" id="create_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Category Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.name')}}">
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="submit" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;Close</button>
+                        <button type="submit" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
@@ -86,7 +85,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Category</h4>
+                    <h4 class="modal-title">{{__('page.edit_category')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('category.edit')}}" id="edit_form" method="post">
@@ -94,16 +93,16 @@
                     <input type="hidden" name="id" class="id">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Category Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.name')}}">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                     </div>  
                     <div class="modal-footer">
-                        <button type="submit" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;Close</button>
+                        <button type="submit" id="btn_update" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mg-r-10"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
