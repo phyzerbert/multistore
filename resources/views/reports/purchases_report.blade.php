@@ -23,7 +23,7 @@
             <div class="br-section-wrapper">
                 <div class="">
                     @include('elements.pagesize')
-                    {{-- @include('purchase.filter') --}}
+                    @include('purchase.filter')
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
@@ -62,7 +62,7 @@
                                         @if ($item->status == 1)
                                             <span class="tx-success">Received</span>
                                         @elseif($item->status == 0)
-                                            <span class="tx-info">Pending</span>
+                                            <span class="tx-danger">Pending</span>
                                         @endif
                                     </td>
                                     {{-- <td></td> --}}
@@ -92,9 +92,9 @@
 <script>
     $(document).ready(function () {
 
-        // $("#period").dateRangePicker({
-        //     autoClose: false,
-        // });
+        $("#period").dateRangePicker({
+            autoClose: false,
+        });
 
         $("#pagesize").change(function(){
             $("#pagesize_form").submit();

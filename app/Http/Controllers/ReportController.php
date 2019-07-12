@@ -102,7 +102,9 @@ class ReportController extends Controller
     public function products_report(Request $request){
         config(['site.page' => 'products_report']);
 
-        $data = Product::paginate(10);        
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = Product::paginate($pagesize);        
 
         return view('reports.products_report', compact('data'));
     }
@@ -147,8 +149,9 @@ class ReportController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
-
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.sales_report', compact('data', 'companies', 'stores', 'customers', 'company_id', 'store_id', 'customer_id', 'reference_no', 'period'));
     }
 
@@ -182,8 +185,9 @@ class ReportController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
-
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.purchases_report', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
     }
 
@@ -202,8 +206,9 @@ class ReportController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
-
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.payments_report', compact('data', 'reference_no', 'period'));
     }
 
@@ -215,10 +220,12 @@ class ReportController extends Controller
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.customers_report', compact('data', 'name'));
     }
-
     public function suppliers_report(Request $request){
         config(['site.page' => 'suppliers_report']);
         $mod = new Supplier();
@@ -227,7 +234,9 @@ class ReportController extends Controller
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.suppliers_report', compact('data', 'name'));
     }
 
@@ -239,7 +248,9 @@ class ReportController extends Controller
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.users_report', compact('data', 'name'));
     }
     
