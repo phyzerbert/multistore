@@ -33,6 +33,7 @@ return [
     'overview_chart' => 'Overview Chart',
     'company_chart' => 'Company Chart',
     'product_quantity_alert' => 'Product Quantity Alert',
+    'product_expiry_alert' => 'Product Expiry Alert',
     'product_report' => 'Product Report',
     'category_report' => 'Category Report',
     'sales_report' => 'Sales Report',
@@ -143,6 +144,16 @@ return [
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
     'picture' => 'Picture',
+    'purchased' => 'Purchased',
+    'sold' => 'Sold',
+    'purchased_amount' => 'Purchased Amount',
+    'sold_amount' => 'Sold Amount',
+    'profit_loss' => 'Profit(Loss)',
+    'total_purchases' => 'Total Purchases',
+    'total_sales' => 'Total Sales',
+    'sale_reference' => 'Sale Reference',
+    'purchase_reference' => 'Purchase Reference',
+    'image' => 'Image',
 
 
 

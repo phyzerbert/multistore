@@ -6,12 +6,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="#">Report</a>
-                <a class="breadcrumb-item active" href="#">Company Chart</a>
+                <a class="breadcrumb-item" href="#">{{__('reports')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.company_chart')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-pie-chart"></i> Company Chart</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-pie-chart"></i> {{__('page.company_chart')}}</h4>
         </div>
         
         @php
@@ -23,9 +23,9 @@
                     <div class="col-md-12 mb-3">
                         <form action="" class="form-inline mx-auto" method="post">
                             @csrf
-                            <input type="text" class="form-control form-control-sm" name="period" id="period" style="width:250px !important" value="{{$period}}" autocomplete="off" placeholder="Period">
-                            <button type="submit" class="btn btn-primary pd-y-7 mg-l-10"> <i class="fa fa-search"></i> Search</button>
-                            <button type="button" class="btn btn-warning pd-y-7 mg-l-10" id="btn-reset"> <i class="fa fa-eraser"></i> Reset</button>
+                            <input type="text" class="form-control form-control-sm" name="period" id="period" style="width:250px !important" value="{{$period}}" autocomplete="off" placeholder="{{__('page.period')}}">
+                            <button type="submit" class="btn btn-primary pd-y-7 mg-l-10"> <i class="fa fa-search"></i> {{__('page.search')}}</button>
+                            <button type="button" class="btn btn-warning pd-y-7 mg-l-10" id="btn-reset"> <i class="fa fa-eraser"></i> {{__('page.reset')}}</button>
                         </form>
                     </div>
                 </div>
@@ -48,12 +48,12 @@
         labels: {!! json_encode($company_names) !!},
         datasets: [
             {
-                label: "Purchase",
+                label: "{{__('page.purchase')}}",
                 backgroundColor:'#DADDE0',
                 data: {!! json_encode($company_purchases_array) !!}
             },
             {
-                label: "Sale",
+                label: "{{__('page.sale')}}",
                 backgroundColor: '#2ecc71',
                 borderColor: "#fff",
                 data: {!! json_encode($company_sales_array) !!}

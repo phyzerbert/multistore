@@ -94,7 +94,7 @@ class ReportController extends Controller
     public function product_quantity_alert(Request $request){
         config(['site.page' => 'product_quantity_alert']);
 
-        $data = Product::paginate(10);        
+        $data = Product::all();        
 
         return view('reports.product_quantity_alert', compact('data'));
     }

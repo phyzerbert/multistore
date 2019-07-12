@@ -4,12 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Report</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.reports')}}</a>
                 <a class="breadcrumb-item active" href="#">Categories Report</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-code-fork"></i> Categories Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-code-fork"></i> {{__('page.category_report')}}</h4>
         </div>
         
         @php
@@ -22,12 +22,12 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Product Name</th>
-                                <th>Purchased</th>
-                                <th>Sold</th>
-                                <th>Purchased Amount</th>
-                                <th>Sold Amount</th>
-                                <th>Profit(Loss)</th>
+                                <th>{{__('page.product_name')}}</th>
+                                <th>{{__('page.purchased')}}</th>
+                                <th>{{__('page.sold')}}</th>
+                                <th>{{__('page.purchased_amount')}}</th>
+                                <th>{{__('page.sold_amount')}}</th>
+                                <th>{{__('page.profit_loss')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                

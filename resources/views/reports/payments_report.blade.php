@@ -8,12 +8,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="#">Report</a>
-                <a class="breadcrumb-item active" href="#">Payments Report</a>
+                <a class="breadcrumb-item" href="#">{{__('page.reports')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.payments_report')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card"></i> Payments Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card"></i> {{__('page.payments_report')}}</h4>
         </div>
         
         @php
@@ -22,20 +22,7 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="">
-                    @php
-                        $pagesize = session('pagesize');
-                        if(!$pagesize){$pagesize = 15;}
-                    @endphp     
-                    <form class="form-inline ml-3 float-left mb-2" action="{{route('set_pagesize')}}" method="post" id="pagesize_form">
-                        @csrf
-                        <label for="pagesize" class="control-label">{{__('Show')}} :</label>
-                        <select class="form-control form-control-sm mx-2" name="pagesize" id="pagesize">
-                            <option value="" @if($pagesize == '') selected @endif>15</option>
-                            <option value="25" @if($pagesize == '25') selected @endif>25</option>
-                            <option value="50" @if($pagesize == '50') selected @endif>50</option>
-                            <option value="100" @if($pagesize == '100') selected @endif>100</option>
-                        </select>
-                    </form>
+                    @include('elements.pagesize')
                     {{-- @include('sale.filter') --}}
                 </div>
                 <div class="table-responsive mg-t-2">
@@ -43,12 +30,12 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:40px;">#</th>
-                                <th>Date</th>
-                                <th>Referenct No</th>
-                                <th>Sale Reference</th>
-                                <th>Purchase Reference</th>
-                                <th>Amount</th>
-                                <th>Type</th>
+                                <th>{{__('page.date')}}</th>
+                                <th>{{__('page.reference_no')}}</th>
+                                <th>{{__('page.sale_reference')}}</th>
+                                <th>{{__('page.purchase_reference')}}</th>
+                                <th>{{__('page.amount')}}</th>
+                                <th>{{__('page.type')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -85,7 +72,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}

@@ -4,12 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="#">Report</a>
-                <a class="breadcrumb-item active" href="#">Overview Chart</a>
+                <a class="breadcrumb-item" href="#">{{__('page.report')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.overview_chart')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-dashboard"></i> Overview Chart</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-dashboard"></i> {{__('page.overview_chart')}}</h4>
         </div>
         
         @php
@@ -23,7 +23,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-pie-chart tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Company Chart</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.company_chart')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -33,7 +33,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-bar-chart tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Store Chart</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.store_chart')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -43,17 +43,17 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-exclamation-triangle tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Product Quantity Alert</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.product_quantity_alert')}}</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="{{route('report.product_expiry_alert')}}" class="d-block p-3 mt-3 bg-teal rounded overflow-hidden">
+                            <a href="#" class="d-block p-3 mt-3 bg-teal rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-exclamation-circle tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Product Expiry Alert</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.product_expiry_alert')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -63,7 +63,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-cubes tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Products Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.product_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -73,7 +73,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-code-fork tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Category Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.category_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -83,7 +83,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-sign-out tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Sales Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.sales_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -93,7 +93,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-sign-in tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Purchases Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.purchases_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -103,7 +103,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-clock-o tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Daily Sales</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.daily_sales')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -113,7 +113,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-calendar tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Monthly Sales</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.monthly_sales')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -123,7 +123,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-money tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Payments Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.payments_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -133,7 +133,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-user tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Customers Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.customers_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -143,7 +143,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-truck tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Supplier Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.suppliers_report')}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -153,7 +153,7 @@
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-users tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">
-                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">Users Report</p>
+                                        <p class="tx-18 tx-white tx-lato mg-b-2 lh-1">{{__('page.users_report')}}</p>
                                     </div>
                                 </div>
                             </a>

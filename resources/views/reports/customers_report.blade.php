@@ -4,8 +4,8 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Report</a>
-                <a class="breadcrumb-item active" href="#">Customers Report</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.reports')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.customers_report')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
@@ -22,14 +22,14 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Company</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email Address</th>
-                                <th>Total Sales</th>
-                                <th>Total Amount</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
+                                <th>{{__('page.company')}}</th>
+                                <th>{{__('page.name')}}</th>
+                                <th>{{__('page.phone_number')}}</th>
+                                <th>{{__('page.email_address')}}</th>
+                                <th>{{__('page.total_sales')}}</th>
+                                <th>{{__('page.total_amount')}}</th>
+                                <th>{{__('page.paid')}}</th>
+                                <th>{{__('page.balance')}}</th>
                                 {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
@@ -58,7 +58,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}

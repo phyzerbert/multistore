@@ -4,8 +4,8 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="#">Report</a>
-                <a class="breadcrumb-item active" href="#">Product Quantity Alert</a>
+                <a class="breadcrumb-item" href="#">{{__('page.reports')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.product_quantity_alert')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
@@ -22,11 +22,11 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Image</th>
-                                <th>Product Code</th>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Alert Quantity</th>
+                                <th>{{__('page.image')}}</th>
+                                <th>{{__('page.product_code')}}</th>
+                                <th>{{__('page.product_name')}}</th>
+                                <th>{{__('page.quantity')}}</th>
+                                <th>{{__('page.alert_quantity')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -46,15 +46,7 @@
                                 @endif
                             @endforeach
                         </tbody>
-                    </table>                
-                    <div class="clearfix mt-2">
-                        <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
-                        </div>
-                        <div class="float-right" style="margin: 0;">
-                            {!! $data->appends([])->links() !!}
-                        </div>
-                    </div>
+                    </table>
                 </div>
             </div>
         </div>                

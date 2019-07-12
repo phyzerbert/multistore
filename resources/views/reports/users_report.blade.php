@@ -4,12 +4,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="{{route('home')}}">Report</a>
-                <a class="breadcrumb-item active" href="#">Users Report</a>
+                <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.reports')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.users_report')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-user"></i> Users Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-user"></i> {{__('page.users_report')}}</h4>
         </div>
         
         @php
@@ -22,13 +22,13 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>Username</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Phone Number</th>
-                                <th>Company</th>
-                                <th>Role</th>
-                                <th>Status</th>
+                                <th>{{__('page.username')}}</th>
+                                <th>{{__('page.first_name')}}</th>
+                                <th>{{__('page.last_name')}}</th>
+                                <th>{{__('page.phone_number')}}</th>
+                                <th>{{__('page.company')}}</th>
+                                <th>{{__('page.role')}}</th>
+                                <th>{{__('page.status')}}</th>
                                 {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
@@ -50,7 +50,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}

@@ -8,12 +8,12 @@
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
-                <a class="breadcrumb-item" href="#">Report</a>
-                <a class="breadcrumb-item active" href="#">Sales Report</a>
+                <a class="breadcrumb-item" href="#">{{__('page.reports')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.sales_report')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i>  Sales Report</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i>  {{__('page.sales_report')}}</h4>
         </div>
         
         @php
@@ -30,14 +30,14 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:40px;">#</th>
-                                <th>Date</th>
-                                <th>Referenct No</th>
-                                <th>User</th>
-                                <th>Customer</th>
-                                <th>Sale Status</th>
-                                <th>Grand Total</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
+                                <th>{{__('page.date')}}</th>
+                                <th>{{__('page.reference_no')}}</th>
+                                <th>{{__('page.user')}}</th>
+                                <th>{{__('page.customer')}}</th>
+                                <th>{{__('page.sale_status')}}</th>
+                                <th>{{__('page.grand_total')}}</th>
+                                <th>{{__('page.paid')}}</th>
+                                <th>{{__('page.balance')}}</th>
                                 {{-- <th>Payment Status</th> --}}
                             </tr>
                         </thead>
@@ -70,7 +70,7 @@
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
-                            <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}
