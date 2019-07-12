@@ -62,7 +62,15 @@
     };
     var barOptions = {
         responsive: true,
-        maintainAspectRatio: false,      
+        maintainAspectRatio: false,
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItems, data) {
+                    let value = parseInt(data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index]).toLocaleString();
+                    return data.datasets[tooltipItems.datasetIndex].label + ": " + value;
+                }
+            }
+        },      
         scales: {
             yAxes: [{
                 ticks: {
