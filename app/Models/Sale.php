@@ -32,6 +32,11 @@ class Sale extends Model
         return $this->belongsTo('App\Models\Customer');
     }
 
+    
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
+
     public function biller(){
         return $this->belongsTo('App\User', 'biller_id');
     }

@@ -32,12 +32,14 @@
                                 <th style="width:40px;">#</th>
                                 <th>{{__('page.date')}}</th>
                                 <th>{{__('page.reference_no')}}</th>
+                                <th>{{__('page.company')}}</th>
+                                <th>{{__('page.store')}}</th>
                                 <th>{{__('page.user')}}</th>
                                 <th>{{__('page.customer')}}</th>
-                                <th>{{__('page.sale_status')}}</th>
                                 <th>{{__('page.grand_total')}}</th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
+                                <th>{{__('page.sale_status')}}</th>
                                 {{-- <th>Payment Status</th> --}}
                             </tr>
                         </thead>
@@ -51,8 +53,13 @@
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
                                     <td class="reference_no">{{$item->reference_no}}</td>
+                                    <td class="company">{{$item->company->name}}</td>
+                                    <td class="store">{{$item->store->name}}</td>
                                     <td class="user">{{$item->biller->name}}</td>
                                     <td class="customer" data-id="{{$item->customer_id}}">{{$item->customer->name}}</td>
+                                    <td class="grand_total"> {{number_format($grand_total)}} </td>
+                                    <td class="paid"> {{ number_format($paid) }} </td>
+                                    <td> {{number_format($grand_total - $paid)}} </td>
                                     <td class="status">
                                         @if ($item->status == 1)
                                             <span class="tx-success">Received</span>
@@ -60,9 +67,6 @@
                                             <span class="tx-info">Pending</span>
                                         @endif
                                     </td>
-                                    <td class="grand_total"> {{number_format($grand_total)}} </td>
-                                    <td class="paid"> {{ number_format($paid) }} </td>
-                                    <td> {{number_format($grand_total - $paid)}} </td>
                                     {{-- <td></td> --}}
                                 </tr>
                             @endforeach

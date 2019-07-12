@@ -66,11 +66,11 @@
                                     <td> {{number_format($grand_total - $paid)}} </td>
                                     <td>
                                         @if ($paid == 0)
-                                            <span class="tx-danger">Pending</span>
+                                            <span class="tx-danger">{{__('page.pending')}}</span>
                                         @elseif($paid < $grand_total)
-                                            <span class="tx-primary">Partial</span>
+                                            <span class="tx-primary">{{__('page.partial')}}</span>
                                         @else
-                                            <span class="tx-success">Paid</span>
+                                            <span class="tx-success">{{__('page.paid')}}</span>
                                         @endif
                                     </td>
                                     <td class="py-2" align="center">

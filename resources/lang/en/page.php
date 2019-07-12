@@ -89,6 +89,7 @@ return [
     'success' => 'Success',
     'pending' => 'Pending',
     'received' => 'Received',
+    'partial' => 'Partial',
     'error' => 'Error',
     'created_successfully' => 'Created Successfully',
     'updated_successfully' => 'Updated Successfully',

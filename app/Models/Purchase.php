@@ -29,6 +29,10 @@ class Purchase extends Model
         return $this->belongsTo('App\Models\Store');
     }
 
+    public function company(){
+        return $this->belongsTo('App\Models\Company');
+    }
+
     public function supplier(){
         return $this->belongsTo('App\Models\Supplier');
     }
