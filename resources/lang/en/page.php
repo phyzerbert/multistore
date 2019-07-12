@@ -212,7 +212,7 @@ return [
     'today_sales' => 'Today Sales',
     'week_sales' => 'Week Sales',
     'month_sales' => 'Month Sales',
-    'overall_purchases' => 'Overall Sales',    
+    'overall_sales' => 'Overall Sales',
 
     // ******** Transaction ********
     'select_type' => 'Select a type',
