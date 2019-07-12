@@ -69,6 +69,7 @@ return [
     'delete' => 'Delete',
     'duplicated' => 'Duplicated',
     'details' => 'Details',
+    'payment' => 'Payment',
     'payment_list' => 'Payment List',
     'save' => 'Save',
     'close' => 'Close',
@@ -177,6 +178,7 @@ return [
     'edit_company' => 'Edit Company',
     'add_store' => 'Add Store',
     'edit_store' => 'Edit Store',
+    'edit_payment' => 'Edit Payment',
 
 
     // ******** Title ********
@@ -193,6 +195,7 @@ return [
     'category_management' => 'Category Management',
     'company_management' => 'Company Management',
     'store_management' => 'Store Management',
+    'payment_management' => 'Payment Management',
 
 
 
