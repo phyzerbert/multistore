@@ -50,7 +50,6 @@ class ReportController extends Controller
         $this_month_sales = Sale::whereBetween('timestamp', [$start_this_month, $end_this_month])->pluck('id')->toArray();
         $return['this_month']['sale'] = Order::whereIn('orderable_id', $this_month_sales)->where('orderable_type', Sale::class)->sum('subtotal');
 
-
         $last_month_purchases = Purchase::whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
         $return['last_month']['purchase'] = Order::whereIn('orderable_id', $last_month_purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
         $last_month_sales = Sale::whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();

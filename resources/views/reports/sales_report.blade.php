@@ -88,9 +88,9 @@
                                     <td> {{number_format($grand_total - $paid)}} </td>
                                     <td class="status">
                                         @if ($item->status == 1)
-                                            <span class="tx-success">Received</span>
+                                            <span class="badge badge-success"><i class="fa fa-check"></i> {{__('page.received')}}</span>
                                         @elseif($item->status == 0)
-                                            <span class="tx-danger">Pending</span>
+                                            <span class="badge badge-danger"><i class="fa fa- exclamation-triangle"></i>{{__('page.pending')}}</span>
                                         @endif
                                     </td>
                                     {{-- <td></td> --}}

@@ -61,9 +61,9 @@
                                     <td class="amount"> {{number_format($item->amount)}} </td>
                                     <td class="type">
                                         @if ($item->paymentable_type == "App\Models\Purchase")
-                                            <span class="tx-success">Sent</span>
+                                            <span class="badge badge-success">Sent</span>
                                         @elseif($item->paymentable_type == "App\Models\Sale")
-                                            <span class="tx-info">Received</span>
+                                            <span class="badge badge-info">Received</span>
                                         @endif
                                     </td>
                                 </tr>

@@ -21,15 +21,10 @@
     @yield('style')
     <link rel="stylesheet" href="{{asset('master/css/bracket.css')}}">
     <link rel="stylesheet" href="{{asset('master/css/custom.css')}}">
-
-    <script>
-    
-    
-    </script>
     
 </head>
 
-<body onload="showloader()">
+<body>
     <div id="ajax-loading" class="text-center">
         <img class="mx-auto" src="{{asset('images/loader.gif')}}" width="70" alt="" style="margin:45vh auto;">
     </div>

@@ -42,7 +42,13 @@
                                     <td>{{$item->phone_number}}</td>
                                     <td>@isset($item->company){{$item->company->name}}@endisset</td>
                                     <td>@isset($item->role->name){{$item->role->name}}@endisset</td>
-                                    <td>{{$item->status}}</td>                                      
+                                    <td>
+                                        @if ($item->status == 1)
+                                            <span class="badge badge-success"><i class="fa fa-check"></i> {{__('page.active')}}</span>
+                                        @elseif($item->status == 0)
+                                            <span class="badge badge-danger"><i class="fa fa- exclamation-triangle"></i>{{__('page.inactive')}}</span>
+                                        @endif
+                                    </td>                                      
                                     {{-- <td></td>--}}
                                 </tr>
                             @endforeach
