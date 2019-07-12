@@ -157,15 +157,6 @@ return [
     'image' => 'Image',
 
 
-
-
-
-
-
-
-
-
-
     // ******** Modal ********
     'add_payment' => 'Add Payment',
     'add_customer' => 'Add Customer',
@@ -221,8 +212,7 @@ return [
     'today_sales' => 'Today Sales',
     'week_sales' => 'Week Sales',
     'month_sales' => 'Month Sales',
-    'overall_purchases' => 'Overall Sales',
-    
+    'overall_purchases' => 'Overall Sales',    
 
     // ******** Transaction ********
     'select_type' => 'Select a type',
@@ -235,7 +225,6 @@ return [
     'attachment' => 'Attachment',
     'description' => 'Description',
     'profit' => 'Profit',
-
 
     // ******** User ********
     'username' => 'Username',
