@@ -39,7 +39,7 @@
                                 <th>{{__('page.grand_total')}}</th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
-                                {{-- <th>Payment Status</th> --}}
+                                <th>{{__('page.payment_status')}}</th>
                                 <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
@@ -64,7 +64,15 @@
                                     <td class="grand_total"> {{number_format($grand_total)}} </td>
                                     <td class="paid"> {{ number_format($paid) }} </td>
                                     <td> {{number_format($grand_total - $paid)}} </td>
-                                    {{-- <td></td> --}}
+                                    <td>
+                                        @if ($paid == 0)
+                                            <span class="tx-danger">Pending</span>
+                                        @elseif($paid < $grand_total)
+                                            <span class="tx-primary">Partial</span>
+                                        @else
+                                            <span class="tx-success">Paid</span>
+                                        @endif
+                                    </td>
                                     <td class="py-2" align="center">
                                         <div class="dropdown">
                                             <a href="#" class="btn btn-info btn-with-icon nav-link" data-toggle="dropdown">

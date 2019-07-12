@@ -105,6 +105,7 @@ return [
     'reference_number' => 'Número de Referencia',
     'purchase_status' => 'Estado de Compra',
     'sale_status' => 'Estado de Venta',
+    'payment_status' => 'Estado de Pago',
     'paid' => 'Pagado',
     'grand_total' => 'Gran Total',
     'status' => 'Estado',

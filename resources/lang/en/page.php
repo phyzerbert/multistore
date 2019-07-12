@@ -105,6 +105,7 @@ return [
     'reference_number' => 'Reference Number',
     'purchase_status' => 'Purchase Status',
     'sale_status' => 'Sale Status',
+    'payment_status' => 'Payment Status',
     'paid' => 'Paid',
     'grand_total' => 'Grand Total',
     'status' => 'Status',

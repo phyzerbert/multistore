@@ -21,11 +21,18 @@
     @yield('style')
     <link rel="stylesheet" href="{{asset('master/css/bracket.css')}}">
     <link rel="stylesheet" href="{{asset('master/css/custom.css')}}">
+
+    <script>
+    
+    
+    </script>
     
 </head>
 
-<body>
-
+<body onload="showloader()">
+    <div id="ajax-loading" class="text-center">
+        <img class="mx-auto" src="{{asset('images/loader.gif')}}" width="70" alt="" style="margin:45vh auto;">
+    </div>
     @include('layouts.aside')
 
     @include('layouts.header')
@@ -43,6 +50,7 @@
     <script src="{{asset('master/lib/moment/moment.js')}}"></script>
 
     <script src="{{asset('master/js/bracket.js')}}"></script>
+    
     @yield('script')
 
     <script>
@@ -50,6 +58,12 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        function showloader(){
+            $("#ajax-loading").show();
+        }
+        $(document).ready(function(){
+            $("#ajax-loading").hide();
         });
     </script>
 
