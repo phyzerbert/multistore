@@ -164,7 +164,17 @@
     };
     var lineOptions = {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,      
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false,
+                    callback: function(value, index, values) {
+                        return value.toLocaleString();
+                    }
+                }
+            }]
+        }
     };
     var ctx = document.getElementById("line_chart").getContext("2d");
     new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});

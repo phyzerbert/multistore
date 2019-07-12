@@ -62,7 +62,17 @@
     };
     var barOptions = {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,      
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false,
+                    callback: function(value, index, values) {
+                        return value.toLocaleString();
+                    }
+                }
+            }]
+        }
     };
 
     var ctx = document.getElementById("bar_chart").getContext("2d");
