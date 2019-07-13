@@ -18,6 +18,16 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="">
+                    @include('elements.pagesize')
+                    <form action="" method="POST" class="form-inline float-left" id="searchForm">
+                        @csrf
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="name" id="search_name" value="{{$name}}" placeholder="{{__('page.name')}}">
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="company" id="search_company" value="{{$company}}" placeholder="{{__('page.company')}}">
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="phone_number" id="search_phone" value="{{$phone_number}}" placeholder="{{__('page.phone_number')}}">
+                        
+                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
+                        <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
+                    </form>
                     @if ($role == 'admin')
                         <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> Add New</button>
                     @endif
@@ -208,13 +218,15 @@
             $("#addModal").modal();
         });
 
-        $("#btn_create").click(function(){          
+        $("#btn_create").click(function(){
+            $("#ajax-loading").show();
             $.ajax({
                 url: "{{route('supplier.create')}}",
                 type: 'post',
                 dataType: 'json',
                 data: $('#create_form').serialize(),
                 success : function(data) {
+                    $("#ajax-loading").hide();
                     if(data == 'success') {
                         alert('Created successfully.');
                         window.location.reload();
@@ -224,6 +236,7 @@
                     }
                 },
                 error: function(data) {
+                    $("#ajax-loading").hide();
                     console.log(data.responseJSON);
                     if(data.responseJSON.message == 'The given data was invalid.') {
                         let messages = data.responseJSON.errors;
@@ -289,13 +302,14 @@
         });
 
         $("#btn_update").click(function(){
+            $("#ajax-loading").show();
             $.ajax({
                 url: "{{route('supplier.edit')}}",
                 type: 'post',
                 dataType: 'json',
                 data: $('#edit_form').serialize(),
                 success : function(data) {
-                    console.log(data);
+                    $("#ajax-loading").hide();
                     if(data == 'success') {
                         alert('Updated successfully.');
                         window.location.reload();
@@ -305,7 +319,7 @@
                     }
                 },
                 error: function(data) {
-                    console.log(data.responseJSON);
+                    $("#ajax-loading").hide();
                     if(data.responseJSON.message == 'The given data was invalid.') {
                         let messages = data.responseJSON.errors;
                         if(messages.name) {
@@ -346,6 +360,12 @@
                     }
                 }
             });
+        });
+
+        $("#btn-reset").click(function(){
+            $("#search_name").val('');
+            $("#search_company").val('');
+            $("#search_phone").val('');
         });
 
     });

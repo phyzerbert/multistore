@@ -12,11 +12,27 @@ class CustomerController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         config(['site.page' => 'customer']);
-        $data = Customer::paginate(15);
-        return view('admin.customers', compact('data'));
+        $mod = new Customer();
+        $company = $name = $phone_number = '';
+        if ($request->get('company') != ""){
+            $company = $request->get('company');
+            $mod = $mod->where('company', 'LIKE', "%$company%");
+        }
+        if ($request->get('name') != ""){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }
+        if ($request->get('phone_number') != ""){
+            $phone_number = $request->get('phone_number');
+            $mod = $mod->where('phone_number', 'LIKE', "%$phone_number%");
+        }
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('admin.customers', compact('data', 'company', 'name', 'phone_number'));
     }
 
     public function edit(Request $request){

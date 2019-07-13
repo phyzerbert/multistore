@@ -214,43 +214,67 @@ class ReportController extends Controller
     public function customers_report(Request $request){
         config(['site.page' => 'customers_report']);
         $mod = new Customer();
-        $name = '';
+        $company = $name = $phone_number = '';
+        if ($request->get('company') != ""){
+            $company = $request->get('company');
+            $mod = $mod->where('company', 'LIKE', "%$company%");
+        }
         if ($request->get('name') != ""){
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
-        
+        if ($request->get('phone_number') != ""){
+            $phone_number = $request->get('phone_number');
+            $mod = $mod->where('phone_number', 'LIKE', "%$phone_number%");
+        }
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.customers_report', compact('data', 'name'));
+        return view('reports.customers_report', compact('data', 'name', 'company', 'phone_number'));
     }
     public function suppliers_report(Request $request){
         config(['site.page' => 'suppliers_report']);
         $mod = new Supplier();
-        $name = '';
+        $company = $name = $phone_number = '';
+        if ($request->get('company') != ""){
+            $company = $request->get('company');
+            $mod = $mod->where('company', 'LIKE', "%$company%");
+        }
         if ($request->get('name') != ""){
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
+        if ($request->get('phone_number') != ""){
+            $phone_number = $request->get('phone_number');
+            $mod = $mod->where('phone_number', 'LIKE', "%$phone_number%");
+        }
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.suppliers_report', compact('data', 'name'));
+        return view('reports.suppliers_report', compact('data', 'name', 'company', 'phone_number'));
     }
 
     public function users_report(Request $request){
         config(['site.page' => 'users_report']);
+        $companies = Company::all();
         $mod = new User();
-        $name = '';
+        $company_id = $name = $phone_number = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', 'LIKE', "%$company_id%");
+        }
         if ($request->get('name') != ""){
             $name = $request->get('name');
             $mod = $mod->where('name', 'LIKE', "%$name%");
         }
+        if ($request->get('phone_number') != ""){
+            $phone_number = $request->get('phone_number');
+            $mod = $mod->where('phone_number', 'LIKE', "%$phone_number%");
+        }
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.users_report', compact('data', 'name'));
+        return view('reports.users_report', compact('data', 'companies', 'name', 'company_id', 'phone_number'));
     }
     
     

@@ -26,12 +26,28 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         config(['site.page' => 'user']);
         $companies = Company::all();
-        $data = User::paginate(15);
-        return view('admin.users', compact('data', 'companies'));
+        $mod = new User();
+        $company_id = $name = $phone_number = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', "$company_id");
+        }
+        if ($request->get('name') != ""){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }
+        if ($request->get('phone_number') != ""){
+            $phone_number = $request->get('phone_number');
+            $mod = $mod->where('phone_number', 'LIKE', "%$phone_number%");
+        }
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('admin.users', compact('data', 'companies', 'company_id', 'name', 'phone_number'));
     }
 
         
@@ -73,6 +89,8 @@ class UserController extends Controller
         ]);
         $user = User::find($request->get("id"));
         $user->name = $request->get("name");
+        $user->first_name = $request->get("first_name");
+        $user->last_name = $request->get("last_name");
         $user->phone_number = $request->get("phone_number");
         $user->company_id = $request->get("company_id");
 

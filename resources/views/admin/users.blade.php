@@ -18,6 +18,21 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="">
+                    @include('elements.pagesize')
+                    <form action="" method="POST" class="form-inline float-left" id="searchForm">
+                        @csrf
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="name" id="search_name" value="{{$name}}" placeholder="{{__('page.name')}}">
+                        <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
+                            <option value="" hidden>{{__('page.select_company')}}</option>
+                            @foreach ($companies as $item)
+                                <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                            @endforeach        
+                        </select>
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="phone_number" id="search_phone" value="{{$phone_number}}" placeholder="{{__('page.phone_number')}}">
+                        
+                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
+                        <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
+                    </form>
                     @if ($role == 'admin')
                         <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> {{__('page.add_new')}}</button>
                     @endif
@@ -28,6 +43,8 @@
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
                                 <th>{{__('page.username')}}</th>
+                                <th>{{__('page.first_name')}}</th>
+                                <th>{{__('page.last_name')}}</th>
                                 <th>{{__('page.company')}}</th>
                                 <th>{{__('page.role')}}</th>
                                 <th>{{__('page.phone_number')}}</th>
@@ -39,6 +56,8 @@
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="username">{{$item->name}}</td>
+                                    <td class="first_name">{{$item->first_name}}</td>
+                                    <td class="last_name">{{$item->last_name}}</td>
                                     <td class="company" data-id="{{$item->company_id}}">@isset($item->company->name){{$item->company->name}}@endisset</td>
                                     <td class="role" data-id="{{$item->role_id}}">{{$item->role->name}}</td>
                                     <td class="phone">{{$item->phone_number}}</td>
@@ -152,6 +171,20 @@
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
+                        </div>                    
+                        <div class="form-group">
+                            <label class="control-label">{{__('page.first_name')}}</label>
+                            <input class="form-control first_name" type="text" name="first_name" placeholder="{{__('page.first_name')}}">
+                            <span id="edit_first_name_error" class="invalid-feedback">
+                                <strong></strong>
+                            </span>
+                        </div>                    
+                        <div class="form-group">
+                            <label class="control-label">{{__('page.last_name')}}</label>
+                            <input class="form-control last_name" type="text" name="last_name" placeholder="{{__('page.last_name')}}">
+                            <span id="edit_last_name_error" class="invalid-feedback">
+                                <strong></strong>
+                            </span>
                         </div>
                         <div class="form-group">
                             <label class="control-label">{{__('page.phone_number')}}</label>
@@ -257,12 +290,16 @@
         $(".btn-edit").click(function(){
             let user_id = $(this).attr("data-id");
             let username = $(this).parents('tr').find(".username").text().trim();
+            let first_name = $(this).parents('tr').find(".first_name").text().trim();
+            let last_name = $(this).parents('tr').find(".last_name").text().trim();
             let company = $(this).parents('tr').find(".company").data('id');
             let phone = $(this).parents('tr').find(".phone").text().trim();
 
             $("#edit_form input.form-control").val('');
             $("#edit_form .id").val(user_id);
             $("#edit_form .name").val(username);
+            $("#edit_form .first_name").val(first_name);
+            $("#edit_form .last_name").val(last_name);
             $("#edit_form .company").val(company);
             $("#edit_form .phone_number").val(phone);
 
@@ -309,6 +346,12 @@
                     }
                 }
             });
+        });
+
+        $("#btn-reset").click(function(){
+            $("#search_name").val('');
+            $("#search_company").val('');
+            $("#search_phone").val('');
         });
 
     });
