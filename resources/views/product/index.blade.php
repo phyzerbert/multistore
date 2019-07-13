@@ -19,6 +19,8 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="">
+                    @include('elements.pagesize')
+                    @include('product.filter')
                     @if ($role == 'admin')
                         <a href="{{route('product.create')}}" class="btn btn-success btn-sm float-right tx-white mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>
                     @endif
@@ -49,8 +51,8 @@
                                     <td class="code">{{$item->code}}</td>
                                     <td class="name">{{$item->name}}</td>
                                     <td class="category">{{$item->category->name}}</td>
-                                    <td class="cost">{{$item->cost}}</td>
-                                    <td class="price">{{$item->price}}</td>
+                                    <td class="cost">{{number_format($item->cost)}}</td>
+                                    <td class="price">{{number_format($item->price)}}</td>
                                     <td class="quantity">{{$quantity}}</td>
                                     <td class="unit">{{$item->unit}}</td>
                                     <td class="alert_quantity">{{$item->alert_quantity}}</td>
@@ -94,7 +96,11 @@
 @section('script')
 <script>
     $(document).ready(function () {
-
+        $("#btn-reset").click(function(){
+            $("#search_code").val('');
+            $("#search_name").val('');
+            $("#search_category").val('');
+        });
     });
 </script>
 @endsection

@@ -17,11 +17,28 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         config(['site.page' => 'product']);
-        $data = Product::paginate(15);
-        return view('product.index', compact('data'));
+        $categories = Category::all();
+        $mod = new Product();
+        $code = $name = $category_id = '';
+        if ($request->get('code') != ""){
+            $code = $request->get('code');
+            $mod = $mod->where('code', 'LIKE', "%$code%");
+        }
+        if ($request->get('name') != ""){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }
+        if ($request->get('category_id') != ""){
+            $category_id = $request->get('category_id');
+            $mod = $mod->where('category_id', $category_id);
+        }
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('product.index', compact('data', 'categories', 'code', 'name', 'category_id'));
     }
 
     public function create(Request $request){
