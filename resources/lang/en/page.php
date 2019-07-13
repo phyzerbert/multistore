@@ -162,6 +162,11 @@ return [
     'purchase_reference' => 'Purchase Reference',
     'image' => 'Image',
     'category_name' => 'Cagtegory Name',
+    'code' => 'Code',
+    'name' => 'Name',
+    'rate' => 'Rate',
+    'percentage' => 'Percentage',
+    'fixed' => 'Fixed',
 
 
     // ******** Modal ********
@@ -177,6 +182,8 @@ return [
     'add_store' => 'Add Store',
     'edit_store' => 'Edit Store',
     'edit_payment' => 'Edit Payment',
+    'add_tax_rate' => 'Add Tax Rate',
+    'edit_tax_rate' => 'Edit Tax Rate',
 
 
     // ******** Title ********
@@ -194,6 +201,7 @@ return [
     'company_management' => 'Company Management',
     'store_management' => 'Store Management',
     'payment_management' => 'Payment Management',
+    'tax_rate_management' => 'Tax Rate Management',
 
 
 

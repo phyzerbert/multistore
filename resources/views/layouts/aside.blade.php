@@ -119,7 +119,7 @@
         @if($role == 'admin')
         {{-- Setting --}}
         @php
-            $setting_items = ['category', 'store', 'company'];
+            $setting_items = ['category', 'store', 'company', 'tax_rate'];
         @endphp
         <a href="#" class="br-menu-link @if($page == in_array($page, $setting_items)) active show-sub @endif">
             <div class="br-menu-item">
@@ -132,6 +132,7 @@
             <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif">{{__('page.category')}}</a></li>
             <li class="nav-item"><a href="{{route('company.index')}}" class="nav-link @if($page == 'company') active @endif">{{__('page.company')}}</a></li>
             <li class="nav-item"><a href="{{route('store.index')}}" class="nav-link @if($page == 'store') active @endif">{{__('page.store')}}</a></li>
+            <li class="nav-item"><a href="{{route('tax_rate.index')}}" class="nav-link @if($page == 'tax_rate') active @endif">{{__('page.tax_rate')}}</a></li>
         </ul>
         @endif
     </div>

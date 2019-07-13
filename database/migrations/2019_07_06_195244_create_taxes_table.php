@@ -18,7 +18,7 @@ class CreateTaxesTable extends Migration
             $table->string('name');
             $table->string('code')->nullable();
             $table->integer('rate')->nullable();
-            $table->string('type')->nullable();
+            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }

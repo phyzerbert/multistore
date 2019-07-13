@@ -16,28 +16,28 @@ class TaxesTableSeeder extends Seeder
             'name' => 'IMP CONS',
             'code' => 'IMPCO',
             'rate' => 8,
-            'type' => 'Percentage',
+            'type' => 1,
         ]);
 
         Tax::create([
             'name' => 'IVA 16%',
             'code' => 'IVA16',
             'rate' => 16,
-            'type' => 'Percentage',
+            'type' => 1,
         ]);
 
         Tax::create([
             'name' => 'IVA 19%',
             'code' => 'IVA19',
             'rate' => 19,
-            'type' => 'Percentage',
+            'type' => 1,
         ]);
         
         Tax::create([
             'name' => 'No Imp',
             'code' => 'Ni',
-            'rate' => 0,
-            'type' => 'Percentage',
+            'rate' => 10,
+            'type' => 1,
         ]);
     }
 }

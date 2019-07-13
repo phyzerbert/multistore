@@ -59,6 +59,11 @@ Route::post('/store/create', 'StoreController@create')->name('store.create');
 Route::post('/store/edit', 'StoreController@edit')->name('store.edit');
 Route::get('/store/delete/{id}', 'StoreController@delete')->name('store.delete');
 
+Route::any('/tax_rate/index', 'TaxRateController@index')->name('tax_rate.index');
+Route::post('/tax_rate/create', 'TaxRateController@create')->name('tax_rate.create');
+Route::post('/tax_rate/edit', 'TaxRateController@edit')->name('tax_rate.edit');
+Route::get('/tax_rate/delete/{id}', 'TaxRateController@delete')->name('tax_rate.delete');
+
 
 Route::any('/product/index', 'ProductController@index')->name('product.index');
 Route::get('/product/create', 'ProductController@create')->name('product.create');
