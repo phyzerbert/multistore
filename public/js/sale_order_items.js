@@ -34,7 +34,7 @@ var app = new Vue({
                     this.order_items[i].tax_name = response.data.tax.name
                     this.order_items[i].tax_rate = response.data.tax.rate
                     this.order_items[i].quantity = 1
-                    this.order_items[i].sub_total = parseInt(response.data.price) + parseInt((response.data.price*response.data.tax.rate)/100)
+                    this.order_items[i].sub_total = (parseInt(response.data.price) + parseInt((response.data.price*response.data.tax.rate)/100))
                 })
                 .catch(error => {
                     console.log(error);
