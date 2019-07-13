@@ -22,7 +22,7 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
-                                <th>{{__('page.product_name')}}</th>
+                                <th>{{__('page.category_name')}}</th>
                                 <th>{{__('page.purchased')}}</th>
                                 <th>{{__('page.sold')}}</th>
                                 <th>{{__('page.purchased_amount')}}</th>

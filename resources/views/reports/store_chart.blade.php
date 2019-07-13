@@ -7,11 +7,11 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="#">{{__('page.reports')}}</a>
-                <a class="breadcrumb-item active" href="#">{{__('page.company_chart')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.store_chart')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-pie-chart"></i> {{__('page.company_chart')}}</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-bar-chart"></i> {{__('page.store_chart')}}</h4>
         </div>
         
         @php
@@ -45,18 +45,18 @@
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script>
     var barData = {
-        labels: {!! json_encode($company_names) !!},
+        labels: {!! json_encode($store_names) !!},
         datasets: [
             {
                 label: "{{__('page.purchase')}}",
                 backgroundColor:'#DADDE0',
-                data: {!! json_encode($company_purchases_array) !!}
+                data: {!! json_encode($store_purchases_array) !!}
             },
             {
                 label: "{{__('page.sale')}}",
                 backgroundColor: '#2ecc71',
                 borderColor: "#fff",
-                data: {!! json_encode($company_sales_array) !!}
+                data: {!! json_encode($store_sales_array) !!}
             }
         ]
     };

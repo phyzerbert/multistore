@@ -84,7 +84,7 @@
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{route('report.overview_chart')}}" class="nav-link @if($page == 'overview_chart') active @endif">{{__('page.overview_chart')}}</a></li>
             <li class="nav-item"><a href="{{route('report.company_chart')}}" class="nav-link @if($page == 'company_chart') active @endif">{{__('page.company_chart')}}</a></li>
-            {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'store_chart') active @endif">Store Chart</a></li> --}}
+            <li class="nav-item"><a href="{{route('report.store_chart')}}" class="nav-link @if($page == 'store_chart') active @endif">{{__('page.store_chart')}}</a></li>
             <li class="nav-item"><a href="{{route('report.product_quantity_alert')}}" class="nav-link @if($page == 'product_quantity_alert') active @endif">{{__('page.product_quantity_alert')}}</a></li>
             <li class="nav-item"><a href="{{route('report.product_expiry_alert')}}" class="nav-link @if($page == 'product_expiry_alert') active @endif">{{__('page.product_expiry_alert')}}</a></li>
             <li class="nav-item"><a href="{{route('report.products_report')}}" class="nav-link @if($page == 'products_report') active @endif">{{__('page.product_report')}}</a></li>

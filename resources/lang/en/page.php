@@ -32,6 +32,7 @@ return [
     'reports' => 'Reports',
     'overview_chart' => 'Overview Chart',
     'company_chart' => 'Company Chart',
+    'store_chart' => 'Store Chart',
     'product_quantity_alert' => 'Product Quantity Alert',
     'product_expiry_alert' => 'Product Expiry Alert',
     'product_report' => 'Product Report',
@@ -160,6 +161,7 @@ return [
     'sale_reference' => 'Sale Reference',
     'purchase_reference' => 'Purchase Reference',
     'image' => 'Image',
+    'category_name' => 'Cagtegory Name',
 
 
     // ******** Modal ********

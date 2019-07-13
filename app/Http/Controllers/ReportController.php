@@ -90,6 +90,38 @@ class ReportController extends Controller
         return view('reports.company_chart', compact('return', 'company_names', 'company_purchases_array', 'company_sales_array', 'period'));
     }
 
+    public function store_chart(Request $request){
+        config(['site.page' => 'store_chart']);
+
+        $stores = Store::all();
+        $store_names = Store::pluck('name')->toArray();
+        $store_purchases_array = $store_sales_array = array();
+        $period = '';
+
+        foreach ($stores as $store) {
+            $mod1 = $store->purchases();
+            $mod2 = $store->sales();            
+
+            if($request->has('period') && $request->get('period') != ""){   
+                $period = $request->get('period');
+                $from = substr($period, 0, 10);
+                $to = substr($period, 14, 10);
+                $mod1 = $mod1->whereBetween('timestamp', [$from, $to]);
+                $mod2 = $mod2->whereBetween('timestamp', [$from, $to]);
+            }
+
+            $store_purchases = $mod1->pluck('id');
+            $store_sales = $mod2->pluck('id');
+            
+            $store_purchases_total = Order::whereIn('orderable_id', $store_purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
+            $store_sales_total = Order::whereIn('orderable_id', $store_sales)->where('orderable_type', Sale::class)->sum('subtotal');
+            array_push($store_purchases_array, $store_purchases_total);
+            array_push($store_sales_array, $store_sales_total);
+        }
+
+        return view('reports.store_chart', compact('return', 'store_names', 'store_purchases_array', 'store_sales_array', 'period'));
+    }
+
     public function product_quantity_alert(Request $request){
         config(['site.page' => 'product_quantity_alert']);
 
@@ -109,8 +141,9 @@ class ReportController extends Controller
             $product_id = $request->get('product_id');
             $mod = $mod->where('product_id', $product_id);
         }
-
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
 
         return view('reports.product_expiry_alert', compact('data', 'products', 'product_id'));
     }
@@ -128,7 +161,7 @@ class ReportController extends Controller
     public function categories_report(Request $request){
         config(['site.page' => 'categories_report']);
 
-        $data = Category::paginate(10);        
+        $data = Category::paginate(10);
 
         return view('reports.categories_report', compact('data'));
     }

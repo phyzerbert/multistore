@@ -23,7 +23,13 @@
             <div class="br-section-wrapper">
                 <div class="">
                     @include('elements.pagesize')
-                    {{-- @include('sale.filter') --}}
+                    <form action="" method="POST" class="form-inline float-left" id="searchForm">
+                        @csrf
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="reference_no" id="search_reference_no" value="{{$reference_no}}" placeholder="{{__('page.reference_no')}}">
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="period" id="period" autocomplete="off" value="{{$period}}" placeholder="{{__('page.date')}}">
+                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
+                        <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
+                    </form>
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
@@ -93,22 +99,17 @@
     $(document).ready(function () {
         $("#payment_form input.date").datetimepicker({
             dateFormat: 'yy-mm-dd',
-        });
-        
-        
+        });         
 
-        // $("#period").dateRangePicker({
-        //     autoClose: false,
-        // });
+        $("#period").dateRangePicker({
+            autoClose: false,
+        });
 
         $("#pagesize").change(function(){
             $("#pagesize_form").submit();
         });
 
         $("#btn-reset").click(function(){
-            $("#search_company").val('');
-            $("#search_store").val('');
-            $("#search_supplier").val('');
             $("#search_reference_no").val('');
             $("#period").val('');
         });

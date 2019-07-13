@@ -17,4 +17,12 @@ class Store extends Model
     public function products(){
         return $this->belongsToMany('App\Models\Product', 'store_products');
     }
+
+    public function purchases(){
+        return $this->hasMany('App\Models\Purchase');
+    }
+
+    public function sales(){
+        return $this->hasMany('App\Models\Sale');
+    }
 }

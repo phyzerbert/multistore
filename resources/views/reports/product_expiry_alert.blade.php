@@ -45,10 +45,7 @@
                             </tr>
                         </thead>
                         <tbody>                                
-                            @foreach ($data as $item)
-                                @php
-                                    
-                                @endphp                              
+                            @foreach ($data as $item)                            
                                 <tr>
                                     <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="image py-1 wd-60"><img src="@if($item->product->image){{asset($item->product->image)}}@else{{asset('images/no-image.png')}}@endif" class="wd-40 ht-40 rounded-circle" alt=""></td>
@@ -60,6 +57,14 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="clearfix mt-2">
+                        <div class="float-left" style="margin: 0;">
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
+                        </div>
+                        <div class="float-right" style="margin: 0;">
+                            {!! $data->appends([])->links() !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>                
@@ -69,7 +74,9 @@
 @section('script')
 <script>
     $(document).ready(function () {
-        
+        $("#pagesize").change(function(){
+            $("#pagesize_form").submit();
+        });
     });
 </script>
 @endsection

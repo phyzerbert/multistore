@@ -46,7 +46,7 @@ var app = new Vue({
                 price: 0,
                 tax_name: "",
                 tax_rate: 0,
-                quantity: 0,z
+                quantity: 0,
                 sub_total: 0,
             })
         },
