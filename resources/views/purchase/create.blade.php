@@ -115,7 +115,7 @@
                                     <thead>
                                         <tr>
                                             <th>{{__('page.product_name_code')}}</th>
-                                            {{-- <th>{{__('page.expiry_date')}}</th> --}}
+                                            <th>{{__('page.expiry_date')}}</th>
                                             <th>{{__('page.product_cost')}}</th>
                                             <th>{{__('page.quantity')}}</th>
                                             <th>{{__('page.product_tax')}}</th>
@@ -131,7 +131,7 @@
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
-                                            {{-- <td><input type="text" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="order_items[i].expiry_date" placeholder="Expiry Date" /></td> --}}
+                                            <td><input type="date" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="order_items[i].expiry_date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="{{__('page.expiry_date')}}" /></td>
                                             <td class="cost">@{{item.cost}}</td>
                                             <td><input type="number" class="form-control form-control-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="{{__('page.quantity')}}" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>

@@ -50,6 +50,7 @@ var app = new Vue({
                 tax_name: "",
                 tax_rate: 0,
                 quantity: 0,
+                expiry_date: "",
                 sub_total: 0,
             })
         },
@@ -87,6 +88,7 @@ var app = new Vue({
                             tax_name: response1.data.tax.name,
                             tax_rate: response1.data.tax.rate,
                             quantity: element.quantity,
+                            expiry_date: element.expiry_date,
                             sub_total: element.subtotal,
                             order_id: element.id,
                         })

@@ -108,6 +108,7 @@ class PurchaseController extends Controller
             Order::create([
                 'product_id' => $data['product_id'][$i],
                 'quantity' => $data['quantity'][$i],
+                'expiry_date' => $data['expiry_date'][$i],
                 'subtotal' => $data['subtotal'][$i],
                 'orderable_id' => $item->id,
                 'orderable_type' => Purchase::class,

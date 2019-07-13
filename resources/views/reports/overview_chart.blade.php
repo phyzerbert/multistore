@@ -49,7 +49,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6 col-xl-3">
-                            <a href="#" class="d-block p-3 mt-3 bg-teal rounded overflow-hidden">
+                            <a href="{{route('report.product_expiry_alert')}}" class="d-block p-3 mt-3 bg-teal rounded overflow-hidden">
                                 <div class="d-flex align-items-center ht-50">
                                     <i class="fa fa-exclamation-circle tx-50 lh-0 tx-white op-7"></i>
                                     <div class="mg-l-20">

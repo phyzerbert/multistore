@@ -98,6 +98,23 @@ class ReportController extends Controller
         return view('reports.product_quantity_alert', compact('data'));
     }
 
+    public function product_expiry_alert(Request $request){
+        config(['site.page' => 'product_expiry_alert']);
+        $products = Product::all();
+        $mod = new Order();
+        $mod = $mod->where('orderable_type', Purchase::class)->where('expiry_date', '<=', date('Y-m-d'));
+
+        $product_id = '';
+        if ($request->get('product_id') != ""){
+            $product_id = $request->get('product_id');
+            $mod = $mod->where('product_id', $product_id);
+        }
+
+        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+
+        return view('reports.product_expiry_alert', compact('data', 'products', 'product_id'));
+    }
+
     public function products_report(Request $request){
         config(['site.page' => 'products_report']);
 

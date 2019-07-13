@@ -47,7 +47,7 @@ var app = new Vue({
                 tax_name: "",
                 tax_rate: 0,
                 quantity: 0,
-                // expiry_date: "",
+                expiry_date: "",
                 sub_total: 0,
             })
         },
