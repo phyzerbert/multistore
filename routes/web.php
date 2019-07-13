@@ -118,6 +118,9 @@ Route::any('/report/payments_report', 'ReportController@payments_report')->name(
 Route::any('/report/customers_report', 'ReportController@customers_report')->name('report.customers_report');
 Route::any('/report/suppliers_report', 'ReportController@suppliers_report')->name('report.suppliers_report');
 Route::any('/report/users_report', 'ReportController@users_report')->name('report.users_report');
+Route::any('/report/users_report/purchases/{id}', 'ReportController@user_purchases')->name('report.users_report.purchases');
+Route::any('/report/users_report/sales/{id}', 'ReportController@user_sales')->name('report.users_report.sales');
+Route::any('/report/users_report/payments/{id}', 'ReportController@user_payments')->name('report.users_report.payments');
 
 
 Route::post('/set_pagesize', 'HomeController@set_pagesize')->name('set_pagesize');

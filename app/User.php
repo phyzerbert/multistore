@@ -48,4 +48,12 @@ class User extends Authenticatable
     public function company(){
         return $this->belongsTo('App\Models\Company');
     }
+
+    public function purchases(){
+        return $this->hasMany('App\Models\Purchase');
+    }
+
+    public function sales(){
+        return $this->hasMany('App\Models\Sale');
+    }
 }

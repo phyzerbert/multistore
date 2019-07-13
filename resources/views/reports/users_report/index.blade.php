@@ -46,7 +46,7 @@
                                 <th>{{__('page.company')}}</th>
                                 <th>{{__('page.role')}}</th>
                                 <th>{{__('page.status')}}</th>
-                                {{-- <th>Action</th> --}}
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -66,7 +66,9 @@
                                             <span class="badge badge-danger"><i class="fa fa- exclamation-triangle"></i>{{__('page.inactive')}}</span>
                                         @endif
                                     </td>                                      
-                                    {{-- <td></td>--}}
+                                    <td>
+                                        <a href="{{route('report.users_report.purchases', $item->id)}}" class="badge badge-primary">{{__('page.view_reports')}}</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -88,7 +90,15 @@
 @section('script')
 <script>
     $(document).ready(function () {
-        
+        $("#pagesize").change(function(){
+            $("#pagesize_form").submit();
+        });
+
+        $("#btn-reset").click(function(){
+            $("#search_company").val('');
+            $("#search_phone").val('');
+            $("#search_name").val('');
+        });
     });
 </script>
 @endsection

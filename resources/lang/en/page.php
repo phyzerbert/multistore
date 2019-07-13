@@ -71,7 +71,9 @@ return [
     'duplicated' => 'Duplicated',
     'details' => 'Details',
     'payment' => 'Payment',
+    'payments' => 'Payments',
     'payment_list' => 'Payment List',
+    'view_reports' => 'View Reports',
     'save' => 'Save',
     'close' => 'Close',
     'back' => 'Back',
@@ -202,6 +204,9 @@ return [
     'store_management' => 'Store Management',
     'payment_management' => 'Payment Management',
     'tax_rate_management' => 'Tax Rate Management',
+    'user_purchases' => 'User Purchases',
+    'user_sales' => 'User Sales',
+    'user_payments' => 'User Payments',
 
 
 

@@ -42,12 +42,17 @@
                                 {{-- <th>Payment Status</th> --}}
                             </tr>
                         </thead>
-                        <tbody>                                
-                            @foreach ($data as $item)
+                        <tbody>
                             @php
-                                $grand_total = $item->orders()->sum('subtotal');
-                                $paid = $item->payments()->sum('amount');
+                                $total_grand = $total_paid = 0;
                             @endphp
+                            @foreach ($data as $item)
+                                @php
+                                    $grand_total = $item->orders()->sum('subtotal');
+                                    $paid = $item->payments()->sum('amount');
+                                    $total_grand += $grand_total;
+                                    $total_paid += $paid;
+                                @endphp
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
@@ -69,6 +74,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">{{__('page.total')}}</td>
+                                <td>{{number_format($total_grand)}}</td>
+                                <td>{{number_format($total_paid)}}</td>
+                                <td>{{number_format($total_grand - $total_paid)}}</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">

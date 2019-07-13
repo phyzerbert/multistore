@@ -9,19 +9,27 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="#">{{__('page.reports')}}</a>
-                <a class="breadcrumb-item active" href="#">{{__('page.sales_report')}}</a>
+                <a class="breadcrumb-item" href="{{route('report.users_report')}}">{{__('page.users_report')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.sales')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i>  {{__('page.sales_report')}}</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i>  {{__('page.user_sales')}}</h4>
         </div>
         
         @php
             $role = Auth::user()->role->slug;
         @endphp
         <div class="br-pagebody">
-            <div class="br-section-wrapper">
-                <div class="">
+            <div class="br-section-wrapper">                                
+                <div class="ht-md-40 pd-x-20 bg-gray-200 rounded d-flex align-items-center">
+                    <ul class="nav nav-outline align-items-center flex-column flex-md-row" role="tablist">
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="{{route('report.users_report.purchases', $user->id)}}" role="tab">{{__('page.purchases')}}</a></li>
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="{{route('report.users_report.sales', $user->id)}}" role="tab">{{__('page.sales')}}</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="{{route('report.users_report.payments', $user->id)}}" role="tab">{{__('page.payments')}}</a></li>
+                    </ul>
+                </div>
+                <div class="mt-2">
                     @include('elements.pagesize')
                     <form action="" method="POST" class="form-inline float-left" id="searchForm">
                         @csrf
@@ -72,7 +80,7 @@
                         <tbody> 
                             @php
                                 $total_grand = $total_paid = 0;
-                            @endphp                               
+                            @endphp
                             @foreach ($data as $item)
                                 @php
                                     $grand_total = $item->orders()->sum('subtotal');
@@ -151,6 +159,10 @@
             $("#search_supplier").val('');
             $("#search_reference_no").val('');
             $("#period").val('');
+        });
+
+        $("ul.nav a.nav-link").click(function(){
+            location.href = $(this).attr('href');
         });
 
     });

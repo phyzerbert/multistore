@@ -324,7 +324,111 @@ class ReportController extends Controller
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.users_report', compact('data', 'companies', 'name', 'company_id', 'phone_number'));
+        return view('reports.users_report.index', compact('data', 'companies', 'name', 'company_id', 'phone_number'));
+    }
+
+    public function user_purchases(Request $request, $id){
+        $user = User::find($id);
+        config(['site.page' => 'users_report']);
+        $stores = Store::all();
+        $suppliers = Supplier::all();
+        $companies = Company::all();
+
+        $mod = $user->purchases();
+        $company_id = $reference_no = $supplier_id = $store_id = $period = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', $company_id);
+        }
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('supplier_id') != ""){
+            $supplier_id = $request->get('supplier_id');
+            $mod = $mod->where('supplier_id', $supplier_id);
+        }
+        if ($request->get('store_id') != ""){
+            $store_id = $request->get('store_id');
+            $mod = $mod->where('store_id', $store_id);
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('reports.users_report.purchases', compact('data', 'user', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
+    }
+
+    public function user_sales(Request $request, $id){
+        $user = User::find($id);
+        config(['site.page' => 'users_report']);
+        $stores = Store::all();
+        $customers = customer::all();
+        $companies = Company::all();
+
+        $mod = $user->sales();
+        $company_id = $reference_no = $customer_id = $store_id = $period = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', $company_id);
+        }
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('customer_id') != ""){
+            $customer_id = $request->get('customer_id');
+            $mod = $mod->where('customer_id', $customer_id);
+        }
+        if ($request->get('store_id') != ""){
+            $store_id = $request->get('store_id');
+            $mod = $mod->where('store_id', $store_id);
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('reports.users_report.sales', compact('data', 'user', 'companies', 'stores', 'customers', 'company_id', 'store_id', 'customer_id', 'reference_no', 'period'));
+    }
+
+    public function user_payments(Request $request, $id){
+        $user = User::find($id);
+        config(['site.page' => 'users_report']);
+        
+        $mod = new Payment();
+        $purchases_array = $user->purchases()->pluck('id')->toArray();
+        $sales_array = $user->sales()->pluck('id')->toArray();
+        $mod = $mod->where(function($query) use($purchases_array){
+            $query->where('paymentable_type', Purchase::class)->whereIn('paymentable_id', $purchases_array);
+        })->orWhere(function($query) use($sales_array){
+            $query->where('paymentable_type', Sale::class)->whereIn('paymentable_id', $sales_array);
+        });
+        $reference_no = $period = '';
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+        // dd($mod->get());
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('reports.users_report.payments', compact('data', 'user', 'reference_no', 'period'));
     }
     
     

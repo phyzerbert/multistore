@@ -30,7 +30,10 @@
                                 <th>{{__('page.profit_loss')}}</th>
                             </tr>
                         </thead>
-                        <tbody>                                
+                        <tbody>
+                            @php
+                                $total_purchased_quantity = $total_sold_quantity = $total_purchased_amount = $total_sold_amount = 0;
+                            @endphp
                             @foreach ($data as $item)
                                 @php
                                     $product_array = $item->products()->pluck('id');
@@ -38,6 +41,11 @@
                                     $sold_quantity = \App\Models\Order::whereIn('product_id', $product_array)->where('orderable_type', "App\Models\Sale")->sum('quantity');                                    
                                     $purchased_amount = \App\Models\Order::whereIn('product_id', $product_array)->where('orderable_type', "App\Models\Purchase")->sum('subtotal');
                                     $sold_amount = \App\Models\Order::whereIn('product_id', $product_array)->where('orderable_type', "App\Models\Sale")->sum('subtotal');
+                                    $total_purchased_quantity += $purchased_quantity;
+                                    $total_sold_quantity += $sold_quantity;
+                                    $total_purchased_amount += $purchased_amount;
+                                    $total_sold_amount += $sold_amount;
+
                                 @endphp                              
                                 <tr>
                                     <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
@@ -49,7 +57,17 @@
                                     <td>{{number_format($sold_amount - $purchased_amount)}}</td>                                      
                                 </tr>
                             @endforeach
-                        </tbody>
+                        </tbody>                        
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">{{__('page.total')}}</td>
+                                <td>{{number_format($total_purchased_quantity)}}</td>
+                                <td>{{number_format($total_sold_quantity)}}</td>
+                                <td>{{number_format($total_purchased_amount)}}</td>
+                                <td>{{number_format($total_sold_amount)}}</td>
+                                <td>{{number_format($total_sold_amount - $total_purchased_amount)}}</td>
+                            </tr>
+                        </tfoot>
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
