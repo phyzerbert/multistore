@@ -78,7 +78,7 @@ class PaymentController extends Controller
 
 
     public function delete($id){
-        $item = Category::find($id);
+        $item = Payment::find($id);
         $item->delete();
         return back()->with("success", __('page.deleted_successfully'));
     }
