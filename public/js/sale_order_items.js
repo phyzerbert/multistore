@@ -55,7 +55,8 @@ var app = new Vue({
             let total_quantity = 0;
             let total_price = 0;
             for(let i = 0; i < data.length; i++) {
-                this.order_items[i].sub_total = parseInt(data[i].price) + parseInt((data[i].price*data[i].tax_rate)/100) * data[i].quantity)
+                this.order_items[i].sub_total = (data[i].price + (data[i].price*data[i].tax_rate)/100) * data[i].quantity
+                console.log(this.order_items[i].sub_total)
                 total_quantity += parseInt(data[i].quantity)
                 total_price += data[i].sub_total
             }
