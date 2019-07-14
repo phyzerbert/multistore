@@ -17,6 +17,8 @@ use App\Models\Customer;
 use App\Models\Supplier;
 use App\User;
 
+use Auth;
+
 use Carbon\Carbon;
 
 class ReportController extends Controller
@@ -26,8 +28,52 @@ class ReportController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(Request $request){
+        config(['site.page' => 'overview_chart']);
+        $user = Auth::user();
+        $companies = Company::all();
+        $company_names = Company::pluck('name')->toArray();
+        $company_purchases_array = $company_sales_array = array();
+        $period = '';
+        $company_id = Company::first()->id;
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }
+        $company = Company::find($company_id);
+
+        $mod1 = $company->purchases();
+        $mod2 = $company->sales();
+
+        if($request->has('period') && $request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod1 = $mod1->whereBetween('timestamp', [$from, $to]);
+            $mod2 = $mod2->whereBetween('timestamp', [$from, $to]);
+        }
+
+        $company_purchases = $mod1->pluck('id');
+        $company_sales = $mod2->pluck('id');
+
+        $data['purchase'][0] = Order::whereIn('orderable_id', $company_purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
+        $data['sale'][0] = Order::whereIn('orderable_id', $company_sales)->where('orderable_type', Sale::class)->sum('subtotal');
+
+        return view('reports.index', compact('data', 'companies', 'company_id', 'period'));
+
+    }
+
     public function overview_chart(Request $request){
         config(['site.page' => 'overview_chart']);
+        $user = Auth::user();
+        $companies = Company::all();
+        $company_id = Company::first()->id;
+        if($user->role->slug == 'user'){
+            $company_id = $user->company_id;
+        }
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }
+        $company = Company::find($company_id);
 
         $start_this_month = new Carbon('first day of this month');
         $end_this_month = new Carbon('last day of this month');
@@ -45,17 +91,17 @@ class ReportController extends Controller
         $return['this_month']['month_name'] = $currentMonth." ".date('Y');
         $return['last_month']['month_name'] = Date('F', strtotime($currentMonth . " last month"))." ".date('Y');
 
-        $this_month_purchases = Purchase::whereBetween('timestamp', [$start_this_month, $end_this_month])->pluck('id')->toArray();
+        $this_month_purchases = Purchase::where('company_id', $company_id)->whereBetween('timestamp', [$start_this_month, $end_this_month])->pluck('id')->toArray();
         $return['this_month']['purchase'] = Order::whereIn('orderable_id', $this_month_purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
-        $this_month_sales = Sale::whereBetween('timestamp', [$start_this_month, $end_this_month])->pluck('id')->toArray();
+        $this_month_sales = Sale::where('company_id', $company_id)->whereBetween('timestamp', [$start_this_month, $end_this_month])->pluck('id')->toArray();
         $return['this_month']['sale'] = Order::whereIn('orderable_id', $this_month_sales)->where('orderable_type', Sale::class)->sum('subtotal');
 
-        $last_month_purchases = Purchase::whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
+        $last_month_purchases = Purchase::where('company_id', $company_id)->whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
         $return['last_month']['purchase'] = Order::whereIn('orderable_id', $last_month_purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
-        $last_month_sales = Sale::whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
+        $last_month_sales = Sale::where('company_id', $company_id)->whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
         $return['last_month']['sale'] = Order::whereIn('orderable_id', $last_month_sales)->where('orderable_type', Sale::class)->sum('subtotal');
         
-        return view('reports.overview_chart', compact('return'));
+        return view('reports.overview_chart', compact('return', 'companies', 'company_id'));
     }
 
     public function company_chart(Request $request){
@@ -132,11 +178,27 @@ class ReportController extends Controller
 
     public function product_expiry_alert(Request $request){
         config(['site.page' => 'product_expiry_alert']);
+        $user = Auth::user();
+        $companies = Company::all();
+        $company_id = '';
+        if($user->role->slug == 'user'){
+            $company_id = $user->company_id;
+        }
+
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }        
+        
         $products = Product::all();
         $mod = new Order();
-        $mod = $mod->where('orderable_type', Purchase::class)->where('expiry_date', '<=', date('Y-m-d'));
+        $mod = $mod->where('orderable_type', Purchase::class)->where('expiry_date', '!=', "")->where('expiry_date', '<=', date('Y-m-d'));
 
         $product_id = '';
+        if($company_id != ''){
+            $company = Company::find($company_id);
+            $company_purchases = $company->purchases()->pluck('id');
+            $mod = $mod->whereIn('orderable_id', $company_purchases)->where('orderable_type', Purchase::class);
+        }
         if ($request->get('product_id') != ""){
             $product_id = $request->get('product_id');
             $mod = $mod->where('product_id', $product_id);
@@ -145,25 +207,60 @@ class ReportController extends Controller
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
 
-        return view('reports.product_expiry_alert', compact('data', 'products', 'product_id'));
+        return view('reports.product_expiry_alert', compact('data', 'products', 'product_id', 'companies', 'company_id'));
     }
 
     public function products_report(Request $request){
         config(['site.page' => 'products_report']);
+        $user = Auth::user();
+        $companies = Company::all();
+        $mod = new Product();
+        $product_code = $product_name = $company_id = '';
+        if($user->role->slug == 'user'){
+            $company_id = $user->company_id;
+        }
+        if($request->get('product_code') != ''){
+            $product_code = $request->get('product_code');
+            $mod = $mod->where('code', 'LIKE', "%$product_code%");
+        }
+        if($request->get('product_name') != ''){
+            $product_name = $request->get('product_name');
+            $mod = $mod->where('name', 'LIKE', "%$product_name%");
+        }        
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }
 
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
-        $data = Product::paginate($pagesize);        
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);        
 
-        return view('reports.products_report', compact('data'));
+        return view('reports.products_report', compact('data', 'companies', 'product_name', 'product_code', 'company_id'));
     }
 
     public function categories_report(Request $request){
         config(['site.page' => 'categories_report']);
 
-        $data = Category::paginate(10);
+        $user = Auth::user();
+        $companies = Company::all();
+        $mod = new Category();
+        $name = $company_id = '';
+        if($user->role->slug == 'user'){
+            $company_id = $user->company_id;
+        }
+        if($request->get('name') != ''){
+            $name = $request->get('name');
+            $mod = $mod->where('name', 'LIKE', "%$name%");
+        }        
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }
 
-        return view('reports.categories_report', compact('data'));
+        $pagesize = session('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);        
+
+        return view('reports.categories_report', compact('data', 'companies', 'name', 'company_id'));
     }
 
     public function sales_report(Request $request){
@@ -306,8 +403,12 @@ class ReportController extends Controller
 
     public function users_report(Request $request){
         config(['site.page' => 'users_report']);
+        $user = Auth::user();
         $companies = Company::all();
-        $mod = new User();
+        $mod = new User();        
+        if($user->role->slug == 'user'){
+            $mod = $user->company->users();
+        }
         $company_id = $name = $phone_number = '';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');

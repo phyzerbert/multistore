@@ -17,6 +17,29 @@
         @endphp
         <div class="br-pagebody">
             <div class="br-section-wrapper">
+                {{-- <div class="">
+                    @include('elements.pagesize')                    
+                    <form action="" method="POST" class="form-inline float-left" id="searchForm">
+                        @csrf
+                        <select class="form-control form-control-sm mr-sm-2 mb-2" name="product_id" id="search_product">
+                            <option value="" hidden>{{__('page.select_product')}}</option>
+                            @foreach ($products as $item)
+                                <option value="{{$item->id}}" @if ($product_id == $item->id) selected @endif>{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        @if($role == 'admin')
+                            <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
+                                <option value="" hidden>{{__('page.select_company')}}</option>
+                                @foreach ($companies as $item)
+                                    <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        @endif
+
+                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
+                        <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
+                    </form>
+                </div> --}}
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
                         <thead class="thead-colored thead-primary">

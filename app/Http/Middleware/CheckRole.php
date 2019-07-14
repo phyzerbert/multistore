@@ -17,7 +17,7 @@ class CheckRole
     public function handle($request, Closure $next, $role)
     {
         if (!Auth::user()->hasRole($role)) {
-            return redirect()->back();
+            return redirect()->back()->withErrors(['role_error' => 'You can not access to this page.']);
         }
         return $next($request);
     }

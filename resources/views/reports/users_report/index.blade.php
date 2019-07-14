@@ -21,13 +21,15 @@
                     @include('elements.pagesize')
                     <form action="" method="POST" class="form-inline float-left" id="searchForm">
                         @csrf
+                        @if($role == 'admin')
+                            <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
+                                <option value="" hidden>{{__('page.select_company')}}</option>
+                                @foreach ($companies as $item)
+                                    <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                                @endforeach        
+                            </select>
+                        @endif
                         <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="name" id="search_name" value="{{$name}}" placeholder="{{__('page.name')}}">
-                        <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
-                            <option value="" hidden>{{__('page.select_company')}}</option>
-                            @foreach ($companies as $item)
-                                <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
-                            @endforeach        
-                        </select>
                         <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="phone_number" id="search_phone" value="{{$phone_number}}" placeholder="{{__('page.phone_number')}}">
                         
                         <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>

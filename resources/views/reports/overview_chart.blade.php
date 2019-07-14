@@ -161,6 +161,13 @@
                 </div>
             </div>
             <div class="br-section-wrapper">
+                @if($role == 'admin')
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            @include('elements.company_filter')
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="card card-body">
                         <canvas id="bar_chart" style="height:400px;"></canvas>
@@ -220,7 +227,9 @@
 
 <script>
     $(document).ready(function () {
-        
+        $("#company_filter").change(function(){
+            $("#company_filter_form").submit();
+        })
     });
 </script>
 @endsection

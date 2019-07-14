@@ -63,12 +63,12 @@ class PurchaseController extends Controller
     }
 
     public function create(Request $request){
-        config(['site.page' => 'purchase_create']);   
+        config(['site.page' => 'purchase_create']);         
         $user = Auth::user();  
         $suppliers = Supplier::all();
         $products = Product::all();
         $stores = Store::all();
-        if($user->role->slug == 'user'){
+        if($user->hasRole('user')){
             $stores = $user->company->stores;
         }
         return view('purchase.create', compact('suppliers', 'stores', 'products'));

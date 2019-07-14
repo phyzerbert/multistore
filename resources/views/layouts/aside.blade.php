@@ -27,7 +27,9 @@
         </a>
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{route('purchase.index')}}" class="nav-link @if($page == 'purchase_list') active @endif">{{__('page.purchases_list')}}</a></li>
-            <li class="nav-item"><a href="{{route('purchase.create')}}" class="nav-link @if($page == 'purchase_create') active @endif">{{__('page.add_purchase')}}</a></li>
+            @if($role == 'user')
+                <li class="nav-item"><a href="{{route('purchase.create')}}" class="nav-link @if($page == 'purchase_create') active @endif">{{__('page.add_purchase')}}</a></li>
+            @endif
         </ul>
 
         {{-- Sale --}}
@@ -44,7 +46,9 @@
         </a>
         <ul class="br-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{route('sale.index')}}" class="nav-link @if($page == 'sale_list') active @endif">{{__('page.sales_list')}}</a></li>
-            <li class="nav-item"><a href="{{route('sale.create')}}" class="nav-link @if($page == 'sale_create') active @endif">{{__('page.add_sale')}}</a></li>
+            @if($role == 'user')
+                <li class="nav-item"><a href="{{route('sale.create')}}" class="nav-link @if($page == 'sale_create') active @endif">{{__('page.add_sale')}}</a></li>
+            @endif
         </ul>
         
         <a href="{{route('product.index')}}" class="br-menu-link @if($page == 'product') active @endif">

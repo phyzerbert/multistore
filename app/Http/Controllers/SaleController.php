@@ -70,7 +70,7 @@ class SaleController extends Controller
         $customers = Customer::all();
         $products = Product::all();
         $stores = Store::all();
-        if($user->role->slug == 'user'){
+        if($user->hasRole('user')){
             $stores = $user->company->stores;
         }
         $users = User::where('role_id', 2)->get();

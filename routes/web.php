@@ -74,7 +74,7 @@ Route::get('/product/detail/{id}', 'ProductController@detail')->name('product.de
 Route::get('/product/delete/{id}', 'ProductController@delete')->name('product.delete');
 
 Route::any('/purchase/index', 'PurchaseController@index')->name('purchase.index');
-Route::get('/purchase/create', 'PurchaseController@create')->name('purchase.create');
+Route::get('/purchase/create', 'PurchaseController@create')->name('purchase.create')->middleware('role:user');
 Route::post('/purchase/save', 'PurchaseController@save')->name('purchase.save');
 Route::get('/purchase/edit/{id}', 'PurchaseController@edit')->name('purchase.edit');
 Route::post('/purchase/update', 'PurchaseController@update')->name('purchase.update');
@@ -84,7 +84,7 @@ Route::get('/purchase/delete/{id}', 'PurchaseController@delete')->name('purchase
 
 
 Route::any('/sale/index', 'SaleController@index')->name('sale.index');
-Route::get('/sale/create', 'SaleController@create')->name('sale.create');
+Route::get('/sale/create', 'SaleController@create')->name('sale.create')->middleware('role:user');
 Route::post('/sale/save', 'SaleController@save')->name('sale.save');
 Route::get('/sale/edit/{id}', 'SaleController@edit')->name('sale.edit');
 Route::post('/sale/update', 'SaleController@update')->name('sale.update');
@@ -103,6 +103,7 @@ Route::post('get_product', 'VueController@get_product');
 
 // ******** Report ********
 
+Route::any('/report/index', 'ReportController@index')->name('report.index');
 Route::any('/report/overview_chart', 'ReportController@overview_chart')->name('report.overview_chart');
 Route::any('/report/company_chart', 'ReportController@company_chart')->name('report.company_chart');
 Route::any('/report/store_chart', 'ReportController@store_chart')->name('report.store_chart');
