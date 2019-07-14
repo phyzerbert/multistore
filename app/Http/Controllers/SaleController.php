@@ -122,6 +122,7 @@ class SaleController extends Controller
 
             Order::create([
                 'product_id' => $data['product_id'][$i],
+                'price' => $data['price'][$i],
                 'quantity' => $data['quantity'][$i],
                 'subtotal' => $data['subtotal'][$i],
                 'orderable_id' => $item->id,

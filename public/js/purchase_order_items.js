@@ -18,7 +18,6 @@ var app = new Vue({
             axios.get('/get_products')
                 .then(response => {
                     this.products = response.data;
-                    // console.log(response.data)
                 })
                 .catch(error => {
                     console.log(error);

@@ -107,6 +107,7 @@ class PurchaseController extends Controller
         for ($i=0; $i < count($data['product_id']); $i++) { 
             Order::create([
                 'product_id' => $data['product_id'][$i],
+                'cost' => $data['cost'][$i],
                 'quantity' => $data['quantity'][$i],
                 'expiry_date' => $data['expiry_date'][$i],
                 'subtotal' => $data['subtotal'][$i],
