@@ -62,6 +62,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required',
             'phone_number'=>'required',
+            'password' => 'confirmed',
         ]);
         $user = Auth::user();
         $user->name = $request->get("name");
@@ -86,6 +87,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required',
             'phone_number'=>'required',
+            'password' => 'confirmed',
         ]);
         $user = User::find($request->get("id"));
         $user->name = $request->get("name");

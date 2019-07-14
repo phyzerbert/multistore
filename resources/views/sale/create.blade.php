@@ -27,7 +27,7 @@
                 <form class="form-layout form-layout-1" action="{{route('sale.save')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.sale_date')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="date" id="sale_date" value="{{date('Y-m-d H:i')}}" placeholder="{{__('page.sale_date')}}" autocomplete="off" required>
@@ -38,7 +38,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.reference_number')}}:</label>
                                 <input class="form-control" type="text" name="reference_number" placeholder="{{__('page.reference_number')}}">
@@ -49,7 +49,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.user')}}:</label>
                                 <select class="form-control select2-show-search" name="user" data-placeholder="{{__('page.user')}}">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="row mg-b-25">                        
-                        <div class="col-lg-3">
+                        <div class="col-md-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.store')}}:</label>
                                 <select class="form-control select2" name="store" data-placeholder="{{__('page.select_store')}}">
@@ -83,7 +83,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.customer')}}:</label>
                                 <select class="form-control select2-show-search" name="customer" data-placeholder="{{__('page.select_customer')}}">
@@ -99,16 +99,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.attachment')}}:</label>
-                                <label class="custom-file wd-100p">
-                                    <input type="file" name="attachment" id="file2" class="custom-file-input">
-                                    <span class="custom-file-control custom-file-control-primary"></span>
-                                </label>
+                                <input type="file" name="attachment" id="file2" class="file-input-styled">
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.status')}}:</label>
                                 <select class="form-control select2" name="status" data-placeholder="{{__('page.status')}}">
@@ -171,7 +168,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-md-12">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.note')}}:</label>
                                 <textarea class="form-control" name="note" rows="5" placeholder="{{__('page.note')}}"></textarea>
@@ -192,6 +189,7 @@
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
+<script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
 <script>
     $(document).ready(function () {
 
@@ -201,7 +199,11 @@
         $(".expire_date").datepicker({
             dateFormat: 'yy-mm-dd',
         });
-
+        
+        $('.file-input-styled').uniform({
+            fileButtonClass: 'action btn bg-primary tx-white'
+        });
+        
     });
 </script>
 <script src="{{ asset('js/sale_order_items.js') }}"></script>

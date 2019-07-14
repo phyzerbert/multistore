@@ -140,8 +140,8 @@
                         </div>    
                         <div class="form-group password-field">
                             <label class="control-label">{{__('page.password_confirm')}}</label>
-                            <input type="password" name="password_confirmation" id="confirmpassword" class="form-control" placeholder="{{__('page.password_confirm')}}">
-                            <span id="confirmpassword_error" class="invalid-feedback">
+                            <input type="password" name="password_confirmation" id="confirm_password" class="form-control" placeholder="{{__('page.password_confirm')}}">
+                            <span id="confirm_password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>

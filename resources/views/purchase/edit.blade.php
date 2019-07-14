@@ -88,10 +88,7 @@
                         <div class="col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.attachment')}}:</label>
-                                <label class="custom-file wd-100p">
-                                    <input type="file" name="attachment" id="file2" class="custom-file-input">
-                                    <span class="custom-file-control custom-file-control-primary"></span>
-                                </label>
+                                <input type="file" name="attachment" id="file2" class="file-input-styled">
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -135,7 +132,7 @@
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
-                                            <td><input type="date" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="order_items[i].expiry_date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="{{__('page.expiry_date')}}" /></td>
+                                            <td><input type="date" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="order_items[i].expiry_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="{{__('page.expiry_date')}}" /></td>
                                             <td class="cost">@{{item.cost}}</td>
                                             <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="{{__('page.quantity')}}" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
@@ -185,6 +182,7 @@
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
+<script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
 <script>
     $(document).ready(function () {
 
@@ -193,6 +191,10 @@
         });
         $(".expire_date").datepicker({
             dateFormat: 'yy-mm-dd',
+        });
+
+        $('.file-input-styled').uniform({
+            fileButtonClass: 'action btn bg-primary tx-white'
         });
 
     });
