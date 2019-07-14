@@ -3,6 +3,9 @@
     <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
+    @php
+        $role = Auth::user()->role->slug;
+    @endphp
     <div class="br-mainpanel" id="app">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
@@ -11,12 +14,15 @@
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-dashboard"></i> {{__('page.dashboard')}}</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="tx-gray-800 mg-b-5 float-left"><i class="fa fa-dashboard"></i> {{__('page.dashboard')}}</h4>
+                    @if ($role == 'admin')
+                        @include('dashboard.top_filter')
+                    @endif                    
+                </div>                
+            </div>                      
         </div>
-
-        @php
-            $role = Auth::user()->role->slug;
-        @endphp
         <div class="br-pagebody">
             <div class="row row-sm">
                 <div class="col-sm-6 col-xl-3">
@@ -124,7 +130,15 @@
                         <h4 class="tx-primary float-left">{{__('page.overview')}}</h4>
                         <form action="" class="form-inline float-right" method="post">
                             @csrf
-                            <input type="text" class="form-control input-sm" name="period" id="period" style="width:250px !important" value="{{$period}}" autocomplete="off" placeholder="{{__('page.period')}}">
+                            @if ($role == 'admin')                                
+                                <label for="">{{__('page.company')}} : </label>                          
+                                <select name="chart_company" class="form-control form-control-sm mx-2">
+                                    @foreach ($companies as $item)
+                                        <option value="{{$item->id}}" @if($chart_company == $item->id) selected @endif>{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                            <input type="text" class="form-control form-control-sm" name="period" id="period" style="width:250px !important" value="{{$period}}" autocomplete="off" placeholder="{{__('page.period')}}">
                             <button type="submit" class="btn btn-primary pd-y-7 mg-l-10"> <i class="fa fa-search"></i> {{__('page.search')}}</button>
                         </form>
                     </div>
@@ -140,6 +154,7 @@
 @endsection
 
 @section('script')
+<script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('master/lib/chart.js/Chart.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script>
@@ -190,7 +205,10 @@
 </script>
 <script>
     $(document).ready(function () {
-        $("#period").dateRangePicker()
+        $("#period").dateRangePicker();
+        $("#top_company_filter").change(function(){
+            $("#top_filter_form").submit();
+        });
     });
 </script>
 @endsection
