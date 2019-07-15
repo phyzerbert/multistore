@@ -159,8 +159,7 @@
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_image')}}:</label>                                
                                 <label class="custom-file wd-100p">
-                                    <input type="file" name="image" id="file2" class="custom-file-input" accept="image/*">
-                                    <span class="custom-file-control custom-file-control-primary"></span>
+                                    <input type="file" name="image" id="file2" class="file-input-styled" accept="image/*">
                                 </label>
                             </div>
                         </div>
@@ -185,10 +184,12 @@
 
 @section('script')
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
+<script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
 <script>
     $(document).ready(function () {
-        
-
+        $('.file-input-styled').uniform({
+            fileButtonClass: 'action btn bg-primary tx-white'
+        });
     });
 </script>
 @endsection

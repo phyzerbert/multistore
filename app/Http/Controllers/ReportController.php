@@ -350,6 +350,7 @@ class ReportController extends Controller
         $user = Auth::user();
         $companies = Company::all();
         $mod = new Payment();
+        $mod = $mod->where('paymentable_type', Purchase::class);
         $reference_no = $period = $company_id = '';
         if($user->hasRole('user')){
             $company_id = $user->company_id;            
@@ -361,11 +362,12 @@ class ReportController extends Controller
             $company = Company::find($company_id);
             $company_purchases = $company->purchases()->pluck('id');
             $company_sales = $company->sales()->pluck('id');
-            $mod = $mod->where(function($query) use($company_purchases){
-                $query->whereIn('paymentable_id', $company_purchases)->where('paymentable_type', Purchase::class);
-            })->orWhere(function($query) use($company_sales){
-                $query->whereIn('paymentable_id', $company_sales)->where('paymentable_type', Sale::class);
-            });
+            $mod = $mod->whereIn('paymentable_id', $company_purchases);
+            // $mod = $mod->where(function($query) use($company_purchases){
+            //     $query->whereIn('paymentable_id', $company_purchases)->where('paymentable_type', Purchase::class);
+            // })->orWhere(function($query) use($company_sales){
+            //     $query->whereIn('paymentable_id', $company_sales)->where('paymentable_type', Sale::class);
+            // });
         }
         if ($request->get('reference_no') != ""){
             $reference_no = $request->get('reference_no');
