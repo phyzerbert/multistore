@@ -39,6 +39,7 @@ return [
     'sales_report' => 'Reporte de Ventas',
     'purchases_report' => 'Reporte de Compras',
     'payments_report' => 'Reporte de Pagos',
+    'income_report' => 'Reporte de Income',
     'customers_report' => 'Reporte de Clientes',
     'suppliers_report' => 'Reporte de Proveedores',
     'users_report' => 'Reportes de Usuarios',
