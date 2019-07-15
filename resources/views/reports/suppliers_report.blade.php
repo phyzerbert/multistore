@@ -53,7 +53,10 @@
                                 {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
-                        <tbody>                                
+                        <tbody> 
+                            @php
+                                $footer_total_purchases = $footer_total_amount = $footer_paid = 0;
+                            @endphp                               
                             @foreach ($data as $item)
                                 @php
                                     $purchases_array = $item->purchases()->pluck('id');
@@ -71,6 +74,10 @@
 
                                     $total_amount = $mod_total_amount->sum('subtotal');
                                     $paid = $mod_paid->sum('amount');  
+
+                                    $footer_total_purchases += $total_purchases;
+                                    $footer_total_amount += $total_amount;
+                                    $footer_paid += $paid;
                                 @endphp                              
                                 <tr>
                                     <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
@@ -86,6 +93,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">{{__('page.total')}}</td>
+                                <td>{{number_format($footer_total_purchases)}}</td>
+                                <td>{{number_format($footer_total_amount)}}</td>
+                                <td>{{number_format($footer_paid)}}</td>
+                                <td>{{number_format($footer_total_amount - $footer_paid)}}</td>
+                            </tr>
+                        </tfoot>
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
