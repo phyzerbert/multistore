@@ -105,7 +105,6 @@
                                 <td>{{number_format($footer_purchased_amount)}}</td>
                                 <td>{{number_format($footer_sold_amount)}}</td>
                                 <td>{{number_format($footer_sold_amount - $footer_purchased_amount)}}</td>
-                                <td colspan="2"></td>
                             </tr>
                         </tfoot>
                     </table>
