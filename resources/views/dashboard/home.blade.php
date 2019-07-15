@@ -164,20 +164,20 @@
         datasets: [
             {
                 label: "{{__('page.purchase')}}",
-                backgroundColor: 'rgba(52,152,219, 0.6)',
+                backgroundColor: 'rgba(52,152,219, 0.5)',
                 borderColor: 'rgba(52,152,219, 1)',
                 pointBorderColor: "#fff",
                 data: {!! json_encode($purchase_array) !!},
             },{
                 label: "{{__('page.sale')}}",
-                backgroundColor: 'rgba(213,217,219, 0.6)',
-                borderColor: 'rgba(213,217,219, 1)',
+                backgroundColor: 'rgba(255, 215, 0, 0.5)',
+                borderColor: 'rgba(255, 215, 0, 1)',
                 pointBorderColor: "#fff",
                 data: {!! json_encode($sale_array) !!},
             },{
                 label: "{{__('page.payment')}}",
-                backgroundColor: 'rgba(46,87,115, 0.6)',
-                borderColor: 'rgba(46,87,115, 1)',
+                backgroundColor: 'rgba(220,53,69, 0.5)',
+                borderColor: 'rgba(220,53,69, 1)',
                 pointBorderColor: "#fff",
                 data: {!! json_encode($payment_array) !!},
             }

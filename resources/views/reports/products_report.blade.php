@@ -51,7 +51,10 @@
                                 <th>{{__('page.profit_loss')}}</th>
                             </tr>
                         </thead>
-                        <tbody>                                
+                        <tbody>
+                            @php
+                                $footer_purchased_quantity = $footer_sold_quantity = $footer_purchased_amount = $footer_sold_amount = 0;
+                            @endphp
                             @foreach ($data as $item)
                                 @php
                                     $mod_purchased_quantity = \App\Models\Order::where('product_id', $item->id)->where('orderable_type', "App\Models\Purchase");
@@ -75,6 +78,11 @@
                                     $sold_quantity = $mod_sold_quantity->sum('quantity');                                    
                                     $purchased_amount = $mod_purchased_amount->sum('subtotal');
                                     $sold_amount = $mod_sold_amount->sum('subtotal');
+
+                                    $footer_purchased_quantity += $purchased_quantity;
+                                    $footer_sold_quantity += $sold_quantity;
+                                    $footer_purchased_amount += $purchased_amount;
+                                    $footer_sold_amount += $sold_amount;
                                 @endphp                              
                                 <tr>
                                     <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
@@ -89,6 +97,17 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">{{__('page.total')}}</td>
+                                <td>{{number_format($footer_purchased_quantity)}}</td>
+                                <td>{{number_format($footer_sold_quantity)}}</td>
+                                <td>{{number_format($footer_purchased_amount)}}</td>
+                                <td>{{number_format($footer_sold_amount)}}</td>
+                                <td>{{number_format($footer_sold_amount - $footer_purchased_amount)}}</td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tfoot>
                     </table>
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">

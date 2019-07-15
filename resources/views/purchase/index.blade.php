@@ -44,12 +44,17 @@
                                 <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
-                        <tbody>                                
-                            @foreach ($data as $item)
+                        <tbody>
                             @php
-                                $grand_total = $item->orders()->sum('subtotal');
-                                $paid = $item->payments()->sum('amount');
+                                $footer_grand_total = $footer_paid = 0;
                             @endphp
+                            @foreach ($data as $item)
+                                @php
+                                    $grand_total = $item->orders()->sum('subtotal');
+                                    $paid = $item->payments()->sum('amount');
+                                    $footer_grand_total += $grand_total;
+                                    $footer_paid += $paid;
+                                @endphp
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
@@ -98,6 +103,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">{{__('page.total')}}</td>
+                                <td>{{number_format($footer_grand_total)}}</td>
+                                <td>{{number_format($footer_paid)}}</td>
+                                <td>{{number_format($footer_grand_total - $footer_paid)}}</td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tfoot>
                     </table>                
                     <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
