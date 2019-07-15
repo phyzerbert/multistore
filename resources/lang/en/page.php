@@ -229,6 +229,7 @@ return [
     'week_purchases' => 'Week Purchases',
     'month_purchases' => 'Month Purchases',
     'overall_purchases' => 'Overall Purchases',
+    'company_balance' => 'Company Balance',
     'today_sales' => 'Today Sales',
     'week_sales' => 'Week Sales',
     'month_sales' => 'Month Sales',

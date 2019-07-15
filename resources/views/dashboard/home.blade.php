@@ -66,8 +66,8 @@
                         <div class="pd-25 d-flex align-items-center">
                             <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                             <div class="mg-l-20">
-                                <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.overall_purchases')}}</p>
-                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['overall_purchases']['total'])}}</p>
+                                <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.company_balance')}}</p>
+                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['overall_purchases']['total'] - $return['overall_purchases']['total_paid'])}}</p>
                                 <span class="tx-11 tx-roboto tx-white-6">{{number_format($return['overall_purchases']['count'])}} {{__('page.purchases')}}</span>
                             </div>
                         </div>
@@ -116,8 +116,8 @@
                         <div class="pd-25 d-flex align-items-center">
                             <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                             <div class="mg-l-20">
-                                <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.overall_sales')}}</p>
-                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['overall_sales']['total'])}}</p>
+                                <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.company_balance')}}</p>
+                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['overall_sales']['total'] - $return['overall_purchases']['total_paid'])}}</p>
                                 <span class="tx-11 tx-roboto tx-white-6">{{number_format($return['overall_sales']['count'])}} {{__('page.sales')}}</span>
                             </div>
                         </div>
@@ -174,6 +174,12 @@
                 borderColor: 'rgba(213,217,219, 1)',
                 pointBorderColor: "#fff",
                 data: {!! json_encode($sale_array) !!},
+            },{
+                label: "{{__('page.payment')}}",
+                backgroundColor: 'rgba(46,87,115, 0.6)',
+                borderColor: 'rgba(46,87,115, 1)',
+                pointBorderColor: "#fff",
+                data: {!! json_encode($payment_array) !!},
             }
         ]
     };

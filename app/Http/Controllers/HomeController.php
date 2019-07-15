@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Order;
+use App\Models\Payment;
 
 use Carbon\Carbon;
 use DB;
@@ -59,7 +60,7 @@ class HomeController extends Controller
         if($request->get('chart_company') != ''){
             $chart_company = $request->get('chart_company');
         } 
-        $key_array = $purchases = $sales = $purchase_array = $sale_array = array();
+        $key_array = $purchases = $sales = $purchase_array = $sale_array = $payment_array = array();
 
         for ($dt=$chart_start; $dt < $chart_end; $dt->addDay()) {
             $key = $dt->format('Y-m-d');
@@ -67,10 +68,13 @@ class HomeController extends Controller
             array_push($key_array, $key1);
             $purchases = Purchase::where('company_id', $chart_company)->whereDate('timestamp', $key)->pluck('id')->toArray();
             $sales = Sale::where('company_id', $chart_company)->whereDate('timestamp', $key)->pluck('id')->toArray();
-            $daily_purchase = Order::whereIn('orderable_id', $purchases)->sum('subtotal');
-            $daily_sale = Order::whereIn('orderable_id', $sales)->sum('subtotal');
+            $daily_purchase = Order::whereIn('orderable_id', $purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
+            $daily_sale = Order::whereIn('orderable_id', $sales)->where('orderable_type', Sale::class)->sum('subtotal');
+            $daily_purchase_payment = Payment::whereIn('paymentable_id', $purchases)->where('paymentable_type', Purchase::class)->sum('amount');
+            $daily_sale_payment = Payment::whereIn('paymentable_id', $sales)->where('paymentable_type', Sale::class)->sum('amount');
             array_push($purchase_array, $daily_purchase);
             array_push($sale_array, $daily_sale);
+            array_push($payment_array, $daily_sale_payment - $daily_purchase_payment);
         }
         
         if($request->get('top_company') != ''){
@@ -87,7 +91,7 @@ class HomeController extends Controller
         $return['overall_purchases'] = $this->getOverallData('purchases', $where);
         $return['overall_sales'] = $this->getOverallData('sales', $where);
           
-        return view('dashboard.home', compact('return', 'companies', 'top_company', 'chart_company', 'key_array', 'purchase_array', 'sale_array', 'period'));
+        return view('dashboard.home', compact('return', 'companies', 'top_company', 'chart_company', 'key_array', 'purchase_array', 'sale_array', 'payment_array', 'period'));
     }
 
     public function getTodayData($table, $where = ''){        
@@ -132,8 +136,10 @@ class HomeController extends Controller
         $return['count'] = count($orderables);
         if($table == 'purchases'){
             $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Purchase::class)->sum('subtotal');
+            $return['total_paid'] = Payment::whereIn('paymentable_id', $orderables)->where('paymentable_type', Purchase::class)->sum('amount');
         }elseif($table == 'sales'){
             $return['total'] = Order::whereIn('orderable_id', $orderables)->where('orderable_type', Sale::class)->sum('subtotal');
+            $return['total_paid'] = Payment::whereIn('paymentable_id', $orderables)->where('paymentable_type',Sale::class)->sum('amount');
         }  
         return $return;
     }
