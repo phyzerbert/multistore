@@ -49,7 +49,6 @@
                                 <th>{{__('page.purchase_reference')}}</th>
                                 <th>{{__('page.supplier')}}</th>
                                 <th>{{__('page.amount')}}</th>
-                                <th>{{__('page.type')}}</th>
                             </tr>
                         </thead>
                         <tbody> 
@@ -76,13 +75,6 @@
                                         @isset($item->paymentable->supplier->name){{$item->paymentable->supplier->name}}@endisset
                                     </td>
                                     <td class="amount"> {{number_format($item->amount)}} </td>
-                                    <td class="type">
-                                        @if ($item->paymentable_type == "App\Models\Purchase")
-                                            <span class="badge badge-success">Sent</span>
-                                        @elseif($item->paymentable_type == "App\Models\Sale")
-                                            <span class="badge badge-info">Received</span>
-                                        @endif
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -90,7 +82,6 @@
                             <tr>
                                 <td colspan="5">{{__('page.total')}}</td>
                                 <td>{{number_format($total_amount)}}</td>
-                                <td></td>
                             </tr>
                         </tfoot>
                     </table>                
