@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('style')    
+    <link href="{{asset('master/lib/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
@@ -161,6 +162,7 @@
 @endsection
 
 @section('script')
+<script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>

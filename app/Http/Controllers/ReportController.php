@@ -264,12 +264,17 @@ class ReportController extends Controller
 
     public function sales_report(Request $request){
         config(['site.page' => 'sales_report']);
-
+        $user = Auth::user();
         $stores = Store::all();
         $customers = Customer::all();
         $companies = Company::all();
 
         $mod = new Sale();
+        if($user->hasRole('user')){
+            $company = $user->company;
+            $stores = $company->stores;
+            $mod = $company->sales();
+        }
 
         $company_id = $reference_no = $customer_id = $store_id = $period = '';
         if ($request->get('company_id') != ""){
@@ -301,11 +306,17 @@ class ReportController extends Controller
 
     public function purchases_report(Request $request){
         config(['site.page' => 'purchases_report']);
+        $user = Auth::user();
         $stores = Store::all();
         $suppliers = Supplier::all();
         $companies = Company::all();
 
         $mod = new Purchase();
+        if($user->hasRole('user')){
+            $company = $user->company;
+            $stores = $company->stores;
+            $mod = $company->purchases();
+        }
         $company_id = $reference_no = $supplier_id = $store_id = $period = '';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');

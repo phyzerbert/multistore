@@ -71,7 +71,7 @@
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.supplier')}}:</label>
                                 <select class="form-control select2-show-search" name="supplier" data-placeholder="{{__('page.select_supplier')}}">
-                                    <option label="Supplier"></option>
+                                    <option label="{{__('page.select_supplier')}}"></option>
                                     @foreach ($suppliers as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach

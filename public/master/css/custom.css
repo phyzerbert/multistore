@@ -121,3 +121,11 @@ input[type=file][data-fouc] {
 }
 
 /* ******** end uniform.js style ******** */
+
+.top-search-form .select2-container--default .select2-selection--single {
+    height: 31px !important;
+    margin-bottom: 8px;
+}
+.top-search-form .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 30px !important;
+}
