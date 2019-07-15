@@ -139,7 +139,9 @@ class HomeController extends Controller
     }
 
     public function set_pagesize(Request $request){
-        $request->session()->put('pagesize', $request->get('pagesize'));
+        $pagesize = $request->get('pagesize');
+        if($pagesize == '') $pagesize = 15;
+        $request->session()->put('pagesize', $pagesize);
         return back();
     }
 

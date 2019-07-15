@@ -233,6 +233,8 @@ return [
     'week_sales' => 'Week Sales',
     'month_sales' => 'Month Sales',
     'overall_sales' => 'Overall Sales',
+    'customer_company' => 'Customer Company',
+    'supplier_company' => 'Supplier Company',
 
     // ******** Transaction ********
     'select_type' => 'Select a type',

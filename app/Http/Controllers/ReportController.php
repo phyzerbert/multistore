@@ -257,7 +257,6 @@ class ReportController extends Controller
         }
 
         $pagesize = session('pagesize');
-        if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);        
 
         return view('reports.categories_report', compact('data', 'companies', 'name', 'company_id'));
@@ -296,7 +295,6 @@ class ReportController extends Controller
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
         $pagesize = session('pagesize');
-        if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.sales_report', compact('data', 'companies', 'stores', 'customers', 'company_id', 'store_id', 'customer_id', 'reference_no', 'period'));
     }
@@ -332,16 +330,32 @@ class ReportController extends Controller
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
         $pagesize = session('pagesize');
-        if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.purchases_report', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
     }
 
     public function payments_report(Request $request){
         config(['site.page' => 'payments_report']);
-        
+        $user = Auth::user();
+        $companies = Company::all();
         $mod = new Payment();
-        $reference_no = $period = '';
+        $reference_no = $period = $company_id = '';
+        if($user->hasRole('user')){
+            $company_id = $user->company_id;            
+        }
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }
+        if($company_id != ''){
+            $company = Company::find($company_id);
+            $company_purchases = $company->purchases()->pluck('id');
+            $company_sales = $company->sales()->pluck('id');
+            $mod = $mod->where(function($query) use($company_purchases){
+                $query->whereIn('paymentable_id', $company_purchases)->where('paymentable_type', Purchase::class);
+            })->orWhere(function($query) use($company_sales){
+                $query->whereIn('paymentable_id', $company_sales)->where('paymentable_type', Sale::class);
+            });
+        }
         if ($request->get('reference_no') != ""){
             $reference_no = $request->get('reference_no');
             $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
@@ -353,18 +367,26 @@ class ReportController extends Controller
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
         $pagesize = session('pagesize');
-        if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.payments_report', compact('data', 'reference_no', 'period'));
+        return view('reports.payments_report', compact('data', 'companies', 'company_id', 'reference_no', 'period'));
     }
 
     public function customers_report(Request $request){
         config(['site.page' => 'customers_report']);
+        $user = Auth::user();
+        $companies = Company::all();
         $mod = new Customer();
-        $company = $name = $phone_number = '';
-        if ($request->get('company') != ""){
-            $company = $request->get('company');
-            $mod = $mod->where('company', 'LIKE', "%$company%");
+        $customer_company = $name = $phone_number = $company_id = '';
+        if($user->hasRole('user')){
+            $company_id = $user->company_id;            
+        }else{
+            if ($request->get('company_id') != ""){
+                $company_id = $request->get('company_id');
+            }
+        }        
+        if ($request->get('customer_company') != ""){
+            $customer_company = $request->get('customer_company');
+            $mod = $mod->where('company', 'LIKE', "%$customer_company%");
         }
         if ($request->get('name') != ""){
             $name = $request->get('name');
@@ -377,15 +399,24 @@ class ReportController extends Controller
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.customers_report', compact('data', 'name', 'company', 'phone_number'));
+        return view('reports.customers_report', compact('data', 'companies', 'company_id', 'name', 'customer_company', 'phone_number'));
     }
     public function suppliers_report(Request $request){
         config(['site.page' => 'suppliers_report']);
+        $user = Auth::user();
+        $companies = Company::all();
         $mod = new Supplier();
-        $company = $name = $phone_number = '';
-        if ($request->get('company') != ""){
-            $company = $request->get('company');
-            $mod = $mod->where('company', 'LIKE', "%$company%");
+        $supplier_company = $name = $phone_number = $company_id = '';
+        if($user->hasRole('user')){
+            $company_id = $user->company_id;            
+        }else{
+            if ($request->get('company_id') != ""){
+                $company_id = $request->get('company_id');
+            }
+        }  
+        if ($request->get('supplier_company') != ""){
+            $supplier_company = $request->get('supplier_company');
+            $mod = $mod->where('company', 'LIKE', "%$supplier_company%");
         }
         if ($request->get('name') != ""){
             $name = $request->get('name');
@@ -398,7 +429,7 @@ class ReportController extends Controller
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.suppliers_report', compact('data', 'name', 'company', 'phone_number'));
+        return view('reports.suppliers_report', compact('data', 'companies', 'company_id', 'name', 'supplier_company', 'phone_number'));
     }
 
     public function users_report(Request $request){

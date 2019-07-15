@@ -24,7 +24,15 @@
                 <div class="">
                     @include('elements.pagesize')
                     <form action="" method="POST" class="form-inline float-left" id="searchForm">
-                        @csrf
+                        @csrf                        
+                        @if($role == 'admin')
+                            <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
+                                <option value="" hidden>{{__('page.select_company')}}</option>
+                                @foreach ($companies as $item)
+                                    <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        @endif
                         <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="reference_no" id="search_reference_no" value="{{$reference_no}}" placeholder="{{__('page.reference_no')}}">
                         <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="period" id="period" autocomplete="off" value="{{$period}}" placeholder="{{__('page.date')}}">
                         <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
@@ -119,6 +127,7 @@
         });
 
         $("#btn-reset").click(function(){
+            $("#search_company").val('');
             $("#search_reference_no").val('');
             $("#period").val('');
         });
