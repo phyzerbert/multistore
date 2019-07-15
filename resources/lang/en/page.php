@@ -169,6 +169,7 @@ return [
     'rate' => 'Rate',
     'percentage' => 'Percentage',
     'fixed' => 'Fixed',
+    'product_qty' => 'Product(Qty)',
 
 
     // ******** Modal ********

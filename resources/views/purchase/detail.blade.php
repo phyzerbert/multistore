@@ -1,6 +1,16 @@
 @extends('layouts.master')
 @section('style')    
     <link href="{{asset('master/lib/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('master/lib/imageviewer/css/jquery.verySimpleImageViewer.css')}}">
+    <style>
+        #image_preview {
+            max-width: 600px;
+            height: 600px;
+        }
+        .image_viewer_inner_container {
+            width: 100% !important;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="br-mainpanel">
@@ -21,11 +31,11 @@
         <div class="br-pagebody">
             <div class="br-section-wrapper">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-12 col-lg-4">
                         <div class="card card-body tx-white-8 bg-success mg-y-10 bd-0 ht-150 purchase-card">
                             <div class="row">
                                 <div class="col-3">
-                                    <span class="tx-70"><i class="fa fa-plug"></i></span>
+                                    <span class="card-icon tx-70"><i class="fa fa-plug"></i></span>
                                 </div>
                                 <div class="col-9">
                                     <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.supplier')}}</h4>
@@ -36,11 +46,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-12 col-lg-4">
                         <div class="card card-body bg-teal tx-white mg-y-10 bd-0 ht-150 purchase-card">
                             <div class="row">
                                 <div class="col-3">
-                                    <span class="tx-70"><i class="fa fa-truck"></i></span>
+                                    <span class="card-icon tx-70"><i class="fa fa-truck"></i></span>
                                 </div>
                                 <div class="col-9">
                                     <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.store')}}</h4>
@@ -51,11 +61,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-12 col-lg-4">
                         <div class="card card-body bg-info tx-white-8 mg-y-10 bd-0 ht-150 purchase-card">
                             <div class="row">                                
                                 <div class="col-3">
-                                    <span class="tx-70"><i class="fa fa-file-text-o"></i></span>
+                                    <span class="card-icon tx-70"><i class="fa fa-file-text-o"></i></span>
                                 </div>
                                 <div class="col-9">
                                     <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.reference')}}</h4>
@@ -64,7 +74,7 @@
                                     <p class="tx-16 mg-b-3">
                                         {{__('page.attachment')}}: 
                                         @if ($purchase->attachment != "")
-                                            <a href="{{asset($purchase->attachment)}}" download>&nbsp;&nbsp;&nbsp;<i class="fa fa-paperclip"></i></a>
+                                            <a href="#" class="attachment" data-value="{{$purchase->attachment}}">&nbsp;&nbsp;&nbsp;<i class="fa fa-paperclip"></i></a>
                                         @endif
                                     </p>
                                 </div>
@@ -147,13 +157,39 @@
             </div>
         </div>                
     </div>
+
+    <div class="modal fade" id="attachModal">
+        <div class="modal-dialog" style="margin-top:17vh">
+            <div class="modal-content">
+                <div id="image_preview"></div>
+                {{-- <img src="" id="attachment" width="100%" height="600" alt=""> --}}
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
+<script src="{{asset('master/lib/imageviewer/js/jquery.verySimpleImageViewer.min.js')}}"></script>
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script>
     $(document).ready(function () {
-        
+        $(".attachment").click(function(e){
+            e.preventDefault();
+            let path = '{{asset("/")}}' + $(this).data('value');
+            console.log(path)
+            // $("#attachment").attr('src', path);
+            $("#image_preview").html('')
+            $("#image_preview").verySimpleImageViewer({
+                imageSource: path,
+                frame: ['100%', '100%'],
+                maxZoom: '900%',
+                zoomFactor: '10%',
+                mouse: true,
+                keyboard: true,
+                toolbar: true,
+            });
+            $("#attachModal").modal();
+        });
 
     });
 </script>

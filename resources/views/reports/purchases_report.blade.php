@@ -36,6 +36,7 @@
                                 <th>{{__('page.company')}}</th>
                                 <th>{{__('page.store')}}</th>
                                 <th>{{__('page.supplier')}}</th>
+                                <th>{{__('page.product_qty')}}</th>
                                 <th>{{__('page.grand_total')}}</th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
@@ -51,6 +52,14 @@
                                 @php
                                     $grand_total = $item->orders()->sum('subtotal');
                                     $paid = $item->payments()->sum('amount');
+                                    $orders = $item->orders;
+                                    $product_array = array();
+                                    foreach ($orders as $order) {
+                                        $product_name = isset($order->product->name) ? $order->product->name : "product";
+                                        $product_quantity = $order->quantity;
+                                        array_push($product_array, $product_name."(".$product_quantity.")");
+                                    }
+
                                     $total_grand += $grand_total;
                                     $total_paid += $paid;
                                 @endphp
@@ -61,6 +70,7 @@
                                     <td class="company">{{$item->company->name}}</td>
                                     <td class="store">{{$item->store->name}}</td>
                                     <td class="supplier" data-id="{{$item->supplier_id}}">{{$item->supplier->name}}</td>
+                                    <td class="product">{{implode(", ", $product_array)}}</td>
                                     <td class="grand_total"> {{number_format($grand_total)}} </td>
                                     <td class="paid"> {{ number_format($paid) }} </td>
                                     <td> {{number_format($grand_total - $paid)}} </td>
@@ -77,7 +87,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="6">{{__('page.total')}}</td>
+                                <td colspan="7">{{__('page.total')}}</td>
                                 <td>{{number_format($total_grand)}}</td>
                                 <td>{{number_format($total_paid)}}</td>
                                 <td>{{number_format($total_grand - $total_paid)}}</td>

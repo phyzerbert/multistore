@@ -59,23 +59,24 @@
                             @foreach ($data as $item)
                                 @php
                                     $total_amount += $item->amount;
+                                    $td_style = $item->paymentable_type == 'App\Models\Sale' ? 'background-color: #adb5bd' : '';
                                 @endphp
                                 <tr>
-                                    <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
-                                    <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
-                                    <td class="reference_no">{{$item->reference_no}}</td>
-                                    <td class="sale" data-id="{{$item->paymentable_id}}">
+                                    <td style="{{$td_style}}">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
+                                    <td class="timestamp" style="{{$td_style}}">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
+                                    <td class="reference_no" style="{{$td_style}}">{{$item->reference_no}}</td>
+                                    <td class="sale" style="{{$td_style}}" data-id="{{$item->paymentable_id}}">
                                         @if ($item->paymentable_type == 'App\Models\Sale')
                                             {{$item->paymentable->reference_no}}
                                         @endif                                        
                                     </td>
-                                    <td class="purchase" data-id="{{$item->paymentable_id}}">
+                                    <td class="purchase" style="{{$td_style}}" data-id="{{$item->paymentable_id}}">
                                         @if ($item->paymentable_type == 'App\Models\Purchase')
                                             {{$item->paymentable->reference_no}}
                                         @endif  
                                     </td>
-                                    <td class="amount"> {{number_format($item->amount)}} </td>
-                                    <td class="type">
+                                    <td class="amount" style="{{$td_style}}"> {{number_format($item->amount)}} </td>
+                                    <td class="type" style="{{$td_style}}">
                                         @if ($item->paymentable_type == "App\Models\Purchase")
                                             <span class="badge badge-success">Sent</span>
                                         @elseif($item->paymentable_type == "App\Models\Sale")
