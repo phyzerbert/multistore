@@ -142,8 +142,8 @@
                                                     <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
                                                 </select>
                                             </td>
-                                            <td><input type="number" class="form-control form-control-sm price" name="price[]" v-model="order_items[i].price" placeholder="{{__('page.product_price')}}" /></td>
-                                            <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="order_items[i].quantity" placeholder="{{__('page.quantity')}}" /></td>
+                                            <td><input type="number" class="form-control form-control-sm price" name="price[]" v-model="item.price" placeholder="{{__('page.product_price')}}" /></td>
+                                            <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="item.quantity" placeholder="{{__('page.quantity')}}" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
                                             <td class="subtotal">
                                                 @{{item.sub_total}}
