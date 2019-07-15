@@ -161,6 +161,7 @@ return [
     'sale_reference' => 'Referencia de Venta',
     'purchase_reference' => 'Referencia de Compra',
     'image' => 'Imagen',
+    'product_qty' => 'Producto(cant.)',
 
 
     // ******** Modal ********

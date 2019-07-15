@@ -164,12 +164,12 @@ return [
     'sale_reference' => 'Sale Reference',
     'purchase_reference' => 'Purchase Reference',
     'image' => 'Image',
-    'category_name' => 'Cagtegory Name',
-    'code' => 'Code',
-    'name' => 'Name',
-    'rate' => 'Rate',
-    'percentage' => 'Percentage',
-    'fixed' => 'Fixed',
+    'category_name' => 'Nombre Categoria',
+    'code' => 'Codigo',
+    'name' => 'Nombre',
+    'rate' => 'Tarifa',
+    'percentage' => 'Porcentaje',
+    'fixed' => 'Fijo',
     'product_qty' => 'Product(Qty)',
 
 
