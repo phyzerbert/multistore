@@ -23,7 +23,7 @@
                 <form class="form-layout form-layout-1" action="{{route('product.save')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_name')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="name" placeholder="{{__('page.product_name')}}" required>
@@ -34,7 +34,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_code')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="code" placeholder="{{__('page.product_code')}}" required>
@@ -45,7 +45,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.barcode_symbology')}}: <span class="tx-danger">*</span></label>
                                 <select class="form-control select2" name="barcode_symbology_id" data-placeholder="{{__('page.barcode_symbology')}}" required>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.select_category')}}: <span class="tx-danger">*</span></label>
                                 <select class="form-control select2" name="category_id" data-placeholder="{{__('page.select_category')}}" required>
@@ -79,7 +79,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_unit')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="unit" placeholder="{{__('page.product_unit')}}" required>
@@ -90,7 +90,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_cost')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="cost" placeholder="{{__('page.product_cost')}}" required>
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_price')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="price" placeholder="{{__('page.product_price')}}" required>
@@ -114,7 +114,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_tax')}}:</label>
                                 <select class="form-control select2" name="tax_id" data-placeholder="{{__('page.select_tax')}}">
@@ -125,7 +125,7 @@
                                 </select>
                             </div>
                         </div>                        
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.tax_method')}}:</label>
                                 <select class="form-control select2" name="tax_method" data-placeholder="{{__('page.select_tax_method')}}">
@@ -137,13 +137,13 @@
                         </div>
                     </div>                    
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.alert_quantity')}}:</label>
                                 <input class="form-control" type="number" name="alert_quantity" placeholder="{{__('page.alert_quantity')}}">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.supplier')}}:</label>
                                 <select class="form-control select2-show-search" name="supplier_id" data-placeholder="{{__('page.product_supplier')}}">
@@ -154,18 +154,17 @@
                                 </select>
                             </div>
                         </div>                        
-                        <div class="col-lg-4">
+                        <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_image')}}:</label>                                
                                 <label class="custom-file wd-100p">
-                                    <input type="file" name="image" id="file2" class="custom-file-input" accept="image/*">
-                                    <span class="custom-file-control custom-file-control-primary"></span>
+                                    <input type="file" name="image" id="file2" class="file-input-styled" accept="image/*">
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-md-12">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.product_detail')}}:</label>
                                 <textarea class="form-control" name="detail" rows="5" placeholder="{{__('page.product_detail')}}"></textarea>
@@ -184,10 +183,13 @@
 
 @section('script')
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
+<script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         
-
+        $('.file-input-styled').uniform({
+            fileButtonClass: 'action btn bg-primary tx-white'
+        });
     });
 </script>
 @endsection
