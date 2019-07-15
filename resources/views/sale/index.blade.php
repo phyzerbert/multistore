@@ -26,7 +26,9 @@
                 <div class="">
                     @include('elements.pagesize') 
                     @include('sale.filter')
-                    <a href="{{route('sale.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> {{__('page.add_new')}}</a>
+                    @if($role == 'user')
+                        <a href="{{route('sale.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> {{__('page.add_new')}}</a>
+                    @endif
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
