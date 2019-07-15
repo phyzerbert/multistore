@@ -59,7 +59,7 @@
                                 @endphp
                                 @if ($item->alert_quantity >= $quantity)                                
                                     <tr>
-                                        <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
+                                        <td class="wd-40">{{ $loop->index+1 }}</td>
                                         <td class="image py-1 wd-60"><img src="@if($item->image){{asset($item->image)}}@else{{asset('images/no-image.png')}}@endif" class="wd-40 ht-40 rounded-circle" alt=""></td>
                                         <td>{{$item->code}}</td>
                                         <td>{{$item->name}}</td>
