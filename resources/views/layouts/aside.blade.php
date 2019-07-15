@@ -98,6 +98,7 @@
             {{-- <li class="nav-item"><a href="#" class="nav-link @if($page == 'daily_sales') active @endif">Daily Sales</a></li>
             <li class="nav-item"><a href="#" class="nav-link @if($page == 'monthly_sales') active @endif">Monthly Sales</a></li> --}}
             <li class="nav-item"><a href="{{route('report.payments_report')}}" class="nav-link @if($page == 'payments_report') active @endif">{{__('page.payments_report')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.income_report')}}" class="nav-link @if($page == 'income_report') active @endif">{{__('page.income_report')}}</a></li>
             <li class="nav-item"><a href="{{route('report.customers_report')}}" class="nav-link @if($page == 'customers_report') active @endif">{{__('page.customers_report')}}</a></li>
             <li class="nav-item"><a href="{{route('report.suppliers_report')}}" class="nav-link @if($page == 'suppliers_report') active @endif">{{__('page.suppliers_report')}}</a></li>
             <li class="nav-item"><a href="{{route('report.users_report')}}" class="nav-link @if($page == 'users_report') active @endif">{{__('page.users_report')}}</a></li>

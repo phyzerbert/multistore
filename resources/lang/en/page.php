@@ -40,6 +40,7 @@ return [
     'sales_report' => 'Sales Report',
     'purchases_report' => 'Purchases Report',
     'payments_report' => 'Payments Report',
+    'income_report' => 'Income Report',
     'customers_report' => 'Customers Report',
     'suppliers_report' => 'Suppliers Report',
     'users_report' => 'Users Report',

@@ -391,6 +391,51 @@ class ReportController extends Controller
         return view('reports.payments_report', compact('data', 'companies', 'suppliers', 'company_id', 'supplier_id', 'reference_no', 'period'));
     }
 
+    public function income_report(Request $request){
+        config(['site.page' => 'payments_report']);
+        $user = Auth::user();
+        $companies = Company::all();
+        $customers = Supplier::all();
+        $mod = new Payment();
+        $mod = $mod->where('paymentable_type', Sale::class);
+        $reference_no = $period = $company_id = $customer_id = '';
+        if($user->hasRole('user')){
+            $company_id = $user->company_id;            
+        }
+        if($request->get('company_id') != ''){
+            $company_id = $request->get('company_id');
+        }
+        if($company_id != ''){
+            $company = Company::find($company_id);
+            $company_sales = $company->sales()->pluck('id');
+            $mod = $mod->whereIn('paymentable_id', $company_sales);
+            // $mod = $mod->where(function($query) use($company_purchases){
+            //     $query->whereIn('paymentable_id', $company_purchases)->where('paymentable_type', Purchase::class);
+            // })->orWhere(function($query) use($company_sales){
+            //     $query->whereIn('paymentable_id', $company_sales)->where('paymentable_type', Sale::class);
+            // });
+        }
+        if($request->get('customer_id') != ''){
+            $customer_id = $request->get('customer_id');
+            $customer = Supplier::find($customer_id);
+            $customer_sales = $customer->sales()->pluck('id');
+            $mod = $mod->whereIn('paymentable_id', $customer_sales);
+        }
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+        $pagesize = session('pagesize');
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('reports.income_report', compact('data', 'companies', 'customers', 'company_id', 'customer_id', 'reference_no', 'period'));
+    }
+
     public function customers_report(Request $request){
         config(['site.page' => 'customers_report']);
         $user = Auth::user();
