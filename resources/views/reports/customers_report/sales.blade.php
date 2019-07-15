@@ -9,12 +9,12 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="#">{{__('page.reports')}}</a>
-                <a class="breadcrumb-item" href="{{route('report.users_report')}}">{{__('page.users_report')}}</a>
+                <a class="breadcrumb-item" href="{{route('report.users_report')}}">{{__('page.customers_report')}}</a>
                 <a class="breadcrumb-item active" href="#">{{__('page.sales')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
-            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i>  {{__('page.user_sales')}}</h4>
+            <h4 class="tx-gray-800 mg-b-5"><i class="fa fa-credit-card-alt"></i>  {{__('page.customer_sales')}}</h4>
         </div>
         
         @php
@@ -24,9 +24,8 @@
             <div class="br-section-wrapper">                                
                 <div class="ht-md-40 pd-x-20 bg-gray-200 rounded d-flex align-items-center">
                     <ul class="nav nav-outline align-items-center flex-column flex-md-row" role="tablist">
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="{{route('report.users_report.purchases', $user->id)}}" role="tab">{{__('page.purchases')}}</a></li>
-                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="{{route('report.users_report.sales', $user->id)}}" role="tab">{{__('page.sales')}}</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="{{route('report.users_report.payments', $user->id)}}" role="tab">{{__('page.payments')}}</a></li>
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="{{route('report.customers_report.sales', $customer->id)}}" role="tab">{{__('page.sales')}}</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="{{route('report.customers_report.payments', $customer->id)}}" role="tab">{{__('page.payments')}}</a></li>
                     </ul>
                 </div>
                 <div class="mt-2">
@@ -48,12 +47,6 @@
                             @endforeach        
                         </select>
                         <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="reference_no" id="search_reference_no" value="{{$reference_no}}" placeholder="{{__('page.reference_no')}}">
-                        <select class="form-control form-control-sm mr-sm-2 mb-2" name="customer_id" id="select_customer">
-                            <option value="" hidden>{{__('page.select_customer')}}</option>
-                            @foreach ($customers as $item)
-                                <option value="{{$item->id}}" @if ($customer_id == $item->id) selected @endif>{{$item->name}}</option>
-                            @endforeach
-                        </select>
                         <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="period" id="period" autocomplete="off" value="{{$period}}" placeholder="{{__('page.sale_date')}}">
                         <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
                         <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
@@ -69,7 +62,7 @@
                                 <th>{{__('page.company')}}</th>
                                 <th>{{__('page.store')}}</th>
                                 <th>{{__('page.user')}}</th>
-                                <th>{{__('page.customer')}}</th>
+                                <th>{{__('page.product_qty')}}</th>
                                 <th>{{__('page.grand_total')}}</th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
@@ -87,6 +80,14 @@
                                     $paid = $item->payments()->sum('amount');
                                     $total_grand += $grand_total;
                                     $total_paid += $paid;
+
+                                    $orders = $item->orders;
+                                    $product_array = array();
+                                    foreach ($orders as $order) {
+                                        $product_name = isset($order->product->name) ? $order->product->name : "product";
+                                        $product_quantity = $order->quantity;
+                                        array_push($product_array, $product_name."(".$product_quantity.")");
+                                    }
                                 @endphp
                                 <tr>
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
@@ -95,7 +96,7 @@
                                     <td class="company">{{$item->company->name}}</td>
                                     <td class="store">{{$item->store->name}}</td>
                                     <td class="user">{{$item->biller->name}}</td>
-                                    <td class="customer" data-id="{{$item->customer_id}}">{{$item->customer->name}}</td>
+                                    <td class="product">{{implode(", ", $product_array)}}</td>
                                     <td class="grand_total"> {{number_format($grand_total)}} </td>
                                     <td class="paid"> {{ number_format($paid) }} </td>
                                     <td> {{number_format($grand_total - $paid)}} </td>

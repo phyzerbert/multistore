@@ -50,7 +50,7 @@
                                 <th>{{__('page.total_amount')}}</th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
-                                {{-- <th>Action</th> --}}
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody> 
@@ -89,7 +89,9 @@
                                     <td>{{number_format($total_amount)}}</td>                                        
                                     <td>{{number_format($paid)}}</td>
                                     <td>{{number_format($total_amount - $paid)}}</td>                                      
-                                    {{-- <td></td>--}}
+                                    <td>
+                                        <a href="{{route('report.suppliers_report.purchases', $item->id)}}" class="badge badge-primary">{{__('page.view_reports')}}</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -100,6 +102,7 @@
                                 <td>{{number_format($footer_total_amount)}}</td>
                                 <td>{{number_format($footer_paid)}}</td>
                                 <td>{{number_format($footer_total_amount - $footer_paid)}}</td>
+                                <td></td>
                             </tr>
                         </tfoot>
                     </table>                

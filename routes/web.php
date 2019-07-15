@@ -118,7 +118,11 @@ Route::any('/report/monthly_sales', 'ReportController@monthly_sales')->name('rep
 Route::any('/report/payments_report', 'ReportController@payments_report')->name('report.payments_report');
 Route::any('/report/income_report', 'ReportController@income_report')->name('report.income_report');
 Route::any('/report/customers_report', 'ReportController@customers_report')->name('report.customers_report');
+Route::any('/report/customers_report/sales/{id}', 'ReportController@customer_sales')->name('report.customers_report.sales');
+Route::any('/report/customers_report/payments/{id}', 'ReportController@customer_payments')->name('report.customers_report.payments');
 Route::any('/report/suppliers_report', 'ReportController@suppliers_report')->name('report.suppliers_report');
+Route::any('/report/suppliers_report/purchases/{id}', 'ReportController@supplier_purchases')->name('report.suppliers_report.purchases');
+Route::any('/report/suppliers_report/payments/{id}', 'ReportController@supplier_payments')->name('report.suppliers_report.payments');
 Route::any('/report/users_report', 'ReportController@users_report')->name('report.users_report');
 Route::any('/report/users_report/purchases/{id}', 'ReportController@user_purchases')->name('report.users_report.purchases');
 Route::any('/report/users_report/sales/{id}', 'ReportController@user_sales')->name('report.users_report.sales');

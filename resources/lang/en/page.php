@@ -209,8 +209,10 @@ return [
     'user_purchases' => 'User Purchases',
     'user_sales' => 'User Sales',
     'user_payments' => 'User Payments',
-
-
+    'supplier_purchases' => 'Supplier Purchases',
+    'supplier_payments' => 'Supplier Payments',
+    'customer_sales' => 'Customer Sales',
+    'customer_payments' => 'Customer Payments',
 
 
 

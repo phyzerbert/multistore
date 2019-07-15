@@ -48,7 +48,7 @@
                                 <th>{{__('page.company')}}</th>
                                 <th>{{__('page.role')}}</th>
                                 <th>{{__('page.status')}}</th>
-                                <th>Action</th>
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
