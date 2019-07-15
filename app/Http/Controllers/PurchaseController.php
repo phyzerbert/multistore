@@ -162,8 +162,7 @@ class PurchaseController extends Controller
         $data = $request->all();
         // dd($data);
         $item = Purchase::find($request->get("id"));
-
-        $item->user_id = Auth::user()->id;  
+ 
         $item->timestamp = $data['date'].":00";
         $item->reference_no = $data['reference_number'];
         $item->store_id = $data['store'];

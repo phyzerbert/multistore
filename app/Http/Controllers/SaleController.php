@@ -136,7 +136,8 @@ class SaleController extends Controller
 
     public function edit(Request $request, $id){    
         config(['site.page' => 'sale']);
-        $user = Auth::user();    
+        $user = Auth::user();
+        $users = User::where('role_id', 2)->get();
         $sale = Sale::find($id);        
         $customers = Customer::all();
         $products = Product::all();
@@ -145,7 +146,7 @@ class SaleController extends Controller
             $stores = $user->company->stores;
         }
 
-        return view('sale.edit', compact('sale', 'customers', 'stores', 'products'));
+        return view('sale.edit', compact('sale', 'users', 'customers', 'stores', 'products'));
     }
 
     public function detail(Request $request, $id){    
@@ -164,11 +165,10 @@ class SaleController extends Controller
             'user'=>'required',
             'status'=>'required',
         ]);
-        $$data = $request->all();
+        $data = $request->all();
         // dd($data);
         $item = Sale::find($request->get("id"));
-
-        $item->user_id = Auth::user()->id;  
+ 
         $item->biller_id = $data['user'];  
         $item->timestamp = $data['date'].":00";
         $item->reference_no = $data['reference_number'];

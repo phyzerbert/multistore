@@ -29,7 +29,7 @@
                     @csrf
                     <input type="hidden" name="id" value="{{$sale->id}}">
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.sale_date')}}: <span class="tx-danger">*</span></label>
                                 <input class="form-control" type="text" name="date" id="sale_date" value="{{date('Y-m-d H:i', strtotime($sale->timestamp))}}" placeholder="Sale Date" autocomplete="off" required>
@@ -50,8 +50,26 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div>                        
                         <div class="col-md-6 col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">{{__('page.user')}}:</label>
+                                <select class="form-control select2-show-search" name="user" data-placeholder="{{__('page.user')}}">
+                                    <option label="{{__('page.user')}}"></option>
+                                    @foreach ($users as $item)
+                                        <option value="{{$item->id}}" @if($sale->biller_id == $item->id) selected @endif>{{$item->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('user')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mg-b-25">                        
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.store')}}:</label>
                                 <select class="form-control select2" name="store" data-placeholder="Select Store">
@@ -67,9 +85,7 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row mg-b-25">
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.customer')}}:</label>
                                 <select class="form-control select2-show-search" name="customer" data-placeholder="{{__('page.customer')}}">
@@ -85,13 +101,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.attachment')}}:</label>
                                 <input type="file" name="attachment" id="file2" class="file-input-styled">
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.status')}}:</label>
                                 <select class="form-control select2" name="status" data-placeholder="Status">
