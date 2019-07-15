@@ -127,7 +127,7 @@ class PurchaseController extends Controller
             }
         }
 
-        return back()->with('success', 'Created Successfully');
+        return back()->with('success', __('page.created_successfully'));
     }
 
     public function edit(Request $request, $id){    
@@ -179,8 +179,26 @@ class PurchaseController extends Controller
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
+
+        for ($i=0; $i < count($data['order_id']); $i++) { 
+            $order = Order::find($data['order_id'][$i]);
+            $order_original_quantity = $order->quantity;
+            $order->update([
+                'product_id' => $data['product_id'][$i],
+                'cost' => $data['cost'][$i],
+                'quantity' => $data['quantity'][$i],
+                'expiry_date' => $data['expiry_date'][$i],
+                'subtotal' => $data['subtotal'][$i],
+            ]);
+            if($order_original_quantity != $data['quantity'][$i]){
+                $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();                
+                $store_product->increment('quantity', $data['quantity'][$i]);
+                $store_product->decrement('quantity', $order_original_quantity);
+            }
+        }
+
         $item->save();
-        return back()->with('success', 'Updated Successfully');
+        return back()->with('success', __('page.updated_successfully'));
     }
 
     public function delete($id){

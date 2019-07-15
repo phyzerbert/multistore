@@ -468,7 +468,7 @@ class ReportController extends Controller
     }
 
     public function customer_sales(Request $request, $id){
-        config(['site.page' => 'users_report']);
+        config(['site.page' => 'customers_report']);
         $user = Auth::user();
         $customer = Customer::find($id);
         $stores = Store::all();

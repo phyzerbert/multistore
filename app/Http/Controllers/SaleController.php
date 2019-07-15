@@ -185,6 +185,23 @@ class SaleController extends Controller
             $picture->move(public_path('images/uploaded/sale_images/'), $imageName);
             $item->attachment = 'images/uploaded/sale_images/'.$imageName;
         }
+
+        for ($i=0; $i < count($data['order_id']); $i++) { 
+            $order = Order::find($data['order_id'][$i]);
+            $order_original_quantity = $order->quantity;
+            $order->update([
+                'product_id' => $data['product_id'][$i],
+                'price' => $data['price'][$i],
+                'quantity' => $data['quantity'][$i],
+                'subtotal' => $data['subtotal'][$i],
+            ]);
+            if($order_original_quantity != $data['quantity'][$i]){
+                $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();                
+                $store_product->increment('quantity', $order_original_quantity);
+                $store_product->decrement('quantity', $data['quantity'][$i]);
+            }
+        }
+
         $item->save();
         return back()->with('success', 'Updated Successfully');
     }

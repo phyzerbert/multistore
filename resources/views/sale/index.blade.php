@@ -93,11 +93,9 @@
                                                 <ul class="list-unstyled user-profile-nav">
                                                     <li><a href="{{route('sale.detail', $item->id)}}"><i class="icon ion-eye  "></i> {{__('page.details')}}</a></li>
                                                     <li><a href="{{route('payment.index', ['sale', $item->id])}}"><i class="icon ion-cash"></i> {{__('page.payment_list')}}</a></li>
-                                                    <li><a href="#" data-id="{{$item->id}}" class="btn-add-payment"><i class="icon ion-cash"></i> {{__('page.add_payment')}}</a></li>
-                                                    @if($role == 'admin')
-                                                        <li><a href="{{route('sale.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
-                                                        <li><a href="{{route('sale.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>
-                                                    @endif
+                                                    <li><a href="#" data-id="{{$item->id}}" class="btn-add-payment"><i class="icon ion-cash"></i> {{__('page.add_payment')}}</a></li>                                                    
+                                                    <li><a href="{{route('sale.edit', $item->id)}}"><i class="icon ion-compose"></i> Edit</a></li>
+                                                    <li><a href="{{route('sale.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>                                                    
                                                 </ul>
                                             </div>
                                         </div>
