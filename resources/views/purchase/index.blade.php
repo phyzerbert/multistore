@@ -131,7 +131,7 @@
                         </div>                        
                         <div class="form-group">
                             <label class="control-label">{{__('page.reference_no')}}</label>
-                            <input class="form-control reference_no" type="text" name="reference_no" placeholder="{{__('page.reference_no')}}">
+                            <input class="form-control reference_no" type="text" name="reference_no" required placeholder="{{__('page.reference_no')}}">
                         </div>                                                
                         <div class="form-group">
                             <label class="control-label">{{__('page.amount')}}</label>

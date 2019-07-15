@@ -71,10 +71,10 @@ class HomeController extends Controller
             $daily_purchase = Order::whereIn('orderable_id', $purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
             $daily_sale = Order::whereIn('orderable_id', $sales)->where('orderable_type', Sale::class)->sum('subtotal');
             $daily_purchase_payment = Payment::whereIn('paymentable_id', $purchases)->where('paymentable_type', Purchase::class)->sum('amount');
-            $daily_sale_payment = Payment::whereIn('paymentable_id', $sales)->where('paymentable_type', Sale::class)->sum('amount');
+            // $daily_sale_payment = Payment::whereIn('paymentable_id', $sales)->where('paymentable_type', Sale::class)->sum('amount');
             array_push($purchase_array, $daily_purchase);
             array_push($sale_array, $daily_sale);
-            array_push($payment_array, $daily_sale_payment - $daily_purchase_payment);
+            array_push($payment_array, $daily_purchase_payment);
         }
         
         if($request->get('top_company') != ''){

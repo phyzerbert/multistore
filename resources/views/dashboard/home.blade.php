@@ -75,7 +75,7 @@
                 </div><!-- col-3 -->
             </div>
             <div class="row row-sm mt-3">
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-6 col-xl-4   ">
                     <div class="bg-teal rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="fa fa-sun-o tx-60 lh-0 tx-white op-7"></i>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div><!-- col-3 -->
-                <div class="col-sm-6 col-xl-3 mg-t-20 mg-sm-t-0">
+                <div class="col-sm-6 col-xl-4 mg-t-20 mg-sm-t-0">
                     <div class="bg-danger rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="ion ion-bag tx-60 lh-0 tx-white op-7"></i>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </div><!-- col-3 -->
-                <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
+                <div class="col-sm-6 col-xl-4 mg-t-20 mg-xl-t-0">
                     <div class="bg-primary rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="fa fa-calendar tx-60 lh-0 tx-white op-7"></i>
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 </div><!-- col-3 -->
-                <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
+                {{-- <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
                     <div class="bg-br-primary rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- col-3 -->
+                </div><!-- col-3 --> --}}
             </div>
             <div class="br-section-wrapper mt-3">
                 <div class="row">
