@@ -349,9 +349,10 @@ class ReportController extends Controller
         config(['site.page' => 'payments_report']);
         $user = Auth::user();
         $companies = Company::all();
+        $suppliers = Supplier::all();
         $mod = new Payment();
         $mod = $mod->where('paymentable_type', Purchase::class);
-        $reference_no = $period = $company_id = '';
+        $reference_no = $period = $company_id = $supplier_id = '';
         if($user->hasRole('user')){
             $company_id = $user->company_id;            
         }
@@ -369,6 +370,12 @@ class ReportController extends Controller
             //     $query->whereIn('paymentable_id', $company_sales)->where('paymentable_type', Sale::class);
             // });
         }
+        if($request->get('supplier_id') != ''){
+            $supplier_id = $request->get('supplier_id');
+            $supplier = Supplier::find($supplier_id);
+            $supplier_purchases = $supplier->purchases()->pluck('id');
+            $mod = $mod->whereIn('paymentable_id', $supplier_purchases);
+        }
         if ($request->get('reference_no') != ""){
             $reference_no = $request->get('reference_no');
             $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
@@ -381,7 +388,7 @@ class ReportController extends Controller
         }
         $pagesize = session('pagesize');
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.payments_report', compact('data', 'companies', 'company_id', 'reference_no', 'period'));
+        return view('reports.payments_report', compact('data', 'companies', 'suppliers', 'company_id', 'supplier_id', 'reference_no', 'period'));
     }
 
     public function customers_report(Request $request){
