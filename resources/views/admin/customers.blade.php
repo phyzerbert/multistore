@@ -28,9 +28,7 @@
                         <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
                         <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
                     </form>
-                    @if ($role == 'admin')
-                        <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> {{__('page.add_new')}}</button>
-                    @endif
+                    <button type="button" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="icon ion-person-add mg-r-2"></i> {{__('page.add_new')}}</button>                    
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
@@ -43,9 +41,7 @@
                                 <th>{{__('page.phone_number')}}</th>
                                 <th>{{__('page.city')}}</th>
                                 <th>{{__('page.address')}}</th>
-                                @if($role == 'admin')
-                                    <th>{{__('page.action')}}</th>
-                                @endif
+                                <th>{{__('page.action')}}</th>
                             </tr>
                         </thead>
                         <tbody>                                
@@ -58,12 +54,10 @@
                                     <td class="phone_number">{{$item->phone_number}}</td>
                                     <td class="city">{{$item->city}}</td>
                                     <td class="address">{{$item->address}}</td>
-                                    @if($role == 'admin')
                                     <td class="py-1">
                                         <a href="#" class="btn btn-primary btn-icon rounded-circle mg-r-5 btn-edit" data-id="{{$item->id}}"><div><i class="fa fa-edit"></i></div></a>
                                         <a href="{{route('customer.delete', $item->id)}}" class="btn btn-danger btn-icon rounded-circle mg-r-5" data-id="{{$item->id}}" onclick="return window.confirm('{{__('page.are_you_sure')}}')"><div><i class="fa fa-trash-o"></i></div></a>
                                     </td>
-                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
