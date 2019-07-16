@@ -91,6 +91,7 @@
             <li class="nav-item"><a href="{{route('report.store_chart')}}" class="nav-link @if($page == 'store_chart') active @endif">{{__('page.store_chart')}}</a></li>
             <li class="nav-item"><a href="{{route('report.product_quantity_alert')}}" class="nav-link @if($page == 'product_quantity_alert') active @endif">{{__('page.product_quantity_alert')}}</a></li>
             <li class="nav-item"><a href="{{route('report.product_expiry_alert')}}" class="nav-link @if($page == 'product_expiry_alert') active @endif">{{__('page.product_expiry_alert')}}</a></li>
+            <li class="nav-item"><a href="{{route('report.expired_purchases_report')}}" class="nav-link @if($page == 'expired_purchases_report') active @endif">{{__('page.expired_purchases_report')}}</a></li>
             <li class="nav-item"><a href="{{route('report.products_report')}}" class="nav-link @if($page == 'products_report') active @endif">{{__('page.product_report')}}</a></li>
             <li class="nav-item"><a href="{{route('report.categories_report')}}" class="nav-link @if($page == 'categories_report') active @endif">{{__('page.category_report')}}</a></li>
             <li class="nav-item"><a href="{{route('report.sales_report')}}" class="nav-link @if($page == 'sales_report') active @endif">{{__('page.sales_report')}}</a></li>

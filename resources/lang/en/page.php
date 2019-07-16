@@ -35,6 +35,7 @@ return [
     'store_chart' => 'Store Chart',
     'product_quantity_alert' => 'Product Quantity Alert',
     'product_expiry_alert' => 'Product Expiry Alert',
+    'expired_purchases_report' => 'Expired Purchases Report',
     'product_report' => 'Product Report',
     'category_report' => 'Category Report',
     'sales_report' => 'Sales Report',
@@ -171,6 +172,7 @@ return [
     'percentage' => 'Porcentaje',
     'fixed' => 'Fijo',
     'product_qty' => 'Product(Qty)',
+    'credit_days' => 'Days Of Credit',
 
 
     // ******** Modal ********

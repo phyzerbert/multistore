@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="row mg-b-25">
-                        <div class="col-md-4">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.supplier')}}:</label>
                                 <select class="form-control select2-show-search" name="supplier" required data-placeholder="{{__('page.select_supplier')}}">
@@ -83,13 +83,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.attachment')}}:</label>
                                 <input type="file" name="attachment" id="file2" class="file-input-styled">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.status')}}:</label>
                                 <select class="form-control select2" name="status" required data-placeholder="{{__('page.status')}}">
@@ -99,7 +99,13 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">{{__('page.credit_days')}}:</label>
+                                <input type="number" class="form-control" name="credit_days" min=0 placeholder="{{__('page.credit_days')}}" />
+                            </div>
+                        </div>
+                    </div> 
                     <div class="row mg-b-25">
                         <div class="col-md-12">
                             <div>

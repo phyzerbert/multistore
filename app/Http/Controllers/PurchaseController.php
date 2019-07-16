@@ -84,6 +84,7 @@ class PurchaseController extends Controller
         ]);
 
         $data = $request->all();
+        
         // dd($data);
         $item = new Purchase();
         $item->user_id = Auth::user()->id;  
@@ -93,6 +94,11 @@ class PurchaseController extends Controller
         $store = Store::find($data['store']);
         $item->company_id = $store->company_id;
         $item->supplier_id = $data['supplier'];
+        if($data['credit_days'] != ''){
+            $item->credit_days = $data['credit_days'];
+            $item->expiry_date = date('Y-m-d', strtotime("+".$data['credit_days']."days", strtotime($item->timestamp)));
+        }        
+        $item->credit_days = $data['credit_days'];
         $item->status = $data['status'];
         $item->note = $data['note'];
 
@@ -169,6 +175,10 @@ class PurchaseController extends Controller
         $store = Store::find($data['store']);
         $item->company_id = $store->company_id;
         $item->supplier_id = $data['supplier'];
+        if($data['credit_days'] != ''){
+            $item->credit_days = $data['credit_days'];
+            $item->expiry_date = date('Y-m-d', strtotime("+".$data['credit_days']."days", strtotime($item->timestamp)));
+        }
         $item->status = $data['status'];
         $item->note = $data['note'];
 

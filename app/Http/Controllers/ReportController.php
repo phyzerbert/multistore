@@ -781,6 +781,54 @@ class ReportController extends Controller
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.users_report.payments', compact('data', 'user', 'reference_no', 'period'));
     }
+
+    public function expired_purchases_report(Request $request){
+        config(['site.page' => 'expired_purchases_report']);
+        $user = Auth::user();
+        $stores = Store::all();
+        $suppliers = Supplier::all();
+        $companies = Company::all();
+        $mod = new Purchase();      
+        
+        if($user->hasRole('user')){
+            $company = $user->company;
+            $stores = $company->stores;
+            $mod = $company->purchases();
+        }
+        $mod = $mod->whereNotNull('credit_days')->where("expiry_date", "<=", date('Y-m-d'));
+        $company_id = $reference_no = $supplier_id = $store_id = $period = $expiry_date = '';
+        if ($request->get('company_id') != ""){
+            $company_id = $request->get('company_id');
+            $mod = $mod->where('company_id', $company_id);
+        }
+        if ($request->get('reference_no') != ""){
+            $reference_no = $request->get('reference_no');
+            $mod = $mod->where('reference_no', 'LIKE', "%$reference_no%");
+        }
+        if ($request->get('supplier_id') != ""){
+            $supplier_id = $request->get('supplier_id');
+            $mod = $mod->where('supplier_id', $supplier_id);
+        }
+        if ($request->get('store_id') != ""){
+            $store_id = $request->get('store_id');
+            $mod = $mod->where('store_id', $store_id);
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+            $mod = $mod->whereBetween('timestamp', [$from, $to]);
+        }
+        if ($request->get('expiry_date') != ""){   
+            $expiry_date = $request->get('expiry_date');
+            $from = substr($expiry_date, 0, 10);
+            $to = substr($expiry_date, 14, 10);
+            $mod = $mod->whereBetween('expiry_date', [$from, $to]);
+        }
+        $pagesize = session('pagesize');
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        return view('reports.expired_purchases_report', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'expiry_date'));
+    }
     
     
 

@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="row mg-b-25">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.supplier')}}:</label>
                                 <select class="form-control select2-show-search" name="supplier" data-placeholder="{{__('page.supplier')}}">
@@ -85,13 +85,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.attachment')}}:</label>
                                 <input type="file" name="attachment" id="file2" class="file-input-styled">
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.status')}}:</label>
                                 <select class="form-control select2" name="status" data-placeholder="Status">
@@ -99,6 +99,12 @@
                                     <option value="0" @if($purchase->status == 0) selected @endif>{{__('page.pending')}}</option>
                                     <option value="1" @if($purchase->status == 1) selected @endif>{{__('page.received')}}</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">{{__('page.credit_days')}}:</label>
+                                <input type="number" class="form-control" name="credit_days" min="0" value="{{$purchase->credit_days}}">
                             </div>
                         </div>
                     </div>

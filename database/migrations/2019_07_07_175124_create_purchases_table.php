@@ -21,6 +21,8 @@ class CreatePurchasesTable extends Migration
             $table->integer('store_id')->nullable();
             $table->integer('company_id')->nullable();
             $table->integer('supplier_id')->nullable();
+            $table->integer('credit_days')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->string('attachment')->nullable();
             $table->text('note')->nullable();
             $table->integer('status')->nullable();

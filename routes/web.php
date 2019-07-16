@@ -110,6 +110,7 @@ Route::any('/report/company_chart', 'ReportController@company_chart')->name('rep
 Route::any('/report/store_chart', 'ReportController@store_chart')->name('report.store_chart');
 Route::any('/report/product_quantity_alert', 'ReportController@product_quantity_alert')->name('report.product_quantity_alert');
 Route::any('/report/product_expiry_alert', 'ReportController@product_expiry_alert')->name('report.product_expiry_alert');
+Route::any('/report/expired_purchases_report', 'ReportController@expired_purchases_report')->name('report.expired_purchases_report');
 Route::any('/report/products_report', 'ReportController@products_report')->name('report.products_report');
 Route::any('/report/categories_report', 'ReportController@categories_report')->name('report.categories_report');
 Route::any('/report/sales_report', 'ReportController@sales_report')->name('report.sales_report');

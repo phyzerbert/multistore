@@ -70,7 +70,7 @@
                                 <div class="col-9">
                                     <h4 class="card-title tx-white tx-medium mg-b-10">{{__('page.reference')}}</h4>
                                     <p class="tx-16 mg-b-3">{{__('page.number')}}: {{$purchase->reference_no}}</p>
-                                    <p class="tx-16 mg-b-3">{{__('page.date')}}: {{$purchase->timestamp    }}</p>
+                                    <p class="tx-16 mg-b-3">{{__('page.date')}}: {{$purchase->timestamp}}</p>
                                     <p class="tx-16 mg-b-3">
                                         {{__('page.attachment')}}: 
                                         @if ($purchase->attachment != "")
