@@ -147,3 +147,7 @@ input[type=file][data-fouc] {
 .ui-autocomplete .ui-menu-item {
     padding: 2px;
 }
+
+table.table-hover tbody tr:hover td{
+    background-color: #8dbbea !important;
+}
