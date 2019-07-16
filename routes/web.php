@@ -100,6 +100,7 @@ Route::get('/payment/delete/{id}', 'PaymentController@delete')->name('payment.de
 Route::get('get_products', 'VueController@get_products');
 Route::post('get_orders', 'VueController@get_orders');
 Route::post('get_product', 'VueController@get_product');
+Route::post('get_autocomplete_products', 'VueController@get_autocomplete_products');
 
 // ******** Report ********
 

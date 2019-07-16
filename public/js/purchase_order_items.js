@@ -1,4 +1,3 @@
-
 var app = new Vue({
     el: '#app',
 
@@ -12,28 +11,11 @@ var app = new Vue({
         }
     },
 
-
     methods:{
         init() {
             axios.get('/get_products')
                 .then(response => {
                     this.products = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        get_product(i) {
-            const data = new FormData();
-            data.append('id', this.order_items[i].product_id);
-
-            axios.post('/get_product', data)
-                .then(response => {
-                    this.order_items[i].cost = response.data.cost
-                    this.order_items[i].tax_name = response.data.tax.name
-                    this.order_items[i].tax_rate = response.data.tax.rate
-                    this.order_items[i].quantity = 1
-                    this.order_items[i].sub_total = response.data.cost + (response.data.cost*response.data.tax.rate)/100
                 })
                 .catch(error => {
                     console.log(error);
@@ -59,7 +41,6 @@ var app = new Vue({
                 total_quantity += parseInt(data[i].quantity)
                 total_cost += data[i].sub_total
             }
-
             this.total.quantity = total_quantity
             this.total.cost = total_cost
         },
@@ -73,9 +54,41 @@ var app = new Vue({
     },
     updated: function() {
         this.calc_subtotal()
-        // $(".expiry_date").datepicker({
-        //     dateFormat: 'yy-mm-dd',
-        // });
-        // $(".product").select2();
-    }
+        $(".product").autocomplete({
+            source : function( request, response ) {
+                axios.post('/get_autocomplete_products', { keyword : request.term })
+                    .then(resp => {
+                        // response(resp.data);
+                        response(
+                            $.map(resp.data, function(item) {
+                                return {
+                                    label: item.name + "(" + item.code + ")",
+                                    value: item.name + "(" + item.code + ")",
+                                    id: item.id,
+                                    cost: item.cost,
+                                    tax_name: item.tax.name,
+                                    tax_rate: item.tax.rate,
+                                }
+                            })
+                        );
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    }
+                );
+            }, 
+            minLength: 1,
+            select: function( event, ui ) {
+                let index = $(".product").index($(this));
+                app.order_items[index].product_id = ui.item.id
+                app.order_items[index].cost = ui.item.cost
+                app.order_items[index].tax_name = ui.item.tax_name
+                app.order_items[index].tax_rate = ui.item.tax_rate
+                app.order_items[index].quantity = 1
+                app.order_items[index].sub_total = ui.item.cost + (ui.item.cost*ui.item.tax_rate)/100
+            }
+        });
+    }    
 });
+
+

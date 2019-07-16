@@ -163,7 +163,7 @@
         $("#btn-reset").click(function(){
             $("#search_company").val('');
             $("#search_store").val('');
-            $("#search_supplier").val('');
+            $("#search_customer").val('');
             $("#search_reference_no").val('');
             $("#period").val('');
         });

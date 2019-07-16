@@ -120,13 +120,11 @@
                                             <th style="width:30px"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="top-search-form">
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
-                                                <select class="form-control form-control-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
-                                                    <option value="" hidden>{{__('page.select_product')}}</option>
-                                                    <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
-                                                </select>
+                                                <input type="hidden" name="product_id[]" class="product_id" :value="item.product_id" />
+                                                <input type="text" name="product_name[]" class="form-control form-control-sm product" />
                                             </td>
                                             <td><input type="date" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="item.expiry_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="{{__('page.expiry_date')}}" /></td>
                                             <td><input type="number" class="form-control form-control-sm cost" name="cost[]" v-model="item.cost" placeholder="{{__('page.product_cost')}}" /></td>
