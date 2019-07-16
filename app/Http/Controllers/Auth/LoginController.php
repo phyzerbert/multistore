@@ -57,7 +57,7 @@ class LoginController extends Controller
             'api_key' => env('NEXMO_KEY'),
             'api_secret' => env('NEXMO_SECRET'),
             'number' => $user->phone_number,
-            'brand' => 'Bilal',
+            'brand' => config('app.name'),
         ]);
 
         $ch = curl_init($url);
