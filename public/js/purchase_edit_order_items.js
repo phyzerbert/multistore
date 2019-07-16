@@ -46,6 +46,7 @@ var app = new Vue({
         add_item() {
             this.order_items.push({
                 product_id: "",
+                product_name_code: "",
                 cost: 0,
                 tax_name: "",
                 tax_rate: 0,
@@ -84,6 +85,7 @@ var app = new Vue({
                     .then(response1 => {
                         this.order_items.push({
                             product_id: element.product_id,
+                            product_name_code: response1.data.name + "(" + response1.data.code + ")",
                             cost: response1.data.cost,
                             tax_name: response1.data.tax.name,
                             tax_rate: response1.data.tax.rate,
@@ -105,6 +107,5 @@ var app = new Vue({
     },
     updated: function() {
         this.calc_subtotal()
-        // $(".product").select2();
     }
 });

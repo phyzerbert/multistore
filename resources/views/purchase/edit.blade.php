@@ -145,11 +145,10 @@
                                                 <a href="#" class="btn btn-warning btn-icon rounded-circle mg-t-3 remove-product" @click="remove(i)"><div style="width:25px;height:25px;"><i class="fa fa-times"></i></div></a>
                                             </td>
                                         </tr>
-
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="2">{{__('page.total')}}</td>
+                                            <td colspan="3">{{__('page.total')}}</td>
                                             <td class="total_quantity">@{{total.quantity}}</td>
                                             <td class="total_tax"></td>
                                             <td colspan="2" class="total">@{{total.cost}}</td>
