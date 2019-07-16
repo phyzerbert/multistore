@@ -151,7 +151,7 @@ return [
     'stores' => 'Tiendas',
     'first_name' => 'Nombre',
     'last_name' => 'Apellido',
-    'picture' => ']Imagen',
+    'picture' => 'Imagen',
     'purchased' => 'Compra',
     'sold' => 'Vendido',
     'purchased_amount' => 'Cantidad Comprada',
