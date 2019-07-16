@@ -229,4 +229,6 @@ $(document).ready(function () {
         });
     }
 
+    $('#btnLeftMenu').trigger('click');
+
 });
