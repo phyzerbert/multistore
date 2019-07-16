@@ -13,13 +13,13 @@ var app = new Vue({
 
     methods:{
         init() {
-            axios.get('/get_products')
-                .then(response => {
-                    this.products = response.data;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            // axios.get('/get_products')
+            //     .then(response => {
+            //         this.products = response.data;
+            //     })
+            //     .catch(error => {
+            //         console.log(error);
+            //     });
         },
         add_item() {
             this.order_items.push({

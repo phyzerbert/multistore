@@ -137,10 +137,8 @@
                                     <tbody>
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
-                                                <select class="form-control input-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
-                                                    <option value="" hidden>{{__('page.select_product')}}</option>
-                                                    <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
-                                                </select>
+                                                <input type="hidden" name="product_id[]" class="product_id" :value="item.product_id" />
+                                                <input type="text" name="product_name[]" class="form-control form-control-sm product" />
                                             </td>
                                             <td><input type="number" class="form-control form-control-sm price" name="price[]" v-model="item.price" placeholder="{{__('page.product_price')}}" /></td>
                                             <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="item.quantity" placeholder="{{__('page.quantity')}}" /></td>
