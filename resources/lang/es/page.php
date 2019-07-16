@@ -34,6 +34,7 @@ return [
     'company_chart' => 'Configuración de la Empresa',
     'product_quantity_alert' => 'Alerta Cant. Producto',
     'product_expiry_alert' => 'Alerta Caducidad Producto',
+    'expired_purchases_report' => 'Facturas Vencidas',
     'product_report' => 'Reportes Productos',
     'category_report' => 'Reportes Categorias',
     'sales_report' => 'Reporte de Ventas',
