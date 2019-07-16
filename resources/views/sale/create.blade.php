@@ -41,7 +41,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.reference_number')}}:</label>
-                                <input class="form-control" type="text" name="reference_number" placeholder="{{__('page.reference_number')}}" required>
+                                <input class="form-control" type="text" name="reference_number" value="{{ old('reference_number') }}" placeholder="{{__('page.reference_number')}}" required>
                                 @error('reference_number')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
