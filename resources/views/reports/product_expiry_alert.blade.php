@@ -48,6 +48,7 @@
                                 <th>{{__('page.image')}}</th>
                                 <th>{{__('page.product_code')}}</th>
                                 <th>{{__('page.product_name')}}</th>
+                                <th>{{__('page.reference_no')}}</th>
                                 <th>{{__('page.expiry_date')}}</th>
                                 <th>{{__('page.purchase_date')}}</th>
                             </tr>
@@ -59,6 +60,7 @@
                                     <td class="image py-1 wd-60"><img src="@if($item->product->image){{asset($item->product->image)}}@else{{asset('images/no-image.png')}}@endif" class="wd-40 ht-40 rounded-circle" alt=""></td>
                                     <td>{{$item->product->code}}</td>
                                     <td>{{$item->product->name}}</td>
+                                    <td>{{$item->orderable->reference_no}}</td>
                                     <td>{{$item->expiry_date}}</td>
                                     <td>{{$item->orderable->timestamp}}</td>                                        
                                 </tr>
