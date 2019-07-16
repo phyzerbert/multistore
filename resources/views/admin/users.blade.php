@@ -240,7 +240,8 @@
             $("#addModal").modal();
         });
 
-        $("#btn_create").click(function(){          
+        $("#btn_create").click(function(){  
+            $("#ajax-loading").show();
             $.ajax({
                 url: "{{route('user.create')}}",
                 type: 'post',
@@ -254,9 +255,10 @@
                     else if(data.message == 'The given data was invalid.') {
                         alert(data.message);
                     }
+                    $("#ajax-loading").hide();
                 },
                 error: function(data) {
-                    console.log(data.responseJSON);
+                    $("#ajax-loading").hide();
                     if(data.responseJSON.message == 'The given data was invalid.') {
                         let messages = data.responseJSON.errors;
                         if(messages.name) {
@@ -307,6 +309,7 @@
         });
 
         $("#btn_update").click(function(){
+            $("#ajax-loading").show();
             $.ajax({
                 url: "{{route('user.edit')}}",
                 type: 'post',
@@ -321,9 +324,10 @@
                     else if(data.message == 'The given data was invalid.') {
                         alert(data.message);
                     }
+                    $("#ajax-loading").hide();
                 },
                 error: function(data) {
-                    console.log(data.responseJSON);
+                    $("#ajax-loading").hide();
                     if(data.responseJSON.message == 'The given data was invalid.') {
                         let messages = data.responseJSON.errors;
                         if(messages.name) {
