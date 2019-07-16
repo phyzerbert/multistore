@@ -21,9 +21,7 @@
                 <div class="">
                     @include('elements.pagesize')
                     @include('product.filter')
-                    @if ($role == 'admin')
-                        <a href="{{route('product.create')}}" class="btn btn-success btn-sm float-right tx-white mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>
-                    @endif
+                    <a href="{{route('product.create')}}" class="btn btn-success btn-sm float-right tx-white mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> Add New</a>                    
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
@@ -66,11 +64,9 @@
                                         <div class="dropdown-menu dropdown-menu-header action-dropdown pd-l-5 pd-r-5 bd-t-1" style="min-width:9rem">
                                             <ul class="list-unstyled user-profile-nav">
                                                 <li><a href="{{route('product.detail', $item->id)}}"><i class="icon ion-eye  "></i> {{__('page.details')}}</a></li>
-                                                {{-- <li><a href="{{route('product.duplicate', $item->id)}}"><i class="icon ion-ios-photos-outline"></i> {{__('page.duplicated')}}</a></li> --}}
-                                                @if($role == 'admin')
+                                                {{-- <li><a href="{{route('product.duplicate', $item->id)}}"><i class="icon ion-ios-photos-outline"></i> {{__('page.duplicated')}}</a></li> --}}                                                
                                                 <li><a href="{{route('product.edit', $item->id)}}"><i class="icon ion-compose"></i> {{__('page.edit')}}</a></li>
-                                                <li><a href="{{route('product.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>
-                                                @endif
+                                                <li><a href="{{route('product.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>                                                
                                             </ul>
                                         </div>                                        
                                     </td>
