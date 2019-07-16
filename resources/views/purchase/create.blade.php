@@ -41,7 +41,7 @@
                         <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.reference_number')}}:</label>
-                                <input class="form-control" type="text" name="reference_number" placeholder="{{__('page.reference_number')}}">
+                                <input class="form-control" type="text" name="reference_number" required placeholder="{{__('page.reference_number')}}">
                                 @error('reference_number')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
                         <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">Store:</label>
-                                <select class="form-control select2" name="store" data-placeholder="{{__('page.select_store')}}">
+                                <select class="form-control select2" name="store" required data-placeholder="{{__('page.select_store')}}">
                                     <option label="{{__('page.select_store')}}"></option>
                                     @foreach ($stores as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -70,7 +70,7 @@
                         <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.supplier')}}:</label>
-                                <select class="form-control select2-show-search" name="supplier" data-placeholder="{{__('page.select_supplier')}}">
+                                <select class="form-control select2-show-search" name="supplier" required data-placeholder="{{__('page.select_supplier')}}">
                                     <option label="{{__('page.select_supplier')}}"></option>
                                     @foreach ($suppliers as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -92,7 +92,7 @@
                         <div class="col-md-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.status')}}:</label>
-                                <select class="form-control select2" name="status" data-placeholder="{{__('page.status')}}">
+                                <select class="form-control select2" name="status" required data-placeholder="{{__('page.status')}}">
                                     <option label="{{__('page.status')}}"></option>
                                     <option value="0">{{__('page.pending')}}</option>
                                     <option value="1">{{__('page.received')}}</option>
