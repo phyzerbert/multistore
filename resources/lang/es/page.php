@@ -163,6 +163,7 @@ return [
     'purchase_reference' => 'Referencia de Compra',
     'image' => 'Imagen',
     'product_qty' => 'Producto(cant.)',
+    'credit_days' => 'Dias de Credito',
 
 
     // ******** Modal ********
