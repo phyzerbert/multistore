@@ -240,6 +240,7 @@ return [
     'week_sales' => 'Week Sales',
     'month_sales' => 'Month Sales',
     'overall_sales' => 'Overall Sales',
+    'expired_purchases' => 'Expired Purchases',
     'customer_company' => 'Customer Company',
     'supplier_company' => 'Supplier Company',
 

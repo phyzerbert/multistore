@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('style')
     <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
+    <link href="{{asset('master/lib/sweet-modal/jquery.sweet-modal.min.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     @php
@@ -75,7 +76,7 @@
                 </div><!-- col-3 -->
             </div>
             <div class="row row-sm mt-3">
-                <div class="col-sm-6 col-xl-4   ">
+                <div class="col-sm-6 col-xl-3   ">
                     <div class="bg-teal rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="fa fa-sun-o tx-60 lh-0 tx-white op-7"></i>
@@ -87,7 +88,7 @@
                         </div>
                     </div>
                 </div><!-- col-3 -->
-                <div class="col-sm-6 col-xl-4 mg-t-20 mg-sm-t-0">
+                <div class="col-sm-6 col-xl-3 mg-t-20 mg-sm-t-0">
                     <div class="bg-danger rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="ion ion-bag tx-60 lh-0 tx-white op-7"></i>
@@ -99,7 +100,7 @@
                         </div>
                     </div>
                 </div><!-- col-3 -->
-                <div class="col-sm-6 col-xl-4 mg-t-20 mg-xl-t-0">
+                <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
                     <div class="bg-primary rounded overflow-hidden">
                         <div class="pd-25 d-flex align-items-center">
                             <i class="fa fa-calendar tx-60 lh-0 tx-white op-7"></i>
@@ -123,6 +124,19 @@
                         </div>
                     </div>
                 </div><!-- col-3 --> --}}
+                
+                <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
+                    <div class="bg-warning rounded overflow-hidden" id="expire_alert">
+                        <div class="pd-25 d-flex align-items-center">
+                            <i class="fa fa-exclamation-triangle tx-60 lh-0 tx-white op-7"></i>
+                            <div class="mg-l-20">
+                                <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.expired_purchases')}}</p>
+                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['expired_purchases'])}}</p>
+                                <p class="tx-11 tx-roboto tx-white-6"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- col-3 -->
             </div>
             <div class="br-section-wrapper mt-3">
                 <div class="row">
@@ -157,6 +171,7 @@
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('master/lib/chart.js/Chart.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
+<script src="{{asset('master/lib/sweet-modal/jquery.sweet-modal.min.js')}}"></script>
 <script>
 
     var lineData = {
@@ -214,6 +229,13 @@
         $("#period").dateRangePicker();
         $("#top_company_filter").change(function(){
             $("#top_filter_form").submit();
+        });
+
+        $("#expire_alert").click(function(){
+            $.sweetModal({
+                content: '{{$return['expired_purchases']}} purchases is expired.',
+                icon: $.sweetModal.ICON_WARNING
+            });
         });
     });
 </script>

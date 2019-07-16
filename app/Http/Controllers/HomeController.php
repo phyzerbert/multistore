@@ -79,9 +79,10 @@ class HomeController extends Controller
         
         if($request->get('top_company') != ''){
             $top_company = $request->get('top_company');
-        }        
+        }
         $where = "and company_id = $top_company";
         // dd($where);
+
         $return['today_purchases'] = $this->getTodayData('purchases', $where);
         $return['today_sales'] = $this->getTodayData('sales', $where);
         $return['week_purchases'] = $this->getWeekData('purchases', $where);
@@ -90,6 +91,7 @@ class HomeController extends Controller
         $return['month_sales'] = $this->getMonthData('sales', $where);
         $return['overall_purchases'] = $this->getOverallData('purchases', $where);
         $return['overall_sales'] = $this->getOverallData('sales', $where);
+        $return['expired_purchases'] = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->where("expiry_date", "<=", date('Y-m-d'))->count();
           
         return view('dashboard.home', compact('return', 'companies', 'top_company', 'chart_company', 'key_array', 'purchase_array', 'sale_array', 'payment_array', 'period'));
     }

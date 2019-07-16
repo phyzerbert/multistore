@@ -9,6 +9,11 @@
     </div>
     <div class="br-header-right">
         <nav class="nav">
+            <div class="user-company mx-5 tx-25">
+                @if (Auth::user()->hasRole('user'))
+                    {{ Auth::user()->company->name }}
+                @endif
+            </div>
             <div class="dropdown dropdown-lang">
                 @php $locale = session()->get('locale'); @endphp
                 <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle mg-t-15" data-toggle="dropdown">                    
