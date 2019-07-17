@@ -222,6 +222,7 @@ return [
     'week_sales' => 'Ventas de la Semana',
     'month_sales' => 'Ventas del Mes',
     'overall_sales' => 'Ventas Totales',
+    'expired_purchases' => 'Facturas Vencidas',
 
     // ******** Transaction ********
     'select_type' => 'Seleccione un Tipo',
