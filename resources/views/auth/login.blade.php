@@ -12,7 +12,7 @@
 
         <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
             <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">{{ config("app.name") }}</span></div>
-            <div class="tx-center mg-b-40">{{__('page.enter_your_credentials_below')}}</div>
+            <div class="tx-center my-4">{{__('page.enter_your_credentials_below')}}</div>
             
             @error('phone')
                 <span class="text-danger mt-2" role="alert">
