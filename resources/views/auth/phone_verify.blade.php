@@ -18,11 +18,16 @@
     <div class="d-flex align-items-center justify-content-center bg-br-primary ht-100v">
 
         <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white rounded shadow-base">
-            <div class="signin-logo tx-center tx-28 tx-bold tx-inverse"><span class="tx-normal">{{ config("app.name") }}</span></div>
+
+            <div class="signin-logo tx-center tx-bold">
+                <div class="wd-100 ht-100 bd bd-5 bd-warning rounded-circle mx-auto" style="font-size: 63px;">
+                    <i class="fa fa-mobile"></i>
+                </div>
+            </div>
             
             <form action="{{ route('verify') }}" method="post">
                 @csrf
-                <div class="form-group mt-5">
+                <div class="form-group mt-4">
                         <input id="code" type="number" class="form-control" name="code" value="{{ old('code') }}" placeholder="{{__('page.verification_code')}}" required autofocus>
                     @error('code')
                         <span class="invalid-feedback d-block" role="alert">
