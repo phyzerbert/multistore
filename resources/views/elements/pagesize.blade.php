@@ -6,9 +6,10 @@
     @csrf
     <label for="pagesize" class="control-label">{{__('page.show')}} :</label>
     <select class="form-control form-control-sm mx-2" name="pagesize" id="pagesize">
-        <option value="15" @if($pagesize == '') selected @endif>15</option>
-        <option value="25" @if($pagesize == '25') selected @endif>25</option>
+        <option value="15" @if($pagesize == '15') selected @endif>15</option>
         <option value="50" @if($pagesize == '50') selected @endif>50</option>
         <option value="100" @if($pagesize == '100') selected @endif>100</option>
+        <option value="200" @if($pagesize == '200') selected @endif>200</option>
+        <option value="100" @if($pagesize == '500') selected @endif>500</option>
     </select>
 </form>

@@ -121,7 +121,7 @@ class HomeController extends Controller
     }
 
     public function getMonthData($table, $where = ''){
-        $sql = "select id from ".$table." where YEARWEEK(DATE_FORMAT(timestamp,'%Y-%m-%d')) = YEARWEEK(now()) ".$where;
+        $sql = "select id from ".$table." where DATE_FORMAT(timestamp,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' ) ".$where;
         $orderables = collect(DB::select($sql))->pluck('id')->toArray();
         $return['count'] = count($orderables);
         if($table == 'purchases'){

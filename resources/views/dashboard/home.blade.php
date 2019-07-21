@@ -159,7 +159,8 @@
                 </div>
                 <div class="row">
                     <div class="card card-body">                        
-                        <canvas id="line_chart" style="height:400px;"></canvas>
+                        {{-- <canvas id="line_chart" style="height:400px;"></canvas> --}}
+                        <div id="line_chart" style="height:400px;"></div>
                     </div>
                 </div>
             </div>
@@ -169,10 +170,11 @@
 
 @section('script')
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
-<script src="{{asset('master/lib/chart.js/Chart.js')}}"></script>
+{{-- <script src="{{asset('master/lib/chart.js/Chart.js')}}"></script> --}}
+<script src="{{asset('master/lib/echarts/echarts-en.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script src="{{asset('master/lib/sweet-modal/jquery.sweet-modal.min.js')}}"></script>
-<script>
+{{-- <script>
 
     var lineData = {
         labels: {!! json_encode($key_array) !!},
@@ -222,6 +224,199 @@
     };
     var ctx = document.getElementById("line_chart").getContext("2d");
     new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
+
+</script> --}}
+<script>
+    var role = "{{Auth::user()->role->slug}}";
+    var legend_array = {!! json_encode([__('page.purchase'), __('page.sale'), __('page.payment')]) !!};
+    var purchase = "{{__('page.purchase')}}";
+    var sale = "{{__('page.sale')}}";
+    var payment = "{{__('page.payment')}}";
+        
+    console.log(legend_array);
+    var Chart_overview = function() {
+
+        var dashboard_chart = function() {
+            if (typeof echarts == 'undefined') {
+                console.warn('Warning - echarts.min.js is not loaded.');
+                return;
+            }
+
+            // Define elements
+            var area_basic_element = document.getElementById('line_chart');
+
+            if (area_basic_element) {
+
+                var area_basic = echarts.init(area_basic_element);
+
+                area_basic.setOption({
+
+                    color: ['#2ec7c9','#5ab1ef','#ff0000','#d87a80','#b6a2de'],
+
+                    textStyle: {
+                        fontFamily: 'Roboto, Arial, Verdana, sans-serif',
+                        fontSize: 13
+                    },
+
+                    animationDuration: 750,
+
+                    grid: {
+                        left: 0,
+                        right: 40,
+                        top: 35,
+                        bottom: 0,
+                        containLabel: true
+                    },
+
+                    
+                    legend: {
+                        data: [purchase, sale, payment],
+                        itemHeight: 8,
+                        itemGap: 20
+                    },
+
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgba(0,0,0,0.75)',
+                        padding: [10, 15],
+                        textStyle: {
+                            fontSize: 13,
+                            fontFamily: 'Roboto, sans-serif'
+                        }
+                    },
+
+                    xAxis: [{
+                        type: 'category',
+                        boundaryGap: false,
+                        data: {!! json_encode($key_array) !!},
+                        axisLabel: {
+                            color: '#333'
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#999'
+                            }
+                        },
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: '#eee',
+                                type: 'dashed'
+                            }
+                        }
+                    }],
+
+                    yAxis: [{
+                        type: 'value',
+                        axisLabel: {
+                            color: '#333'
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#999'
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: '#eee'
+                            }
+                        },
+                        splitArea: {
+                            show: true,
+                            areaStyle: {
+                                color: ['rgba(250,250,250,0.1)', 'rgba(0,0,0,0.01)']
+                            }
+                        }
+                    }],
+
+                    series: [
+                        {
+                            name: purchase,
+                            type: 'line',
+                            data: {!! json_encode($purchase_array) !!},
+                            areaStyle: {
+                                normal: {
+                                    opacity: 0.25
+                                }
+                            },
+                            smooth: true,
+                            symbolSize: 7,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 2
+                                }
+                            }
+                        },
+                        {
+                            name: sale,
+                            type: 'line',
+                            smooth: true,
+                            symbolSize: 7,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 2
+                                }
+                            },
+                            areaStyle: {
+                                normal: {
+                                    opacity: 0.25
+                                }
+                            },
+                            data: {!! json_encode($sale_array) !!}
+                        },
+                        {
+                            name: payment,
+                            type: 'line',
+                            smooth: true,
+                            symbolSize: 7,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 2
+                                }
+                            },
+                            areaStyle: {
+                                normal: {
+                                    opacity: 0.25
+                                }
+                            },
+                            data: {!! json_encode($payment_array) !!}
+                        }
+                    ]
+                });
+            }
+
+            // Resize function
+            var triggerChartResize = function() {
+                area_basic_element && area_basic.resize();
+            };
+
+            // On sidebar width change
+            $(document).on('click', '.sidebar-control', function() {
+                setTimeout(function () {
+                    triggerChartResize();
+                }, 0);
+            });
+
+            // On window resize
+            var resizeCharts;
+            window.onresize = function () {
+                clearTimeout(resizeCharts);
+                resizeCharts = setTimeout(function () {
+                    triggerChartResize();
+                }, 200);
+            };
+        };
+
+        return {
+            init: function() {
+                dashboard_chart();
+            }
+        }
+    }();
+
+    document.addEventListener('DOMContentLoaded', function() {
+        Chart_overview.init();
+    });
 
 </script>
 <script>

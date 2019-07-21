@@ -74,7 +74,6 @@
             </div>
         </div>                
     </div>
-    @if($role == 'admin')
     <!-- The Modal -->
     <div class="modal fade" id="addModal">
         <div class="modal-dialog">
@@ -199,7 +198,6 @@
             </div>
         </div>
     </div>
-    @endif
 @endsection
 
 @section('script')

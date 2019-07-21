@@ -876,7 +876,7 @@ class ReportController extends Controller
     }
 
     public function getMonthData($table, $where = ''){
-        $sql = "select id from ".$table." where YEARWEEK(DATE_FORMAT(timestamp,'%Y-%m-%d')) = YEARWEEK(now()) ".$where;
+        $sql = "select id from ".$table." where DATE_FORMAT(created_at,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' ) ".$where;
         $orderables = collect(DB::select($sql))->pluck('id')->toArray();
         $return['count'] = count($orderables);
         if($table == 'purchases'){

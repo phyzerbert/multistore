@@ -64,6 +64,7 @@ class UserController extends Controller
             'phone_number'=>'required',
             'password' => 'confirmed',
         ]);
+        
         $user = Auth::user();
         $user->name = $request->get("name");
         $user->phone_number = $request->get("phone_number");

@@ -57,8 +57,8 @@ class PurchaseController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
-
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = session('pagesize');
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
     }
 

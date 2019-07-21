@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="form-group mg-b-10-force">
                                     <label class="form-control-label">{{__('page.confirm_password')}}: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" type="password" name="password_confirm" placeholder="{{__('page.confirm_password')}}">
+                                    <input class="form-control" type="password" name="password_confirmation" placeholder="{{__('page.confirm_password')}}">
                                 </div>
                                 <div class="form-layout-footer text-right mt-5">
                                     <button type="submit" class="btn btn-primary tx-20"><i class="fa fa-floppy-o mg-r-2"></i> {{__('page.save')}}</button>
